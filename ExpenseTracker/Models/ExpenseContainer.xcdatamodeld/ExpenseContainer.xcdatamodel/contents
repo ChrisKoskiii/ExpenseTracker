@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21G72" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="ExpenseEntity" representedClassName="ExpenseEntity" syncable="YES">
+        <attribute name="category" attributeType="String" defaultValueString="N/A"/>
+        <attribute name="cost" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="date" attributeType="Date" defaultDateTimeInterval="681921540" usesScalarValueType="NO"/>
+        <attribute name="receipt" optional="YES" attributeType="Binary"/>
+        <attribute name="title" attributeType="String" defaultValueString="N/A"/>
+        <attribute name="vendor" attributeType="String" defaultValueString="N/A"/>
+    </entity>
+    <elements>
+        <element name="ExpenseEntity" positionX="-63" positionY="-18" width="128" height="119"/>
+    </elements>
+</model>
