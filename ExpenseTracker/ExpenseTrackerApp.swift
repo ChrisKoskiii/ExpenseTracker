@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import UIKit
 import AppCenter
 import AppCenterCrashes
 import AppCenterAnalytics
