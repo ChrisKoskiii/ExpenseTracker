@@ -7,11 +7,16 @@
 
 import SwiftUI
 import AppCenterCrashes
+import AppCenterAnalytics
 
 struct CrashTestView: View {
     var body: some View {
       Button("Crash") {
-        Crashes.generateTestCrash()
+//        Crashes.generateTestCrash()
+        Analytics.trackEvent("crash_button_tapped")
+      }
+      .onAppear {
+        Analytics.trackEvent("crash_view_appeared")
       }
     }
 }
