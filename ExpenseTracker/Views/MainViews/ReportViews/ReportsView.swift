@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct ReportsView: View {
-  @EnvironmentObject var coreVM: CoreDataViewModel
   
-  @StateObject var reportsVM = ReportsViewModel()
+  @EnvironmentObject var coreVM:  CoreDataViewModel
+  @StateObject var reportsVM    = ReportsViewModel()
   
   @State var startDate: Date
-  @State var endDate: Date
+  @State var endDate:   Date
   
   var formatter: NumberFormatter = {
     let formatter = NumberFormatter()
@@ -27,8 +27,10 @@ struct ReportsView: View {
     expenseList
       .navigationBarTitle("Generate Reports")
       .navigationBarTitleDisplayMode(.inline)
+    
       .toolbar {
         ToolbarItem {
+          
           Button {
             exportToPDF()
           } label : {
@@ -36,6 +38,7 @@ struct ReportsView: View {
           }
         }
       }
+    
       .sheet(isPresented: $reportsVM.showShareSheet) {
         reportsVM.PDFUrl = nil
       } content: {
@@ -43,6 +46,7 @@ struct ReportsView: View {
           ShareSheet(urls: [PDFUrl])
         }
       }
+    
       .onAppear {
         coreVM.getDateRangeExpenses(startDate: startDate, endDate: endDate) { expenses in
           reportsVM.dateRangeExpenses = expenses
@@ -55,21 +59,29 @@ struct ReportsView: View {
   var expenseList: some View {
     VStack {
       HStack {
+        
         Text("\(startDate.formatDate()) to \(endDate.formatDate())")
           .font(.title2)
           .padding()
+        
         Spacer()
+        
       }
       
       let categories = coreVM.categoriesDict.keys.sorted().map{Category(name: $0, cost: coreVM.categoriesDict[$0]!)}
+      
       ForEach(categories, id: \.name) { category in
         HStack {
+          
           Text(category.name)
             .font(.caption)
             .padding(.leading )
             .lineLimit(0)
+          
           Spacer()
+          
           let costString = formatter.string(from: NSNumber(value: category.cost))!
+          
           Text(costString)
             .font(.caption)
             .padding(.trailing)
@@ -77,11 +89,15 @@ struct ReportsView: View {
         Divider()
       }
       HStack {
+        
         Text("Total:")
           .padding(.leading )
+        
         Spacer()
+        
         Text("$"+String(format: "%.2f", coreVM.dateRangeTotal))
           .padding(.trailing)
+        
       }
       Spacer()
     }
@@ -93,7 +109,7 @@ struct ReportsView: View {
     let outputFileURL = documentDirectory.appendingPathComponent("SwiftUI.pdf")
     
     //Normal with
-    let width: CGFloat = 8.5 * 72.0
+    let width: CGFloat  = 8.5 * 72.0
     //Estimate the height of your view
     let height: CGFloat = 1000
     
@@ -132,8 +148,4 @@ struct ReportsView_Previews: PreviewProvider {
   static var previews: some View {
     ReportsView(reportsVM: ReportsViewModel(), startDate: Date.now, endDate: Date.now)
   }
-}
-
-struct ReportExpenseView {
-  var view: AnyView
 }

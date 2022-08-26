@@ -9,21 +9,21 @@ import SwiftUI
 
 struct AddExpenseView: View {
   @Environment(\.presentationMode) var presentationMode
-  @EnvironmentObject var coreVM: CoreDataViewModel
-  //ViewModels
+  @EnvironmentObject var coreVM:  CoreDataViewModel
   @ObservedObject var expensesVM: ExpensesViewModel
   
   //Scanner state
-  @State private var cameraIsPresented = false
-  @State private var showScanner = false
-  @State private var isRecognizing = false
+  @State private var cameraIsPresented  = false
+  @State private var showScanner        = false
+  @State private var isRecognizing      = false
   
-  @State private var presentAlert = false
+  //Alert
+  @State private var presentAlert       = false
   
   //Form inputs
-  @State private var titleText: String = ""
-  @State private var costText = 0.00
-  @State private var dateValue: Date = Date.now
+  @State private var titleText: String  = ""
+  @State private var costText           = 0.00
+  @State private var dateValue: Date    = Date.now
   
   private var dateString: String {
     dateValue.formatDate()
@@ -46,6 +46,7 @@ struct AddExpenseView: View {
       VStack(spacing: 10) {
         DatePicker(dateValue.formatDate(), selection: $dateValue, displayedComponents: [.date])
           .textfieldStyle()
+        
         TextField("Enter title", text: $titleText)
           .textfieldStyle()
         
@@ -56,8 +57,11 @@ struct AddExpenseView: View {
         ZStack {
           TextField("Enter vendor", text: $expensesVM.selectedVendor ?? "")
             .textfieldStyle()
+          
           HStack {
+            
             Spacer()
+            
             NavigationLink(destination: VendorListView(expensesVM: expensesVM)) {
               Image(systemName: "chevron.right")}
             .frame(width: 20)
@@ -68,8 +72,11 @@ struct AddExpenseView: View {
         ZStack {
           TextField("Enter category", text: $expensesVM.selectedCategory ?? "")
             .textfieldStyle()
+          
           HStack {
+            
             Spacer()
+            
             NavigationLink(destination: CategoryListView(expensesVM: expensesVM)) {
               Image(systemName: "chevron.right")
             }

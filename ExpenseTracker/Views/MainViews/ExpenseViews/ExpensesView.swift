@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ExpensesView: View {
-  @EnvironmentObject var coreVM: CoreDataViewModel
+  
+  @EnvironmentObject var coreVM:  CoreDataViewModel
   @ObservedObject var expensesVM: ExpensesViewModel
   
   var formatter: NumberFormatter = {
@@ -20,14 +21,17 @@ struct ExpensesView: View {
   
   var body: some View {
     NavigationView {
+      
       expenseList
         .background(Color(.secondarySystemBackground))
         .navigationTitle("")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
+          
           ToolbarItem(placement: .navigationBarTrailing) {
             AddExpenseButton(coreVM: coreVM, expensesVM: expensesVM)
           }
+          
           ToolbarItem(placement: .principal) {
             MonthSelector(coreVM: coreVM, expensesVM: expensesVM)
           }

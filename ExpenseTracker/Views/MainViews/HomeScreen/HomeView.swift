@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
   
-  @EnvironmentObject var coreVM: CoreDataViewModel
+  @EnvironmentObject var coreVM:  CoreDataViewModel
   @ObservedObject var expensesVM: ExpensesViewModel
   
   var body: some View {
@@ -28,6 +28,7 @@ struct HomeView: View {
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
           NavigationLink(destination: AddExpenseView(expensesVM: expensesVM)) {
+            
             ZStack {
               Circle()
                 .frame(width: 30, height: 30)

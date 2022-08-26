@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct MonthlyTotalView: View {
+  
   @ObservedObject var coreVM: CoreDataViewModel
-  @StateObject var homeVM = HomeViewModel()
+  @StateObject var homeVM =   HomeViewModel()
   
   var body: some View {
     VStack(alignment: .leading, spacing: 0) {
@@ -74,28 +75,34 @@ struct MenuView: View {
       
       Button("week", action: {
         if let startDate = Calendar.current.date(byAdding: .day, value: -7, to: Date()) {
+          
           coreVM.getDateRangeExpenses(startDate: startDate, endDate: Date.now){ expenses in
             homeVM.dateRangeExpenses = expenses
           }
         }
+        
         homeVM.setViewTotal(text: "week", expenses: homeVM.dateRangeExpenses)
       })
       
       Button("month", action: {
         if let startDate = Calendar.current.date(byAdding: .month, value: -1, to: Date()) {
+          
           coreVM.getDateRangeExpenses(startDate: startDate, endDate: Date.now) { expenses in
             homeVM.dateRangeExpenses = expenses
           }
         }
+        
         homeVM.setViewTotal(text: "month", expenses: homeVM.dateRangeExpenses)
       })
       
       Button("year", action: {
         if let startDate = Calendar.current.date(byAdding: .year, value: -1, to: Date()) {
+          
           coreVM.getDateRangeExpenses(startDate: startDate, endDate: Date.now) { expenses in
             homeVM.dateRangeExpenses = expenses
           }
         }
+        
         homeVM.setViewTotal(text: "year", expenses: homeVM.dateRangeExpenses)
       })
       

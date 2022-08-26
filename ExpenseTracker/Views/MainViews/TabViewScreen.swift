@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct TabViewScreen: View {
-  @EnvironmentObject var coreVM: CoreDataViewModel
   
+  @EnvironmentObject var coreVM:  CoreDataViewModel
   @ObservedObject var expensesVM: ExpensesViewModel
+  
   var body: some View {
     TabView {
       HomeView(expensesVM: expensesVM)

@@ -35,7 +35,6 @@
 		9E5DBE0E28B40588007C96D7 /* ExpenseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5DBE0D28B40588007C96D7 /* ExpenseModel.swift */; };
 		9E8E1F262893762E00300E14 /* RecentExpenseCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8E1F252893762E00300E14 /* RecentExpenseCardView.swift */; };
 		9E8E1F2D289380A300300E14 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8E1F2C289380A300300E14 /* HomeView.swift */; };
-		9E8E1F2F2893FCD100300E14 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8E1F2E2893FCD100300E14 /* Theme.swift */; };
 		9E8E1F312894232300300E14 /* ExpensesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8E1F302894232300300E14 /* ExpensesView.swift */; };
 		9E8E1F332894232A00300E14 /* ReportsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8E1F322894232A00300E14 /* ReportsView.swift */; };
 		9E8E1F362894233B00300E14 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8E1F352894233B00300E14 /* SettingsView.swift */; };
@@ -43,6 +42,7 @@
 		9EBD37542895A09200BABDFA /* MonthlyTotalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBD37532895A09200BABDFA /* MonthlyTotalView.swift */; };
 		9ED23ACD289CB99B00CAAB70 /* GenerateReportsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED23ACC289CB99B00CAAB70 /* GenerateReportsView.swift */; };
 		9EE1AD1328B4FD4900B494D5 /* Published+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE1AD1228B4FD4900B494D5 /* Published+Ext.swift */; };
+		9EE4A37328B9115400CE44CB /* CrashTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE4A37228B9115400CE44CB /* CrashTestView.swift */; };
 		9EF7456828B6F10C0058F681 /* CustomModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF7456728B6F10C0058F681 /* CustomModifiers.swift */; };
 		9EF7458D28B858C70058F681 /* TabViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF7458C28B858C70058F681 /* TabViewScreen.swift */; };
 /* End PBXBuildFile section */
@@ -78,7 +78,6 @@
 		9E5DBE0D28B40588007C96D7 /* ExpenseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseModel.swift; sourceTree = "<group>"; };
 		9E8E1F252893762E00300E14 /* RecentExpenseCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentExpenseCardView.swift; sourceTree = "<group>"; };
 		9E8E1F2C289380A300300E14 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		9E8E1F2E2893FCD100300E14 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		9E8E1F302894232300300E14 /* ExpensesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesView.swift; sourceTree = "<group>"; };
 		9E8E1F322894232A00300E14 /* ReportsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportsView.swift; sourceTree = "<group>"; };
 		9E8E1F352894233B00300E14 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -87,6 +86,7 @@
 		9EBD37532895A09200BABDFA /* MonthlyTotalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyTotalView.swift; sourceTree = "<group>"; };
 		9ED23ACC289CB99B00CAAB70 /* GenerateReportsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateReportsView.swift; sourceTree = "<group>"; };
 		9EE1AD1228B4FD4900B494D5 /* Published+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Published+Ext.swift"; sourceTree = "<group>"; };
+		9EE4A37228B9115400CE44CB /* CrashTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashTestView.swift; sourceTree = "<group>"; };
 		9EF7456728B6F10C0058F681 /* CustomModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomModifiers.swift; sourceTree = "<group>"; };
 		9EF7458C28B858C70058F681 /* TabViewScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabViewScreen.swift; sourceTree = "<group>"; };
 		D563CD5D6A1F16FFFD396D2F /* Pods-ExpenseTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExpenseTracker.release.xcconfig"; path = "Target Support Files/Pods-ExpenseTracker/Pods-ExpenseTracker.release.xcconfig"; sourceTree = "<group>"; };
@@ -112,7 +112,6 @@
 				80E65B3880AE0697C89A67C5 /* Pods-ExpenseTracker.debug.xcconfig */,
 				D563CD5D6A1F16FFFD396D2F /* Pods-ExpenseTracker.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -168,6 +167,7 @@
 			children = (
 				9E9B34AA2897733400408F05 /* MainViews */,
 				9E8E1F242893761B00300E14 /* ViewComponents */,
+				9EE4A37228B9115400CE44CB /* CrashTestView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -198,7 +198,6 @@
 			children = (
 				9EF7456728B6F10C0058F681 /* CustomModifiers.swift */,
 				9E187D4428936D8600142000 /* DocumentScanner.swift */,
-				9E8E1F2E2893FCD100300E14 /* Theme.swift */,
 				9E34DE4028AED43400235442 /* OperatorOverload.swift */,
 			);
 			path = Helpers;
@@ -393,7 +392,6 @@
 				9E187D3D2893010900142000 /* ExpenseContainer.xcdatamodeld in Sources */,
 				9E34DE3F28AEBE1C00235442 /* ItemList.swift in Sources */,
 				9E5824F728A1A6EE00C80A73 /* ReportsViewModel.swift in Sources */,
-				9E8E1F2F2893FCD100300E14 /* Theme.swift in Sources */,
 				9E01C2BC2896DC2E00337A37 /* ScannedImageView.swift in Sources */,
 				9E8E1F262893762E00300E14 /* RecentExpenseCardView.swift in Sources */,
 				9E8E1F362894233B00300E14 /* SettingsView.swift in Sources */,
@@ -412,6 +410,7 @@
 				9E34DE4128AED43400235442 /* OperatorOverload.swift in Sources */,
 				9E58254A28A57EAF00C80A73 /* HomeViewModel.swift in Sources */,
 				9E5DBE0E28B40588007C96D7 /* ExpenseModel.swift in Sources */,
+				9EE4A37328B9115400CE44CB /* CrashTestView.swift in Sources */,
 				9EF7458D28B858C70058F681 /* TabViewScreen.swift in Sources */,
 				9E58254628A5686600C80A73 /* Color+Ext.swift in Sources */,
 			);

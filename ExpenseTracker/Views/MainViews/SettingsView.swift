@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct SettingsView: View {
-  @EnvironmentObject var coreVM: CoreDataViewModel
   
+  @EnvironmentObject var coreVM: CoreDataViewModel
   
   var body: some View {
     Form {

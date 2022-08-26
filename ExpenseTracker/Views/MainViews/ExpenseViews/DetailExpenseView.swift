@@ -10,25 +10,24 @@ import SwiftUI
 struct DetailExpenseView: View {
   @Environment(\.presentationMode) var presentationMode
   
-  @EnvironmentObject var coreVM: CoreDataViewModel
-  
-  //ViewModels
+  @EnvironmentObject var coreVM:  CoreDataViewModel
   @ObservedObject var expensesVM: ExpensesViewModel
   
-  @State var detailExpense: ExpenseEntity
+  @State var detailExpense:       ExpenseEntity
   
-  //scanner states
-  @State private var cameraIsPresented = false
-  @State private var showScanner = false
-  @State private var isRecognizing = false
+  //Scanner properties
+  @State private var cameraIsPresented  = false
+  @State private var showScanner        = false
+  @State private var isRecognizing      = false
+  @State private var scannedImage:      UIImage?
+  
+  //Alert
+  @State private var showingAlert       = false
   
   private var dateString: String {
     detailExpense.wrappedDate.formatDate()
   }
   
-  //Image vars
-  
-  @State private var scannedImage: UIImage?
   
   //Current textfield formatter
   var formatter: NumberFormatter = {
@@ -36,8 +35,6 @@ struct DetailExpenseView: View {
     formatter.numberStyle = .currency
     return formatter
   }()
-  
-  @State private var showingAlert = false
   
   var body: some View {
     ScrollView {

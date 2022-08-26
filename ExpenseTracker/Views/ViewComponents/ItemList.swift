@@ -10,14 +10,16 @@ import SwiftUI
 struct ItemList: View {
   @Environment(\.presentationMode) var presentationMode
   
-  @State var items: [String]
-  @State var selectedChoice = "Alphabetical"
-  @Binding var selectedItem: String?
+  @State var items:           [String]
+  @State var selectedChoice   = "Alphabetical"
+  @Binding var selectedItem:  String?
   
   var sortChoices = ["Alphabetical", "Recently Used"]
+  
   var body: some View {
     List {
       ForEach(items, id: \.self) { item in
+        
         Button {
           selectedItem = item
           presentationMode.wrappedValue.dismiss()

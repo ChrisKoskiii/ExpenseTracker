@@ -10,9 +10,8 @@ import SwiftUI
 struct CategoryListView: View {
   @Environment(\.presentationMode) var presentationMode
   
-  @EnvironmentObject var coreVM: CoreDataViewModel
-  
-  @ObservedObject var expensesVM: ExpensesViewModel
+  @EnvironmentObject var coreVM:    CoreDataViewModel
+  @ObservedObject var expensesVM:   ExpensesViewModel
   
   @State var detailExpenseCategory: String?
   

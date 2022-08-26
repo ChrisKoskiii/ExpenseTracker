@@ -10,20 +10,26 @@ import SwiftUI
 struct GenerateReportsView: View {
   @EnvironmentObject var coreVM: CoreDataViewModel
   
-  @State private var startDate: Date = Date.now
-  @State private var endDate: Date = Date.now
-  @State private var selectedChoice = "Full Report"
+  @State private var startDate: Date  = Date.now
+  @State private var endDate: Date    = Date.now
+  @State private var selectedChoice   = "Full Report"
   
   var reportChoices = ["Full Report", "Summary"]
   
   var body: some View {
     NavigationView {
       Form {
+        
           DatePicker("Start date", selection: $startDate, displayedComponents: [.date])
+        
           DatePicker("End date", selection: $endDate, displayedComponents: [.date])
+        
           Picker("Full Report or Summary", selection: $selectedChoice) {
+            
             ForEach(reportChoices, id: \.self) {
+              
               Text($0)
+              
             }
           }
           .pickerStyle(.segmented)
