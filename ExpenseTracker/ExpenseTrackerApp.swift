@@ -25,9 +25,8 @@ struct ExpenseTrackerApp: App {
   
   var body: some Scene {
     WindowGroup {
-      CrashTestView()
-//      TabViewScreen(expensesVM: expensesVM)
-//        .environmentObject(coreVM)
+      TabViewScreen(expensesVM: expensesVM)
+        .environmentObject(coreVM)
     }
   }
 }

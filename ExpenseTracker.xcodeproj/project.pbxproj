@@ -42,7 +42,6 @@
 		9EBD37542895A09200BABDFA /* MonthlyTotalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBD37532895A09200BABDFA /* MonthlyTotalView.swift */; };
 		9ED23ACD289CB99B00CAAB70 /* GenerateReportsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED23ACC289CB99B00CAAB70 /* GenerateReportsView.swift */; };
 		9EE1AD1328B4FD4900B494D5 /* Published+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE1AD1228B4FD4900B494D5 /* Published+Ext.swift */; };
-		9EE4A37328B9115400CE44CB /* CrashTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE4A37228B9115400CE44CB /* CrashTestView.swift */; };
 		9EF7456828B6F10C0058F681 /* CustomModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF7456728B6F10C0058F681 /* CustomModifiers.swift */; };
 		9EF7458D28B858C70058F681 /* TabViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF7458C28B858C70058F681 /* TabViewScreen.swift */; };
 /* End PBXBuildFile section */
@@ -86,7 +85,6 @@
 		9EBD37532895A09200BABDFA /* MonthlyTotalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyTotalView.swift; sourceTree = "<group>"; };
 		9ED23ACC289CB99B00CAAB70 /* GenerateReportsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateReportsView.swift; sourceTree = "<group>"; };
 		9EE1AD1228B4FD4900B494D5 /* Published+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Published+Ext.swift"; sourceTree = "<group>"; };
-		9EE4A37228B9115400CE44CB /* CrashTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashTestView.swift; sourceTree = "<group>"; };
 		9EF7456728B6F10C0058F681 /* CustomModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomModifiers.swift; sourceTree = "<group>"; };
 		9EF7458C28B858C70058F681 /* TabViewScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabViewScreen.swift; sourceTree = "<group>"; };
 		D563CD5D6A1F16FFFD396D2F /* Pods-ExpenseTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExpenseTracker.release.xcconfig"; path = "Target Support Files/Pods-ExpenseTracker/Pods-ExpenseTracker.release.xcconfig"; sourceTree = "<group>"; };
@@ -167,7 +165,6 @@
 			children = (
 				9E9B34AA2897733400408F05 /* MainViews */,
 				9E8E1F242893761B00300E14 /* ViewComponents */,
-				9EE4A37228B9115400CE44CB /* CrashTestView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -410,7 +407,6 @@
 				9E34DE4128AED43400235442 /* OperatorOverload.swift in Sources */,
 				9E58254A28A57EAF00C80A73 /* HomeViewModel.swift in Sources */,
 				9E5DBE0E28B40588007C96D7 /* ExpenseModel.swift in Sources */,
-				9EE4A37328B9115400CE44CB /* CrashTestView.swift in Sources */,
 				9EF7458D28B858C70058F681 /* TabViewScreen.swift in Sources */,
 				9E58254628A5686600C80A73 /* Color+Ext.swift in Sources */,
 			);
