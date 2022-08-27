@@ -14,7 +14,7 @@ import AppCenterAnalytics
 struct ExpenseTrackerApp: App {
   
   init() {
-    AppCenter.start(withAppSecret: "bf883fcb-7f36-4617-b5f4-36a2652cf667",
+    AppCenter.start(withAppSecret: "98cd03c8-e864-49d0-9918-43184332e3ba",
                     services: [
                       Analytics.self,
                       Crashes.self])
