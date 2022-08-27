@@ -11,12 +11,15 @@ import AppCenterAnalytics
 
 struct CrashTestView: View {
     var body: some View {
-      Button("Crash") {
-//        Crashes.generateTestCrash()
-        Analytics.trackEvent("crash_button_tapped")
+      VStack {
+        Text("Hello World!")
+        Button("Crash") {
+  //        Crashes.generateTestCrash()
+          Analytics.trackEvent("crash_button_tapped")
+        }
+        .onAppear {
+          Analytics.trackEvent("crash_view_appeared")
       }
-      .onAppear {
-        Analytics.trackEvent("crash_view_appeared")
       }
     }
 }
