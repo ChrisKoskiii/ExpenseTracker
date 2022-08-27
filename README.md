@@ -1,4 +1,4 @@
 # ExpenseTracker
 SwiftUI Expense Tracking Application
 
-[![Build status](https://build.appcenter.ms/v0.1/apps/7fe8f072-688a-43ae-9a68-3777bf1ab1b0/branches/dev/badge)](https://appcenter.ms)
+[![Build status](https://build.appcenter.ms/v0.1/apps/c2e61818-2238-46ba-be30-0d11598577d8/branches/dev/badge)](https://appcenter.ms)
