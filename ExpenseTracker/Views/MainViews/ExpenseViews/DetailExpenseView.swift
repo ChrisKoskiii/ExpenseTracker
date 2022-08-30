@@ -41,6 +41,7 @@ struct DetailExpenseView: View {
       VStack(spacing: 10) {
         
         expenseTextfields
+
         
         scanButton
         
@@ -100,15 +101,17 @@ struct DetailExpenseView: View {
   }
   
   var expenseTextfields: some View {
-    Group {
+    VStack(spacing: 0) {
       DatePicker(dateString, selection: $detailExpense.wrappedDate, displayedComponents: [.date])
         .textfieldStyle()
+      Divider()
       TextField("Enter title", text: $detailExpense.wrappedTitle)
         .textfieldStyle()
+      Divider()
       TextField("Enter cost", value: $detailExpense.cost, formatter: formatter)
         .textfieldStyle()
         .keyboardType(.decimalPad)
-      
+      Divider()
       ZStack {
         TextField("Enter vendor", text: $detailExpense.wrappedVendor)
           .textfieldStyle()
@@ -120,7 +123,7 @@ struct DetailExpenseView: View {
           .padding(.trailing, 20)
         }
       }
-      
+      Divider()
       ZStack {
         TextField("Enter category", text: $detailExpense.wrappedCategory)
           .textfieldStyle()
@@ -135,6 +138,8 @@ struct DetailExpenseView: View {
       }
       
     }
+    .cardBackground()
+    .padding(.horizontal)
   }
   
   var scanButton: some View {

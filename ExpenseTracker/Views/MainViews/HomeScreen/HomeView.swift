@@ -39,7 +39,7 @@ struct HomeView: View {
           }
         }
       }
-      .background(Color(.secondarySystemBackground))
+      .background(Color(uiColor: .systemGray5))
       .navigationTitle("Overview")
       .navigationBarTitleDisplayMode(.large)
     }

@@ -9,6 +9,7 @@ import SwiftUI
 import CoreMotion
 
 struct RecentExpenseCardView: View {
+  @Environment(\.colorScheme) var colorScheme
   
   var recentExpense: ExpenseEntity
   
@@ -28,7 +29,7 @@ struct RecentExpenseCardView: View {
           Text(recentExpense.wrappedDate.weekday())
             .font(.caption2)
             .kerning(2)
-            .foregroundColor(.black)
+            .foregroundColor(.recentTextColor)
             .lineLimit(1)
             .minimumScaleFactor(0.75)
           
@@ -54,7 +55,7 @@ struct RecentExpenseCardView: View {
         
         VStack(alignment: .leading, spacing: 0) {
           Text(recentExpense.wrappedTitle)
-            .foregroundColor(.black)
+            .foregroundColor(.recentTextColor)
             .lineLimit(1)
             .font(.headline)
             .padding(.top, 4)
@@ -76,11 +77,11 @@ struct RecentExpenseCardView: View {
           VStack {
             Text("$")
               .font(.footnote)
-            .foregroundColor(.black)
+            .foregroundColor(.recentTextColor)
             Spacer().frame(height: 8)
           }
           Text(costString)
-            .foregroundColor(.black)
+            .foregroundColor(.recentTextColor)
             .font(.title2)
             .fontWeight(.semibold)
         }
