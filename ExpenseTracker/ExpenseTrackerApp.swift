@@ -20,6 +20,8 @@ struct ExpenseTrackerApp: App {
                       Crashes.self])
   }
   
+  @AppStorage("isDarkMode") private var isDarkMode = false
+  
   @StateObject var coreVM     = CoreDataViewModel()
   @StateObject var expensesVM = ExpensesViewModel()
   
@@ -27,6 +29,10 @@ struct ExpenseTrackerApp: App {
     WindowGroup {
       TabViewScreen(expensesVM: expensesVM)
         .environmentObject(coreVM)
+        .preferredColorScheme(isDarkMode ? .dark : .light)
+        .onAppear {
+           UITableView.appearance().backgroundColor = .systemGray5
+        }
     }
   }
 }

@@ -9,14 +9,20 @@ import SwiftUI
 
 struct SettingsView: View {
   
+  @AppStorage("isDarkMode") private var isDarkMode = false
+  
   @EnvironmentObject var coreVM: CoreDataViewModel
-  @State private var lightOn = true
-  @State private var darkOn = false
+
+  
   var body: some View {
     NavigationView {
       Form {
-        Toggle("LightMode", isOn: $lightOn)
-        Toggle("Dark Mode", isOn: $darkOn)
+        Section {
+          Toggle("Dark Mode", isOn: $isDarkMode)
+        } header: {
+          Text("Appearance")
+        }
+        
       }
       .navigationTitle("Settings")
     }
@@ -25,6 +31,6 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
   static var previews: some View {
-      SettingsView()
+    SettingsView()
   }
 }
