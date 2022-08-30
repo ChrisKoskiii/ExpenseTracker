@@ -9,27 +9,16 @@ import SwiftUI
 
 struct SettingsView: View {
   
+  @AppStorage("isDarkMode") private var isDarkMode = false
+  
   @EnvironmentObject var coreVM: CoreDataViewModel
-  @State private var lightOn = true
-  @State private var darkOn = false
-  @State private var systemOn = false
+
   
   var body: some View {
     NavigationView {
       Form {
         Section {
-          Toggle("Light Mode", isOn: $lightOn)
-            .onChange(of: darkOn) { newValue in
-              withAnimation {
-                lightOn = !newValue
-              }
-            }
-          Toggle("Dark Mode", isOn: $darkOn)
-            .onChange(of: lightOn) { newValue in
-              withAnimation {
-                darkOn = !newValue
-              }
-            }
+          Toggle("Dark Mode", isOn: $isDarkMode)
         } header: {
           Text("Appearance")
         }

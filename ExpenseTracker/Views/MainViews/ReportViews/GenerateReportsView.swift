@@ -33,14 +33,15 @@ struct GenerateReportsView: View {
             }
           }
           .pickerStyle(.segmented)
+        
           NavigationLink(destination: ReportsView(startDate: startDate, endDate: endDate), label: {
           Text("Generate Report")
             .foregroundColor(.cyan)
             .centerInView()
         })
         .centerInView()
-        .navigationTitle("Create Reports")
       }
+      .navigationTitle("Create Reports")
     }
   }
 }
@@ -48,5 +49,7 @@ struct GenerateReportsView: View {
 struct GenerateReportsView_Previews: PreviewProvider {
   static var previews: some View {
     GenerateReportsView()
+    GenerateReportsView()
+      .preferredColorScheme(.dark)
   }
 }

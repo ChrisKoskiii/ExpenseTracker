@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ExpensesView: View {
-  
+
   @EnvironmentObject var coreVM:  CoreDataViewModel
   @ObservedObject var expensesVM: ExpensesViewModel
   
@@ -23,7 +23,6 @@ struct ExpensesView: View {
     NavigationView {
       
       expenseList
-        .background(Color(.secondarySystemBackground))
         .navigationTitle("")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -47,6 +46,7 @@ struct ExpensesView: View {
   }
   
   var expenseList: some View {
+    
     List {
       
       ForEach(expensesVM.dateRangeExpenses) { expense in
@@ -80,7 +80,6 @@ struct ExpensesView: View {
           expensesVM.dateRangeExpenses = expenses
         }
     }
-    .listStyle(.plain)
   }
 }
 
@@ -137,7 +136,13 @@ struct MonthSelector: View {
 }
 
 struct ExpensesView_Previews: PreviewProvider {
+  static let coreVM = CoreDataViewModel()
+  
   static var previews: some View {
     ExpensesView(expensesVM: ExpensesViewModel())
+      .environmentObject(coreVM)
+    ExpensesView(expensesVM: ExpensesViewModel())
+      .environmentObject(coreVM)
+      .preferredColorScheme(.dark)
   }
 }

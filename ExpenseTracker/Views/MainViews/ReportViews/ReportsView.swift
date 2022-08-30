@@ -27,7 +27,7 @@ struct ReportsView: View {
     expenseList
       .navigationBarTitle("Generate Reports")
       .navigationBarTitleDisplayMode(.inline)
-    
+      .background(Color(uiColor: .systemGray5))
       .toolbar {
         ToolbarItem {
           
