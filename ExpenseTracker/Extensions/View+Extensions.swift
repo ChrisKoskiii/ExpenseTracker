@@ -45,7 +45,6 @@ struct CardBackground: ViewModifier {
       .background(.ultraThickMaterial, in: RoundedRectangle(
         cornerRadius: 16,
         style: .continuous))
-      .background(Color.white.cornerRadius(16).shadow(color: Color.secondary.opacity(0.2), radius: 50, x: 0, y: 0))
       .strokeStyle(cornerRadius: 16)
   }
 }

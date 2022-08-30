@@ -44,46 +44,51 @@ struct AddExpenseView: View {
   var body: some View {
     ScrollView {
       VStack(spacing: 10) {
-        DatePicker(dateValue.formatDate(), selection: $dateValue, displayedComponents: [.date])
-          .textfieldStyle()
-        
-        TextField("Enter title", text: $titleText)
-          .textfieldStyle()
-        
-        TextField("$", value: $costText, formatter: formatter)
-          .textfieldStyle()
-          .keyboardType(.decimalPad)
-        
-        ZStack {
-          TextField("Enter vendor", text: $expensesVM.selectedVendor ?? "")
+        VStack(spacing: 0) {
+          DatePicker(dateValue.formatDate(), selection: $dateValue, displayedComponents: [.date])
             .textfieldStyle()
-          
-          HStack {
-            
-            Spacer()
-            
-            NavigationLink(destination: VendorListView(expensesVM: expensesVM)) {
-              Image(systemName: "chevron.right")}
-            .frame(width: 20)
-            .padding(.trailing, 20)
-          }
-        }
-        
-        ZStack {
-          TextField("Enter category", text: $expensesVM.selectedCategory ?? "")
+        Divider()
+          TextField("Enter title", text: $titleText)
             .textfieldStyle()
-          
-          HStack {
+        Divider()
+          TextField("$", value: $costText, formatter: formatter)
+            .textfieldStyle()
+            .keyboardType(.decimalPad)
+          Divider()
+          ZStack {
+            TextField("Enter vendor", text: $expensesVM.selectedVendor ?? "")
+              .textfieldStyle()
             
-            Spacer()
-            
-            NavigationLink(destination: CategoryListView(expensesVM: expensesVM)) {
-              Image(systemName: "chevron.right")
+            HStack {
+              
+              Spacer()
+              
+              NavigationLink(destination: VendorListView(expensesVM: expensesVM)) {
+                Image(systemName: "chevron.right")}
+              .frame(width: 20)
+              .padding(.trailing, 20)
             }
-            .frame(width: 20)
-            .padding(.trailing, 20)
           }
+          Divider()
+          ZStack {
+            TextField("Enter category", text: $expensesVM.selectedCategory ?? "")
+              .textfieldStyle()
+            
+            HStack {
+              
+              Spacer()
+              
+              NavigationLink(destination: CategoryListView(expensesVM: expensesVM)) {
+                Image(systemName: "chevron.right")
+              }
+              .frame(width: 20)
+              .padding(.trailing, 20)
+            }
+          }
+
         }
+        .cardBackground()
+        .padding(.horizontal)
         scanButton
         
         addExpenseButton
