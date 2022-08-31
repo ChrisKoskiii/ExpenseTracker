@@ -14,7 +14,7 @@
 		9E187D352892FF3E00142000 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E187D342892FF3E00142000 /* Preview Assets.xcassets */; };
 		9E187D3D2893010900142000 /* ExpenseContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9E187D3B2893010900142000 /* ExpenseContainer.xcdatamodeld */; };
 		9E187D3F2893055000142000 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E187D3E2893055000142000 /* View+Extensions.swift */; };
-		9E187D412893115A00142000 /* CoreDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E187D402893115A00142000 /* CoreDataViewModel.swift */; };
+		9E187D412893115A00142000 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E187D402893115A00142000 /* CoreDataManager.swift */; };
 		9E187D4328936A0E00142000 /* AddExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E187D4228936A0E00142000 /* AddExpenseView.swift */; };
 		9E187D4528936D8600142000 /* DocumentScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E187D4428936D8600142000 /* DocumentScanner.swift */; };
 		9E1E3D292894687B004FE485 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1E3D282894687B004FE485 /* Date+Extension.swift */; };
@@ -54,7 +54,7 @@
 		9E187D342892FF3E00142000 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9E187D3C2893010900142000 /* ExpenseContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ExpenseContainer.xcdatamodel; sourceTree = "<group>"; };
 		9E187D3E2893055000142000 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
-		9E187D402893115A00142000 /* CoreDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataViewModel.swift; sourceTree = "<group>"; };
+		9E187D402893115A00142000 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		9E187D4228936A0E00142000 /* AddExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseView.swift; sourceTree = "<group>"; };
 		9E187D4428936D8600142000 /* DocumentScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentScanner.swift; sourceTree = "<group>"; };
 		9E1E3D282894687B004FE485 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
@@ -140,6 +140,7 @@
 		9E187D2C2892FF3D00142000 /* ExpenseTracker */ = {
 			isa = PBXGroup;
 			children = (
+				9E7F71B928BFD34A00B0B5E0 /* CoreData */,
 				9EF7456A28B6F16D0058F681 /* Files */,
 				9E187D2D2892FF3D00142000 /* ExpenseTrackerApp.swift */,
 				9E8E1F292893802000300E14 /* Models */,
@@ -172,7 +173,6 @@
 		9E187D4728936EE100142000 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				9E187D402893115A00142000 /* CoreDataViewModel.swift */,
 				9E58254928A57EAF00C80A73 /* HomeViewModel.swift */,
 				9E5824F628A1A6EE00C80A73 /* ReportsViewModel.swift */,
 				9E58254B28A5EEE800C80A73 /* ExpensesViewModel.swift */,
@@ -188,6 +188,14 @@
 				9EBD37532895A09200BABDFA /* MonthlyTotalView.swift */,
 			);
 			path = HomeScreen;
+			sourceTree = "<group>";
+		};
+		9E7F71B928BFD34A00B0B5E0 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				9E187D402893115A00142000 /* CoreDataManager.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		9E8E1F2128936F7F00300E14 /* Helpers */ = {
@@ -376,7 +384,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9E187D412893115A00142000 /* CoreDataViewModel.swift in Sources */,
+				9E187D412893115A00142000 /* CoreDataManager.swift in Sources */,
 				9E35E5A328957208008D9ABA /* ExpenseEntity+CoreDataClass.swift in Sources */,
 				9E8E1F332894232A00300E14 /* ReportsView.swift in Sources */,
 				9E9B34AE2899733900408F05 /* ShareSheet.swift in Sources */,

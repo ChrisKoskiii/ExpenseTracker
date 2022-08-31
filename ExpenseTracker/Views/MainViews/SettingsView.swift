@@ -11,7 +11,7 @@ struct SettingsView: View {
   
   @AppStorage("isDarkMode") private var isDarkMode = false
   
-  @EnvironmentObject var coreVM: CoreDataViewModel
+  @EnvironmentObject var coreVM: CoreDataManager
 
   
   var body: some View {

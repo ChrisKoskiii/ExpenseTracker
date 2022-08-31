@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AddExpenseView: View {
   @Environment(\.presentationMode) var presentationMode
-  @EnvironmentObject var coreVM:  CoreDataViewModel
+  @EnvironmentObject var coreVM:  CoreDataManager
   @ObservedObject var expensesVM: ExpensesViewModel
   
   //Scanner state

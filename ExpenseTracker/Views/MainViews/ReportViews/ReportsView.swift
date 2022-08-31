@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ReportsView: View {
   
-  @EnvironmentObject var coreVM:  CoreDataViewModel
+  @EnvironmentObject var coreVM:  CoreDataManager
   @StateObject var reportsVM    = ReportsViewModel()
   
   @State var startDate: Date

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GenerateReportsView: View {
-  @EnvironmentObject var coreVM: CoreDataViewModel
+  @EnvironmentObject var coreVM: CoreDataManager
   
   @State private var startDate: Date  = Date.now
   @State private var endDate: Date    = Date.now

@@ -94,7 +94,7 @@ struct RecentExpenseCardView: View {
 }
 
 struct RecentExpenseCardView_Previews: PreviewProvider {
-  static let coreVM =  CoreDataViewModel()
+  static let coreVM =  CoreDataManager()
   
   static var previews: some View {
     
