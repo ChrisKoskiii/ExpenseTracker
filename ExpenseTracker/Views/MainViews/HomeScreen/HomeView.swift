@@ -62,7 +62,7 @@ struct RecentExpensesList: View {
   @ObservedObject var coreVM: CoreDataManager
   @ObservedObject var expensesVM: ExpensesViewModel
   var body: some View {
-    ForEach(coreVM.recentExpenses) { expense in
+    ForEach(coreVM.recentExpenses, id: \.self) { expense in
       NavigationLink(destination: DetailExpenseView(expensesVM: expensesVM, detailExpense: expense)) {
         RecentExpenseCardView(recentExpense: expense)
       }

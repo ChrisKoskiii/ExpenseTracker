@@ -49,7 +49,7 @@ struct ExpensesView: View {
     
     List {
       
-      ForEach(expensesVM.dateRangeExpenses) { expense in
+      ForEach(expensesVM.dateRangeExpenses, id: \.self) { expense in
         
         NavigationLink(destination: DetailExpenseView(expensesVM: expensesVM, detailExpense: expense)) {
           
@@ -58,9 +58,9 @@ struct ExpensesView: View {
             
             VStack(alignment: .leading) {
               Text(expense.wrappedTitle)
-              Text(expense.wrappedVendor)
+              Text(expense.vendor.wrappedName)
                 .font(.footnote)
-              Text(expense.wrappedCategory)
+              Text(expense.category.wrappedName)
                 .font(.footnote)
             }
             

@@ -60,11 +60,11 @@ struct RecentExpenseCardView: View {
             .font(.headline)
             .padding(.top, 4)
           
-          Text(recentExpense.wrappedCategory)
+          Text(recentExpense.category.wrappedName)
             .foregroundColor(.secondary)
             .font(.footnote)
           
-          Text(recentExpense.wrappedVendor)
+          Text(recentExpense.category.wrappedName)
             .foregroundColor(.secondary)
             .font(.footnote)
             .padding(.bottom, 4)
@@ -100,8 +100,6 @@ struct RecentExpenseCardView_Previews: PreviewProvider {
     
     let sampleExpense = ExpenseEntity(context: coreVM.container.viewContext)
     sampleExpense.title = "Text Expense"
-    sampleExpense.vendor = "Home-Depot"
-    sampleExpense.category = "Supplies"
     sampleExpense.date = Date.now
     sampleExpense.cost = 99.99
     

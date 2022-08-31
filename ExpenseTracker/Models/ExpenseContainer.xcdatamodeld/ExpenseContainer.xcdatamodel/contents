@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21G72" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21G83" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="CategoryEntity" representedClassName="CategoryEntity" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="symbol" optional="YES" attributeType="String"/>
+        <relationship name="expense" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ExpenseEntity" inverseName="category" inverseEntity="ExpenseEntity"/>
+    </entity>
     <entity name="ExpenseEntity" representedClassName="ExpenseEntity" syncable="YES">
-        <attribute name="category" attributeType="String" defaultValueString="N/A"/>
         <attribute name="cost" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="date" attributeType="Date" defaultDateTimeInterval="681921540" usesScalarValueType="NO"/>
         <attribute name="receipt" optional="YES" attributeType="Binary"/>
         <attribute name="title" attributeType="String" defaultValueString="N/A"/>
-        <attribute name="vendor" attributeType="String" defaultValueString="N/A"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CategoryEntity" inverseName="expense" inverseEntity="CategoryEntity"/>
+        <relationship name="vendor" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="VendorEntity" inverseName="expense" inverseEntity="VendorEntity"/>
+    </entity>
+    <entity name="VendorEntity" representedClassName="VendorEntity" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="expense" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ExpenseEntity" inverseName="vendor" inverseEntity="ExpenseEntity"/>
     </entity>
     <elements>
+        <element name="CategoryEntity" positionX="-63" positionY="18" width="128" height="74"/>
         <element name="ExpenseEntity" positionX="-63" positionY="-18" width="128" height="119"/>
+        <element name="VendorEntity" positionX="-45" positionY="45" width="128" height="59"/>
     </elements>
 </model>

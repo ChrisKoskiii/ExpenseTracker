@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workspace
    version = "1.0">
+   <Group
+      location = "container:"
+      name = "CoreDataFiles">
+      <FileRef
+         location = "group:/Users/christopherkoski/Developer/ExpenseTracker/ExpenseTracker/CoreData/CategoryEntity+CoreDataClass.swift">
+      </FileRef>
+      <FileRef
+         location = "group:/Users/christopherkoski/Developer/ExpenseTracker/ExpenseTracker/CoreData/CategoryEntity+CoreDataProperties.swift">
+      </FileRef>
+      <FileRef
+         location = "group:/Users/christopherkoski/Developer/ExpenseTracker/ExpenseTracker/CoreData/ExpenseEntity+CoreDataClass.swift">
+      </FileRef>
+      <FileRef
+         location = "group:/Users/christopherkoski/Developer/ExpenseTracker/ExpenseTracker/CoreData/ExpenseEntity+CoreDataProperties.swift">
+      </FileRef>
+      <FileRef
+         location = "group:/Users/christopherkoski/Developer/ExpenseTracker/ExpenseTracker/CoreData/VendorEntity+CoreDataClass.swift">
+      </FileRef>
+      <FileRef
+         location = "group:/Users/christopherkoski/Developer/ExpenseTracker/ExpenseTracker/CoreData/VendorEntity+CoreDataProperties.swift">
+      </FileRef>
+   </Group>
    <FileRef
       location = "group:ExpenseTracker.xcodeproj">
    </FileRef>
