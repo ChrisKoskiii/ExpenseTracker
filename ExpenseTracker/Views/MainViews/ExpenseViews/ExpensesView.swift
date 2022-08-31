@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ExpensesView: View {
 
-  @EnvironmentObject var coreVM:  CoreDataViewModel
+  @EnvironmentObject var coreVM:  CoreDataManager
   @ObservedObject var expensesVM: ExpensesViewModel
   
   var formatter: NumberFormatter = {
@@ -84,7 +84,7 @@ struct ExpensesView: View {
 }
 
 struct AddExpenseButton: View {
-  @ObservedObject var coreVM: CoreDataViewModel
+  @ObservedObject var coreVM: CoreDataManager
   @ObservedObject var expensesVM: ExpensesViewModel
   
   var body: some View {
@@ -101,7 +101,7 @@ struct AddExpenseButton: View {
 }
 
 struct MonthSelector: View {
-  @ObservedObject var coreVM: CoreDataViewModel
+  @ObservedObject var coreVM: CoreDataManager
   @ObservedObject var expensesVM: ExpensesViewModel
   var body: some View {
     HStack {
@@ -136,7 +136,7 @@ struct MonthSelector: View {
 }
 
 struct ExpensesView_Previews: PreviewProvider {
-  static let coreVM = CoreDataViewModel()
+  static let coreVM = CoreDataManager()
   
   static var previews: some View {
     ExpensesView(expensesVM: ExpensesViewModel())

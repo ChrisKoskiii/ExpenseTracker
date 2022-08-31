@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
   
-  @EnvironmentObject var coreVM:  CoreDataViewModel
+  @EnvironmentObject var coreVM:  CoreDataManager
   @ObservedObject var expensesVM: ExpensesViewModel
   
   var body: some View {
@@ -59,7 +59,7 @@ struct HomeView: View {
 }
 
 struct RecentExpensesList: View {
-  @ObservedObject var coreVM: CoreDataViewModel
+  @ObservedObject var coreVM: CoreDataManager
   @ObservedObject var expensesVM: ExpensesViewModel
   var body: some View {
     ForEach(coreVM.recentExpenses) { expense in
@@ -71,7 +71,7 @@ struct RecentExpensesList: View {
 }
 
 struct HomeView_Previews: PreviewProvider {
-  static let coreVM = CoreDataViewModel()
+  static let coreVM = CoreDataManager()
   
   static var previews: some View {
     HomeView(expensesVM: ExpensesViewModel())

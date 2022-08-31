@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MonthlyTotalView: View {
   
-  @ObservedObject var coreVM: CoreDataViewModel
+  @ObservedObject var coreVM: CoreDataManager
   @StateObject var homeVM =   HomeViewModel()
   
   var body: some View {
@@ -69,7 +69,7 @@ struct timeFrameButtonText: View {
 
 struct MenuView: View {
   @ObservedObject var homeVM: HomeViewModel
-  var coreVM: CoreDataViewModel
+  var coreVM: CoreDataManager
   var body: some View {
     Menu {
       
@@ -123,6 +123,6 @@ struct ThisWeekString: View {
 
 struct MonthlyTotalView_Previews: PreviewProvider {
   static var previews: some View {
-    MonthlyTotalView(coreVM: CoreDataViewModel())
+    MonthlyTotalView(coreVM: CoreDataManager())
   }
 }

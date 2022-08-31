@@ -10,7 +10,7 @@ import SwiftUI
 struct VendorListView: View {
   @Environment(\.presentationMode) var presentationMode
   
-  @EnvironmentObject var coreVM:  CoreDataViewModel
+  @EnvironmentObject var coreVM:  CoreDataManager
   @ObservedObject var expensesVM: ExpensesViewModel
   
   var body: some View {

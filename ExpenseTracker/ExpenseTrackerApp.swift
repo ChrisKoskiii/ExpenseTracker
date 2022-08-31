@@ -22,7 +22,7 @@ struct ExpenseTrackerApp: App {
   
   @AppStorage("isDarkMode") private var isDarkMode = false
   
-  @StateObject var coreVM     = CoreDataViewModel()
+  @StateObject var coreVM     = CoreDataManager()
   @StateObject var expensesVM = ExpensesViewModel()
   
   var body: some Scene {
