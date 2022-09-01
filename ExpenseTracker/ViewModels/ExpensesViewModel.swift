@@ -8,14 +8,11 @@
 import Foundation
 
 class ExpensesViewModel: ObservableObject {
-  let defaults = UserDefaults()
   
   @Published var monthText: String = "January"
   @Published var monthStart: Date = Date.startOfMonth(Date.now)()
   @Published var monthEnd: Date = Date.endOfMonth(Date.now)()
   @Published var dateRangeExpenses: [ExpenseEntity] = []
-  @Published(key: "categories") var categories: [String] = []
-  @Published(key: "vendors") var vendors: [String] = []
   @Published var selectedCategory: String?
   @Published var selectedVendor: String?
   @Published var newExpense: ExpenseModel?
@@ -24,8 +21,6 @@ class ExpensesViewModel: ObservableObject {
   
   init() {
     getCurrentMonthString(from: Date.now)
-    categories = categories.sorted { $0 < $1 }
-    vendors = vendors.sorted { $0 < $1 }
   }
 
   func setCurrentMonth() {
@@ -55,10 +50,13 @@ class ExpensesViewModel: ObservableObject {
     monthText = dateFormatter.string(from: date)
   }
   
-  func makeNewExpense(category: String, cost: Double, date: Date, title: String, vendor: String, receipt: Data?, completion: (ExpenseModel) -> ()) {
-    let expense = ExpenseModel(category: category, cost: cost, date: date, title: title, vendor: vendor, receipt: receipt)
+  func makeNewExpense(category: String, cost: Double, date: Date, title: String, vendor: String, receipt: Data?, symbol: String, completion: (ExpenseModel) -> ()) {
+    let categoryModel = CategoryModel(name: category, symbol: "dollarsign.circle")
+    let vendorModel = VendorModel(name: vendor)
+    let expense = ExpenseModel(category: categoryModel, cost: cost, date: date, title: title, vendor: vendorModel, receipt: receipt)
     completion(expense)
   }
+
 }
 
 

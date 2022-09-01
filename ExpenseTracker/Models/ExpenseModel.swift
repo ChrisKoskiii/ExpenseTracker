@@ -8,10 +8,10 @@
 import Foundation
 
 struct ExpenseModel {
-  var category: String
+  var category: CategoryModel
   var cost: Double
   var date: Date
   var title: String
-  var vendor: String
+  var vendor: VendorModel
   var receipt: Data?
 }

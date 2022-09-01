@@ -10,30 +10,32 @@ import SwiftUI
 struct VendorListView: View {
   @Environment(\.presentationMode) var presentationMode
   
-  @EnvironmentObject var coreVM:  CoreDataManager
+  @EnvironmentObject var data:  CoreDataManager
   @ObservedObject var expensesVM: ExpensesViewModel
   
   var body: some View {
     List {
-      ForEach(expensesVM.vendors, id: \.self) { item in
+      ForEach(data.savedVendors, id: \.self) { item in
         Button {
-          expensesVM.selectedVendor = item
+          expensesVM.selectedVendor = item.name
 //          presentationMode.wrappedValue.dismiss()
         } label: {
-          Text(item)
+          Text(item.wrappedName)
         }
       }
-      .onDelete(perform: deleteItem)
     }
     .listStyle(.plain)
     .background(Color(.secondarySystemBackground))
     .navigationTitle("Vendors")
     .navigationBarTitleDisplayMode(.inline)
   }
-  
-  func deleteItem(at offsets: IndexSet) {
-    expensesVM.vendors.remove(atOffsets: offsets)
-  }
+  // Getting fatal error when deleting from list
+//  func deleteItem(at offsets: IndexSet) {
+//    for index in offsets {
+//      let item = data.savedVendors[index]
+//      data.deleteVendor(item)
+//    }
+//  }
   
 }
 

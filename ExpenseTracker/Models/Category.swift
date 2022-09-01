@@ -11,3 +11,8 @@ struct Category {
   let name: String
   let cost: Double
 }
+
+struct CategoryModel {
+  var name: String
+  var symbol: String
+}

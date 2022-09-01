@@ -1,8 +1,8 @@
 //
 //  ExpenseEntity+CoreDataClass.swift
-//  ExpenseTracker
+//  
 //
-//  Created by Christopher Koski on 7/30/22.
+//  Created by Christopher Koski on 8/31/22.
 //
 //
 

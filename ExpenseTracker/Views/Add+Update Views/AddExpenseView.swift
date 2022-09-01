@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AddExpenseView: View {
   @Environment(\.presentationMode) var presentationMode
-  @EnvironmentObject var coreVM:  CoreDataManager
+  @EnvironmentObject var coreData:  CoreDataManager
   @ObservedObject var expensesVM: ExpensesViewModel
   
   //Scanner state
@@ -79,7 +79,10 @@ struct AddExpenseView: View {
               Spacer()
               
               NavigationLink(destination: CategoryListView(expensesVM: expensesVM)) {
-                Image(systemName: "chevron.right")
+                HStack {
+                  Image(systemName: "car")
+                  Image(systemName: "chevron.right")
+                }
               }
               .frame(width: 20)
               .padding(.trailing, 20)
@@ -110,7 +113,7 @@ struct AddExpenseView: View {
         case .success(let scannedImages):
           isRecognizing = true
           scannedImage = scannedImages.first!
-          imageData = coreVM.getImageData(scannedImage!)
+          imageData = coreData.getImageData(scannedImage!)
         case .failure(let error):
           print(error.localizedDescription)
         }
@@ -149,24 +152,25 @@ struct AddExpenseView: View {
                                   date: dateValue,
                                   title: titleText,
                                   vendor: expensesVM.selectedVendor!,
-                                  receipt: imageData
+                                  receipt: imageData, symbol: "dollarsign.circle"
         ) { expense in
-          coreVM.addExpense(expense)
+          coreData.addExpense(expense)
         }
         presentationMode.wrappedValue.dismiss()
-        coreVM.getDateRangeExpenses(
+        coreData.getDateRangeExpenses(
           startDate: expensesVM.monthStart,
           endDate: expensesVM.monthEnd) { expenses in
             expensesVM.dateRangeExpenses = expenses
           }
-        if !expensesVM.categories.contains(expensesVM.selectedCategory!) {
-          expensesVM.categories.append(expensesVM.selectedCategory!)
-        }
-        if !expensesVM.vendors.contains(expensesVM.selectedVendor!) {
-          expensesVM.vendors.append(expensesVM.selectedVendor!)
-        }
+//        if !expensesVM.categories.contains(expensesVM.selectedCategory!) {
+//          expensesVM.categories.append(expensesVM.selectedCategory!)
+//        }
+//        if !expensesVM.vendors.contains(expensesVM.selectedVendor!) {
+//          expensesVM.vendors.append(expensesVM.selectedVendor!)
+//        }
         expensesVM.selectedVendor = nil
         expensesVM.selectedCategory = nil
+        coreData.fetchData()
       }
     } label: {
       Text("Add Expense")

@@ -113,7 +113,7 @@ struct DetailExpenseView: View {
         .keyboardType(.decimalPad)
       Divider()
       ZStack {
-        TextField("Enter vendor", text: $detailExpense.wrappedVendor)
+        TextField("Enter vendor", text: $detailExpense.vendor.wrappedName)
           .textfieldStyle()
         HStack {
           Spacer()
@@ -125,18 +125,17 @@ struct DetailExpenseView: View {
       }
       Divider()
       ZStack {
-        TextField("Enter category", text: $detailExpense.wrappedCategory)
+        TextField("Enter category", text: $detailExpense.category.wrappedName)
           .textfieldStyle()
         HStack {
           Spacer()
-          NavigationLink(destination: CategoryListView(expensesVM: expensesVM, detailExpenseCategory: detailExpense.wrappedCategory)) {
+          NavigationLink(destination: CategoryListView(expensesVM: expensesVM, detailExpenseCategory: detailExpense.category.wrappedName)) {
             Image(systemName: "chevron.right")
           }
           .frame(width: 20)
           .padding(.trailing, 20)
         }
       }
-      
     }
     .cardBackground()
     .padding(.horizontal)
@@ -159,21 +158,21 @@ struct DetailExpenseView: View {
   
   var updateExpenseButton: some View {
     Button {
-      expensesVM.makeNewExpense(category: detailExpense.wrappedCategory,
+      expensesVM.makeNewExpense(category: detailExpense.category.wrappedName,
                                 cost: detailExpense.cost,
                                 date: detailExpense.wrappedDate,
                                 title: detailExpense.wrappedTitle,
-                                vendor: detailExpense.wrappedVendor,
-                                receipt: detailExpense.receipt
+                                vendor: detailExpense.vendor.wrappedName,
+                                receipt: detailExpense.receipt, symbol: "dollarsign.circle"
       ) { expense in
         coreVM.updateExpense(detailExpense, with: expense)
       }
-      if !expensesVM.categories.contains(expensesVM.selectedCategory!) {
-        expensesVM.categories.append(expensesVM.selectedCategory!)
-      }
-      if !expensesVM.vendors.contains(expensesVM.selectedVendor!) {
-        expensesVM.vendors.append(expensesVM.selectedVendor!)
-      }
+//      if !expensesVM.categories.contains(expensesVM.selectedCategory!) {
+//        expensesVM.categories.append(expensesVM.selectedCategory!)
+//      }
+//      if !expensesVM.vendors.contains(expensesVM.selectedVendor!) {
+//        expensesVM.vendors.append(expensesVM.selectedVendor!)
+//      }
       expensesVM.selectedCategory = nil
       expensesVM.selectedVendor = nil
         presentationMode.wrappedValue.dismiss()
@@ -219,8 +218,8 @@ struct DetailExpenseView: View {
   func emptyTextFields() -> Bool {
     if detailExpense.wrappedTitle.isEmpty ||
         detailExpense.cost == 0.00 ||
-        detailExpense.wrappedVendor.isEmpty ||
-        detailExpense.wrappedCategory.isEmpty {
+        detailExpense.vendor.wrappedName.isEmpty ||
+        detailExpense.category.wrappedName.isEmpty {
       return true
     } else { return false
     }
