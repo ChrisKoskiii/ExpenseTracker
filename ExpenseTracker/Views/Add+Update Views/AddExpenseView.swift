@@ -160,7 +160,12 @@ struct AddExpenseView: View {
                                   date: dateValue,
                                   title: titleText,
                                   vendor: expensesVM.selectedVendor!,
-                                  receipt: imageData, symbol: expensesVM.selectedCategory?.symbol ?? "dollarsign.circle"
+                                  receipt: imageData,
+                                  symbol: expensesVM.selectedCategory?.symbol ?? "dollarsign.circle",
+                                  colorR: expensesVM.selectedCategory?.colorR ?? 0.0,
+                                  colorG: expensesVM.selectedCategory?.colorG ?? 0.0,
+                                  colorB: expensesVM.selectedCategory?.colorB ?? 0.0,
+                                  colorA: expensesVM.selectedCategory?.colorA ?? 0.0
         ) { expense in
           coreData.addExpense(expense)
         }

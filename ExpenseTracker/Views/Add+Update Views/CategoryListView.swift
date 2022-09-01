@@ -13,7 +13,7 @@ struct CategoryListView: View {
   @EnvironmentObject var data:    CoreDataManager
   @ObservedObject var expensesVM:   ExpensesViewModel
   
-  @State var detailExpenseCategory: String?
+  @State var detailExpenseCategory: CategoryEntity?
   
   var body: some View {
     List {
@@ -21,7 +21,16 @@ struct CategoryListView: View {
         let symbolColor = Color(red: item.colorR, green: item.colorG, blue: item.colorB, opacity: item.colorA)
         HStack {
           Button {
+            if detailExpenseCategory == nil {
             expensesVM.newCategory(name: item.wrappedName, symbol: item.wrappedSymbol, colorR: item.colorR, colorG: item.colorG, colorB: item.colorB, colorA: item.colorA)
+            } else {
+              detailExpenseCategory?.name = item.name
+              detailExpenseCategory?.symbol = item.symbol
+              detailExpenseCategory?.colorR = item.colorR
+              detailExpenseCategory?.colorG = item.colorG
+              detailExpenseCategory?.colorB = item.colorB
+              detailExpenseCategory?.colorA = item.colorA
+            }
             presentationMode.wrappedValue.dismiss()
           } label: {
             Text(item.wrappedName)
@@ -33,7 +42,7 @@ struct CategoryListView: View {
             Image(systemName: item.wrappedSymbol)
               .resizable()
               .scaledToFit()
-              .frame(width: 40)
+              .frame(width: 40, height: 40)
               .foregroundColor(symbolColor)
           }
           .frame(width: 60)

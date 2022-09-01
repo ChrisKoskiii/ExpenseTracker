@@ -42,7 +42,6 @@ struct DetailExpenseView: View {
         
         expenseTextfields
 
-        
         scanButton
         
         updateExpenseButton
@@ -129,8 +128,12 @@ struct DetailExpenseView: View {
           .textfieldStyle()
         HStack {
           Spacer()
-          NavigationLink(destination: CategoryListView(expensesVM: expensesVM, detailExpenseCategory: detailExpense.category.wrappedName)) {
-            Image(systemName: "chevron.right")
+          NavigationLink(destination: CategoryListView(expensesVM: expensesVM, detailExpenseCategory: detailExpense.category)) {
+            HStack {
+              Image(systemName: detailExpense.category.wrappedSymbol)
+                .foregroundColor(coreVM.categoryColor(for: detailExpense.category))
+              Image(systemName: "chevron.right")
+            }
           }
           .frame(width: 20)
           .padding(.trailing, 20)
@@ -163,7 +166,12 @@ struct DetailExpenseView: View {
                                 date: detailExpense.wrappedDate,
                                 title: detailExpense.wrappedTitle,
                                 vendor: detailExpense.vendor.wrappedName,
-                                receipt: detailExpense.receipt, symbol: "dollarsign.circle"
+                                receipt: detailExpense.receipt,
+                                symbol: detailExpense.category.wrappedSymbol,
+                                colorR: detailExpense.category.colorR,
+                                colorG: detailExpense.category.colorG,
+                                colorB: detailExpense.category.colorB,
+                                colorA: detailExpense.category.colorA
       ) { expense in
         coreVM.updateExpense(detailExpense, with: expense)
       }

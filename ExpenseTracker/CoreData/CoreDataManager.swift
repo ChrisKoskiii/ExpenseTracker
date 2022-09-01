@@ -7,6 +7,7 @@
 
 import CoreData
 import UIKit
+import SwiftUI
 import CloudKit
 
 class CoreDataManager: ObservableObject {
@@ -75,7 +76,7 @@ class CoreDataManager: ObservableObject {
       print("Error fetching, \(error)")
       
     }
-
+    
   }
   
   func fetchVendors() {
@@ -145,26 +146,30 @@ class CoreDataManager: ObservableObject {
   
   //Maybe we can reduce three delete functions to one with generics?
   func deleteExpense(_ expense: ExpenseEntity) {
-      container.viewContext.delete(expense)
-      saveData()
-    }
+    container.viewContext.delete(expense)
+    saveData()
+  }
   func deleteCategory(_ category: CategoryEntity) {
-      container.viewContext.delete(category)
-      saveData()
-    }
+    container.viewContext.delete(category)
+    saveData()
+  }
   func deleteVendor(_ vendor: VendorEntity) {
-      container.viewContext.delete(vendor)
-      saveData()
-    }
+    container.viewContext.delete(vendor)
+    saveData()
+  }
   
   func updateExpense(_ entity: ExpenseEntity, with expense: ExpenseModel) {
     entity.title = expense.title
     entity.cost = expense.cost
     entity.vendor.name = expense.vendor.name
     entity.category.name = expense.category.name
-    entity.category.symbol = "dollarsign.circle"
+    entity.category.symbol = expense.category.symbol
     entity.date = expense.date
     entity.receipt = expense.receipt
+    entity.category.colorR = expense.category.colorR
+    entity.category.colorG = expense.category.colorG
+    entity.category.colorB = expense.category.colorB
+    entity.category.colorA = expense.category.colorA
     
     saveData()
   }
@@ -209,6 +214,10 @@ class CoreDataManager: ObservableObject {
     for expense in savedExpenses {
       categoriesDict[expense.category.wrappedName] = 0
     }
+  }
+  
+  func categoryColor(for category: CategoryEntity) -> Color {
+    return Color(red: category.colorR, green: category.colorG, blue: category.colorB, opacity: category.colorA)
   }
 }
 
