@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21G83" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="CategoryEntity" representedClassName="CategoryEntity" syncable="YES">
+        <attribute name="colorA" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="colorB" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="colorG" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="colorR" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="symbol" optional="YES" attributeType="String"/>
         <relationship name="expense" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ExpenseEntity" inverseName="category" inverseEntity="ExpenseEntity"/>
@@ -18,7 +22,7 @@
         <relationship name="expense" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ExpenseEntity" inverseName="vendor" inverseEntity="ExpenseEntity"/>
     </entity>
     <elements>
-        <element name="CategoryEntity" positionX="-63" positionY="18" width="128" height="74"/>
+        <element name="CategoryEntity" positionX="-63" positionY="18" width="128" height="134"/>
         <element name="ExpenseEntity" positionX="-63" positionY="-18" width="128" height="119"/>
         <element name="VendorEntity" positionX="-45" positionY="45" width="128" height="59"/>
     </elements>

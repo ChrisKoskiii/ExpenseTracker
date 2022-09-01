@@ -128,6 +128,10 @@ class CoreDataManager: ObservableObject {
     let newCategory = CategoryEntity(context: container.viewContext)
     newCategory.name = expense.category.name
     newCategory.symbol = expense.category.symbol
+    newCategory.colorA = expense.category.colorA
+    newCategory.colorB = expense.category.colorB
+    newCategory.colorG = expense.category.colorG
+    newCategory.colorR = expense.category.colorR
     
     newExpense.category = newCategory
     

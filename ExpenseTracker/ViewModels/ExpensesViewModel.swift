@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class ExpensesViewModel: ObservableObject {
   
@@ -13,7 +14,7 @@ class ExpensesViewModel: ObservableObject {
   @Published var monthStart: Date = Date.startOfMonth(Date.now)()
   @Published var monthEnd: Date = Date.endOfMonth(Date.now)()
   @Published var dateRangeExpenses: [ExpenseEntity] = []
-  @Published var selectedCategory: String?
+  @Published var selectedCategory: CategoryModel?
   @Published var selectedVendor: String?
   @Published var newExpense: ExpenseModel?
   
@@ -51,12 +52,22 @@ class ExpensesViewModel: ObservableObject {
   }
   
   func makeNewExpense(category: String, cost: Double, date: Date, title: String, vendor: String, receipt: Data?, symbol: String, completion: (ExpenseModel) -> ()) {
-    let categoryModel = CategoryModel(name: category, symbol: "dollarsign.circle")
+    let categoryModel = CategoryModel(name: category, symbol: "dollarsign.circle", colorR: 0.0, colorG: 0.0, colorB: 0.0, colorA: 0.0)
     let vendorModel = VendorModel(name: vendor)
     let expense = ExpenseModel(category: categoryModel, cost: cost, date: date, title: title, vendor: vendorModel, receipt: receipt)
     completion(expense)
   }
-
+  
+  func newCategory(name: String, symbol: String, colorR: Double, colorG: Double, colorB: Double, colorA: Double) {
+    selectedCategory = CategoryModel(name: name, symbol: symbol, colorR: colorR, colorG: colorG, colorB: colorB, colorA: colorA)
+  }
+  
+  func categoryColor() -> Color {
+    if let category = selectedCategory {
+    return Color(red: category.colorR, green: category.colorG, blue: category.colorB, opacity: category.colorA)
+    }
+    return Color.brandPrimary
+  }
 }
 
 

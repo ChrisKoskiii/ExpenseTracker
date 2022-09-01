@@ -15,4 +15,8 @@ struct Category {
 struct CategoryModel {
   var name: String
   var symbol: String
+  var colorR: Double
+  var colorG: Double
+  var colorB: Double
+  var colorA: Double
 }

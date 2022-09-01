@@ -18,22 +18,26 @@ struct CategoryListView: View {
   var body: some View {
     List {
       ForEach(data.savedCategories, id: \.self) { item in
+        let symbolColor = Color(red: item.colorR, green: item.colorG, blue: item.colorB, opacity: item.colorA)
         HStack {
           Button {
-              expensesVM.selectedCategory = item.name
-              presentationMode.wrappedValue.dismiss()
-            } label: {
-              Text(item.wrappedName)
+            expensesVM.newCategory(name: item.wrappedName, symbol: item.wrappedSymbol, colorR: item.colorR, colorG: item.colorG, colorB: item.colorB, colorA: item.colorA)
+            presentationMode.wrappedValue.dismiss()
+          } label: {
+            Text(item.wrappedName)
+              .foregroundColor(.primary)
           }
           .buttonStyle(.borderless)
           Spacer()
-          NavigationLink(destination: CategoryPickerView()) {
-            Image(systemName: "car")
+          NavigationLink(destination: CategoryPickerView(category: item)) {
+            Image(systemName: item.wrappedSymbol)
               .resizable()
               .scaledToFit()
               .frame(width: 40)
+              .foregroundColor(symbolColor)
           }
-          .buttonStyle(.borderless)
+          .frame(width: 60)
+          .buttonStyle(PlainButtonStyle())
         }
       }
     }
@@ -44,12 +48,12 @@ struct CategoryListView: View {
   }
   
   //Getting fatal error when deleting from list
-//  func deleteItem(at offsets: IndexSet) {
-//    for index in offsets {
-//      let item = data.savedCategories[index]
-//      data.deleteCategory(item)
-//    }
-//  }
+  //  func deleteItem(at offsets: IndexSet) {
+  //    for index in offsets {
+  //      let item = data.savedCategories[index]
+  //      data.deleteCategory(item)
+  //    }
+  //  }
   
 }
 

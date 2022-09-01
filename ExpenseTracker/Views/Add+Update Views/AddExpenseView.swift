@@ -33,6 +33,12 @@ struct AddExpenseView: View {
   @State private var imageData: Data?
   @State private var scannedImage: UIImage?
   
+  private var bindableCategoryString: Binding<String> { Binding (
+    get: { self.expensesVM.selectedCategory?.name ?? "" },
+    set: { _ in }
+      )
+  }
+  
   //Currency textfield formatter
   var formatter: NumberFormatter = {
     let formatter = NumberFormatter()
@@ -71,7 +77,7 @@ struct AddExpenseView: View {
           }
           Divider()
           ZStack {
-            TextField("Enter category", text: $expensesVM.selectedCategory ?? "")
+            TextField("Enter category", text: bindableCategoryString)
               .textfieldStyle()
             
             HStack {
@@ -79,8 +85,10 @@ struct AddExpenseView: View {
               Spacer()
               
               NavigationLink(destination: CategoryListView(expensesVM: expensesVM)) {
+                
                 HStack {
-                  Image(systemName: "car")
+                  Image(systemName: expensesVM.selectedCategory?.symbol ?? "dollarsign.circle")
+                    .foregroundColor(expensesVM.categoryColor())
                   Image(systemName: "chevron.right")
                 }
               }
@@ -147,12 +155,12 @@ struct AddExpenseView: View {
       if emptyTextFields() {
         presentAlert.toggle()
       } else {
-        expensesVM.makeNewExpense(category: expensesVM.selectedCategory!,
+        expensesVM.makeNewExpense(category: expensesVM.selectedCategory?.name ?? "Unknown",
                                   cost: costText,
                                   date: dateValue,
                                   title: titleText,
                                   vendor: expensesVM.selectedVendor!,
-                                  receipt: imageData, symbol: "dollarsign.circle"
+                                  receipt: imageData, symbol: expensesVM.selectedCategory?.symbol ?? "dollarsign.circle"
         ) { expense in
           coreData.addExpense(expense)
         }
