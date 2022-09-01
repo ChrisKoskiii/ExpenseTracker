@@ -27,8 +27,7 @@ struct CategoryListView: View {
           }
           .buttonStyle(.borderless)
           Spacer()
-          Button {
-          } label: {
+          NavigationLink(destination: CategoryPickerView) {
             Image(systemName: "car")
               .resizable()
               .scaledToFit()
