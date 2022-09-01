@@ -136,7 +136,6 @@ struct DetailExpenseView: View {
           .padding(.trailing, 20)
         }
       }
-      
     }
     .cardBackground()
     .padding(.horizontal)

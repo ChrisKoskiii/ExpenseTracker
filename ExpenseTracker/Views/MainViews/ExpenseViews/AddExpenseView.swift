@@ -79,7 +79,10 @@ struct AddExpenseView: View {
               Spacer()
               
               NavigationLink(destination: CategoryListView(expensesVM: expensesVM)) {
-                Image(systemName: "chevron.right")
+                HStack {
+                  Image(systemName: "car")
+                  Image(systemName: "chevron.right")
+                }
               }
               .frame(width: 20)
               .padding(.trailing, 20)

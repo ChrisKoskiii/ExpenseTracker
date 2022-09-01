@@ -18,11 +18,23 @@ struct CategoryListView: View {
   var body: some View {
     List {
       ForEach(data.savedCategories, id: \.self) { item in
-        Button {
-          expensesVM.selectedCategory = item.name
-          presentationMode.wrappedValue.dismiss()
-        } label: {
-          Text(item.wrappedName)
+        HStack {
+          Button {
+              expensesVM.selectedCategory = item.name
+              presentationMode.wrappedValue.dismiss()
+            } label: {
+              Text(item.wrappedName)
+          }
+          .buttonStyle(.borderless)
+          Spacer()
+          Button {
+          } label: {
+            Image(systemName: "car")
+              .resizable()
+              .scaledToFit()
+              .frame(width: 40)
+          }
+          .buttonStyle(.borderless)
         }
       }
     }
