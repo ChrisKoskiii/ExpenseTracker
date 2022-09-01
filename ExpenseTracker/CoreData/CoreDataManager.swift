@@ -18,10 +18,13 @@ class CoreDataManager: ObservableObject {
   @Published var savedCategories: [CategoryEntity] = []
   @Published var savedVendors: [VendorEntity] = []
   @Published var recentExpenses: [ExpenseEntity] = []
-  @Published var monthlyTotal: Double = 0.00
   @Published var dateRangeExpenses: [ExpenseEntity] = []
-  @Published var dateRangeTotal: Double = 0.0
+  @Published var monthlyExpenses: [ExpenseEntity] = []
   @Published var categoriesDict: [String: Double] = [:]
+  @Published var weeklyTotal: Double = 0.0
+  @Published var monthlyTotal: Double = 0.0
+  @Published var yearlyTotal: Double = 0.0
+  @Published var dateRangeTotal: Double = 0.0
   
   init() {
     container = NSPersistentCloudKitContainer(name: "ExpenseContainer")
@@ -36,7 +39,7 @@ class CoreDataManager: ObservableObject {
     getRecent(expenses: savedExpenses)
     if let startDate = Calendar.current.date(byAdding: .day, value: -7, to: Date()) {
       getDateRangeExpenses(startDate: startDate, endDate: Date.now) { expenses in
-        dateRangeExpenses = expenses
+        self.dateRangeExpenses = expenses
       }
     }
   }
@@ -97,7 +100,7 @@ class CoreDataManager: ObservableObject {
     recentExpenses = Array(savedExpenses.prefix(5))
   }
   
-  func getDateRangeExpenses(startDate: Date, endDate: Date , completion: ([ExpenseEntity]) -> ()) {
+  func getDateRangeExpenses(startDate: Date, endDate: Date, timeframe: TimeFrame? = nil, completion: (([ExpenseEntity]) -> ())? = nil) {
     let request = NSFetchRequest<ExpenseEntity>(entityName: "ExpenseEntity")
     let sort = NSSortDescriptor(key: #keyPath(ExpenseEntity.date), ascending: false)
     
@@ -108,7 +111,17 @@ class CoreDataManager: ObservableObject {
     do {
       let expenses = try container.viewContext.fetch(request)
       dateRangeTotal = getTotal(from: dateRangeExpenses)
-      completion(expenses)
+      if let safeTimeframe = timeframe {
+        switch safeTimeframe {
+        case .week:
+          weeklyTotal = getTotal(from: expenses)
+        case .month:
+          monthlyTotal = getTotal(from: expenses)
+          monthlyExpenses = expenses
+        case .year:
+          yearlyTotal = getTotal(from: expenses)
+        }
+      }
       
     } catch let error {
       print("Error fetching expenses for date range, \(error)")

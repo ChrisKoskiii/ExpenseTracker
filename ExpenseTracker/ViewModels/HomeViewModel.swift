@@ -12,19 +12,21 @@ class HomeViewModel: ObservableObject {
   @Published var selectedTimeFrame = "week"
   @Published var dateRangeExpenses: [ExpenseEntity] = []
   
-  func setViewTotal(text: String, expenses: [ExpenseEntity]) {
+  func setViewTotal(text: String, total: Double) {
     selectedTimeFrame = text
-    getSelectedTotal(from: expenses)
-    
+    self.total = total
   }
   func getSelectedTotal(from expenses: [ExpenseEntity]) {
     dateRangeExpenses = expenses
     if selectedTimeFrame == "week" {
       total = getTotal(from: dateRangeExpenses)
+      print(total)
     } else if selectedTimeFrame == "month" {
       total = getTotal(from: dateRangeExpenses)
+      print(total)
     } else if selectedTimeFrame == "year" {
       total = getTotal(from: dateRangeExpenses)
+      print(total)
     }
   }
   

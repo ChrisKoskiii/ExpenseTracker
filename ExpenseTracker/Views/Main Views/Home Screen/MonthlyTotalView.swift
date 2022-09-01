@@ -43,7 +43,7 @@ struct MonthlyTotalView: View {
           homeVM.dateRangeExpenses = expenses
         }
       }
-      homeVM.setViewTotal(text: "week", expenses: homeVM.dateRangeExpenses)
+      homeVM.setViewTotal(text: "week", total: coreVM.weeklyTotal)
     }
   }
   
@@ -76,34 +76,32 @@ struct MenuView: View {
       Button("week", action: {
         if let startDate = Calendar.current.date(byAdding: .day, value: -7, to: Date()) {
           
-          coreVM.getDateRangeExpenses(startDate: startDate, endDate: Date.now){ expenses in
-            homeVM.dateRangeExpenses = expenses
-          }
+          coreVM.getDateRangeExpenses(startDate: startDate, endDate: Date.now, timeframe: TimeFrame.week)
+          homeVM.setViewTotal(text: "week", total: coreVM.weeklyTotal)
+          print(coreVM.weeklyTotal)
         }
         
-        homeVM.setViewTotal(text: "week", expenses: homeVM.dateRangeExpenses)
+        
       })
       
       Button("month", action: {
         if let startDate = Calendar.current.date(byAdding: .month, value: -1, to: Date()) {
           
-          coreVM.getDateRangeExpenses(startDate: startDate, endDate: Date.now) { expenses in
-            homeVM.dateRangeExpenses = expenses
-          }
+          coreVM.getDateRangeExpenses(startDate: startDate, endDate: Date.now, timeframe: TimeFrame.month)
+          homeVM.setViewTotal(text: "month", total: coreVM.monthlyTotal)
+          print(coreVM.monthlyTotal)
         }
         
-        homeVM.setViewTotal(text: "month", expenses: homeVM.dateRangeExpenses)
+        
       })
       
       Button("year", action: {
         if let startDate = Calendar.current.date(byAdding: .year, value: -1, to: Date()) {
           
-          coreVM.getDateRangeExpenses(startDate: startDate, endDate: Date.now) { expenses in
-            homeVM.dateRangeExpenses = expenses
-          }
+          coreVM.getDateRangeExpenses(startDate: startDate, endDate: Date.now, timeframe: TimeFrame.year)
+          homeVM.setViewTotal(text: "year", total: coreVM.yearlyTotal)
+          print(coreVM.yearlyTotal)
         }
-        
-        homeVM.setViewTotal(text: "year", expenses: homeVM.dateRangeExpenses)
       })
       
     } label: {

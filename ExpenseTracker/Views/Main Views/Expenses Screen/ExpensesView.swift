@@ -39,9 +39,7 @@ struct ExpensesView: View {
     .onAppear {
       coreVM.getDateRangeExpenses(
         startDate: expensesVM.monthStart,
-        endDate: expensesVM.monthEnd) { expenses in
-          expensesVM.dateRangeExpenses = expenses
-        }
+        endDate: expensesVM.monthEnd, timeframe: TimeFrame.month)
     }
   }
   
@@ -49,7 +47,7 @@ struct ExpensesView: View {
     
     List {
       
-      ForEach(expensesVM.dateRangeExpenses, id: \.self) { expense in
+      ForEach(coreVM.monthlyExpenses, id: \.self) { expense in
         
         NavigationLink(destination: DetailExpenseView(expensesVM: expensesVM, detailExpense: expense)) {
           
@@ -74,11 +72,7 @@ struct ExpensesView: View {
     }
     //allows for pull to refresh
     .refreshable {
-      coreVM.getDateRangeExpenses(
-        startDate: expensesVM.monthStart,
-        endDate: expensesVM.monthEnd) { expenses in
-          expensesVM.dateRangeExpenses = expenses
-        }
+
     }
   }
 }
@@ -109,9 +103,7 @@ struct MonthSelector: View {
         expensesVM.subtractMonth()
         coreVM.getDateRangeExpenses(
           startDate: expensesVM.monthStart,
-          endDate: expensesVM.monthEnd) { expenses in
-            expensesVM.dateRangeExpenses = expenses
-          }
+          endDate: expensesVM.monthEnd, timeframe: TimeFrame.month)
       } label: {
         Image(systemName: "chevron.left")
           .font(.footnote)
@@ -124,9 +116,7 @@ struct MonthSelector: View {
         expensesVM.addMonth()
         coreVM.getDateRangeExpenses(
           startDate: expensesVM.monthStart,
-          endDate: expensesVM.monthEnd) { expenses in
-            expensesVM.dateRangeExpenses = expenses
-          }
+          endDate: expensesVM.monthEnd, timeframe: TimeFrame.month)
       } label: {
         Image(systemName: "chevron.right")
           .font(.footnote)

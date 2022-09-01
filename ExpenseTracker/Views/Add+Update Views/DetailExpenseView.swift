@@ -87,11 +87,6 @@ struct DetailExpenseView: View {
     .alert("Are you sure you want to delete this expense?", isPresented: $showingAlert) {
       Button("Delete", role: .destructive) {
         coreVM.deleteExpense(detailExpense)
-        coreVM.getDateRangeExpenses(
-          startDate: expensesVM.monthStart,
-          endDate: expensesVM.monthEnd) { expenses in
-            expensesVM.dateRangeExpenses = expenses
-          }
         presentationMode.wrappedValue.dismiss()
       }
       .foregroundColor(.red)
@@ -193,11 +188,6 @@ struct DetailExpenseView: View {
   var deleteButton: some View {
     Button {
       coreVM.deleteExpense(detailExpense)
-      coreVM.getDateRangeExpenses(
-        startDate: expensesVM.monthStart,
-        endDate: expensesVM.monthEnd) { expenses in
-          expensesVM.dateRangeExpenses = expenses
-        }
       presentationMode.wrappedValue.dismiss()
     } label: {
       Text("Delete Expense")

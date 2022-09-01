@@ -170,11 +170,6 @@ struct AddExpenseView: View {
           coreData.addExpense(expense)
         }
         presentationMode.wrappedValue.dismiss()
-        coreData.getDateRangeExpenses(
-          startDate: expensesVM.monthStart,
-          endDate: expensesVM.monthEnd) { expenses in
-            expensesVM.dateRangeExpenses = expenses
-          }
 //        if !expensesVM.categories.contains(expensesVM.selectedCategory!) {
 //          expensesVM.categories.append(expensesVM.selectedCategory!)
 //        }

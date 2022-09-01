@@ -35,6 +35,11 @@ extension Color {
 }
 
 extension Color {
+  func getColor(from category: CategoryEntity) -> Color {
+    return Color(red: category.colorR, green: category.colorG, blue: category.colorB, opacity: category.colorA)
+  }
+}
+extension Color {
   static let brandPrimary   = Color("brandPrimary")
   static let brandSecondary = Color("brandSecondary")
   static let recentTextColor = Color("RecentTextColor")

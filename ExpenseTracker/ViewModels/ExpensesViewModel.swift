@@ -13,7 +13,6 @@ class ExpensesViewModel: ObservableObject {
   @Published var monthText: String = "January"
   @Published var monthStart: Date = Date.startOfMonth(Date.now)()
   @Published var monthEnd: Date = Date.endOfMonth(Date.now)()
-  @Published var dateRangeExpenses: [ExpenseEntity] = []
   @Published var selectedCategory: CategoryModel?
   @Published var selectedVendor: String?
   @Published var newExpense: ExpenseModel?
