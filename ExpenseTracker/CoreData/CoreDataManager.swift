@@ -30,7 +30,7 @@ class CoreDataManager: ObservableObject {
     container = NSPersistentCloudKitContainer(name: "ExpenseContainer")
     container.loadPersistentStores { description, error in
       if let error = error {
-        print("🎉🎉🎉Error loading Core Data, \(error)")
+        print("Error loading Core Data, \(error)")
       }
     }
     container.viewContext.automaticallyMergesChangesFromParent = true
@@ -38,9 +38,7 @@ class CoreDataManager: ObservableObject {
     fetchData()
     getRecent(expenses: savedExpenses)
     if let startDate = Calendar.current.date(byAdding: .day, value: -7, to: Date()) {
-      getDateRangeExpenses(startDate: startDate, endDate: Date.now) { expenses in
-        self.dateRangeExpenses = expenses
-      }
+      getDateRangeExpenses(startDate: startDate, endDate: Date.now, timeframe: TimeFrame.week)
     }
   }
   
@@ -115,6 +113,7 @@ class CoreDataManager: ObservableObject {
         switch safeTimeframe {
         case .week:
           weeklyTotal = getTotal(from: expenses)
+          dateRangeExpenses = expenses
         case .month:
           monthlyTotal = getTotal(from: expenses)
           monthlyExpenses = expenses

@@ -199,7 +199,7 @@ struct AddExpenseView: View {
     if titleText.isEmpty ||
         costText.isZero ||
         expensesVM.selectedVendor == nil ||
-        expensesVM.selectedCategory == nil {
+        expensesVM.selectedCategory?.name == "" {
       return true
     } else { return false
     }

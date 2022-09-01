@@ -18,7 +18,7 @@ struct VendorListView: View {
       ForEach(data.savedVendors, id: \.self) { item in
         Button {
           expensesVM.selectedVendor = item.name
-//          presentationMode.wrappedValue.dismiss()
+          presentationMode.wrappedValue.dismiss()
         } label: {
           Text(item.wrappedName)
         }
