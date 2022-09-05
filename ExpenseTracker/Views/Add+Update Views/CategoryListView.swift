@@ -22,7 +22,7 @@ struct CategoryListView: View {
         HStack {
           Button {
             if detailExpenseCategory == nil {
-            expensesVM.newCategory(name: item.wrappedName, symbol: item.wrappedSymbol, colorR: item.colorR, colorG: item.colorG, colorB: item.colorB, colorA: item.colorA)
+              expensesVM.newCategory(name: item.wrappedName, symbol: item.wrappedSymbol, colorR: item.colorR, colorG: item.colorG, colorB: item.colorB, colorA: item.colorA)
             } else {
               detailExpenseCategory?.name = item.name
               detailExpenseCategory?.symbol = item.symbol
@@ -49,6 +49,7 @@ struct CategoryListView: View {
           .buttonStyle(PlainButtonStyle())
         }
       }
+      .onDelete(perform: deleteItem)
     }
     .listStyle(.plain)
     .background(Color(.secondarySystemBackground))
@@ -56,13 +57,13 @@ struct CategoryListView: View {
     .navigationBarTitleDisplayMode(.inline)
   }
   
-  //Getting fatal error when deleting from list
-  //  func deleteItem(at offsets: IndexSet) {
-  //    for index in offsets {
-  //      let item = data.savedCategories[index]
-  //      data.deleteCategory(item)
-  //    }
-  //  }
+  func deleteItem(at offsets: IndexSet) {
+    for index in offsets {
+      let item = data.savedCategories[index]
+      data.deleteCategory(item)
+      data.savedCategories.remove(at: index)
+    }
+  }
   
 }
 
