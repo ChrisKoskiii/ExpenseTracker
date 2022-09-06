@@ -17,7 +17,7 @@ class AddExpenseViewModel: ObservableObject {
   
   @Published var titleText: String    = ""
   @Published var costText             = 0.00
-//  @Published var dateValue: Date      = Date.now
+  @Published var dateValue: Date      = Date.now
   @Published var categoryText: String = "Select Category"
   @Published var vendorText: String   = "Select Vendor"
   

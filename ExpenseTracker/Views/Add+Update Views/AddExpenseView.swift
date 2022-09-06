@@ -13,18 +13,6 @@ struct AddExpenseView: View {
   @ObservedObject var expensesVM: ExpensesViewModel
   @StateObject var viewModel = AddExpenseViewModel()
   
-  //  private var bindableCategoryString: Binding<String> { Binding (
-  //    get: { self.expensesVM.selectedCategory?.name ?? "" },
-  //    set: { _ in }
-  //  )
-  //  }
-  
-  //Move this to viewModel
-  @State private var dateValue: Date = Date.now
-  private var dateString: String {
-    dateValue.formatDate()
-  }
-  
   //Currency textfield formatter
   var formatter: NumberFormatter = {
     let formatter = NumberFormatter()
@@ -37,7 +25,7 @@ struct AddExpenseView: View {
     ScrollView {
       VStack(spacing: 10) {
         VStack(spacing: 0) {
-          DatePicker(dateValue.formatDate(), selection: $dateValue, displayedComponents: [.date])
+          DatePicker(viewModel.dateValue.formatDate(), selection: $viewModel.dateValue, displayedComponents: [.date])
             .textfieldStyle()
           Divider()
           TextField("Enter title", text: $viewModel.titleText)
@@ -49,14 +37,14 @@ struct AddExpenseView: View {
           Divider()
           
           CustomItemPicker(item: viewModel.vendorText) {
-            VendorListView(expensesVM: expensesVM, selectedVendor: $viewModel.selectedVendor, vendorText: $viewModel.vendorText)
+            VendorListView(selectedVendor: $viewModel.selectedVendor, vendorText: $viewModel.vendorText)
           }
           
           
           Divider()
           
           CustomItemPicker(item: viewModel.categoryText) {
-            CategoryListView(expensesVM: expensesVM, selectedCategory: $viewModel.selectedCategory, categoryText: $viewModel.categoryText) }
+            CategoryListView(selectedCategory: $viewModel.selectedCategory, categoryText: $viewModel.categoryText) }
           
         }
         .cardBackground()
@@ -119,19 +107,11 @@ struct AddExpenseView: View {
       } else {
         if let myCategory = viewModel.selectedCategory,
            let myVendor = viewModel.selectedVendor {
-          viewModel.makeNewExpense(category: myCategory, vendor: myVendor, date: dateValue) { expense in
+          viewModel.makeNewExpense(category: myCategory, vendor: myVendor, date: viewModel.dateValue) { expense in
             coreData.addExpense(expense)
           }
         }
         presentationMode.wrappedValue.dismiss()
-        //        if !expensesVM.categories.contains(expensesVM.selectedCategory!) {
-        //          expensesVM.categories.append(expensesVM.selectedCategory!)
-        //        }
-        //        if !expensesVM.vendors.contains(expensesVM.selectedVendor!) {
-        //          expensesVM.vendors.append(expensesVM.selectedVendor!)
-        //        }
-        expensesVM.selectedVendor = nil
-        expensesVM.selectedCategory = nil
         coreData.fetchData()
       }
     } label: {

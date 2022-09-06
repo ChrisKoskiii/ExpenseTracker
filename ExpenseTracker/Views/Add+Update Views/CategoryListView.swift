@@ -11,7 +11,6 @@ struct CategoryListView: View {
   @Environment(\.presentationMode) var presentationMode
   
   @EnvironmentObject var data:    CoreDataManager
-  @ObservedObject var expensesVM: ExpensesViewModel
   
   @Binding var selectedCategory: CategoryModel?
   @Binding var categoryText: String
@@ -27,7 +26,7 @@ struct CategoryListView: View {
         let symbolColor = Color(red: item.colorR, green: item.colorG, blue: item.colorB, opacity: item.colorA)
         HStack {
           Button {
-            selectedCategory = expensesVM.categoryEntityToModel(item)
+            selectedCategory = categoryEntityToModel(item)
             categoryText = item.wrappedName
             presentationMode.wrappedValue.dismiss()
           } label: {
@@ -64,6 +63,11 @@ struct CategoryListView: View {
       data.deleteCategory(item)
       data.savedCategories.remove(at: index)
     }
+  }
+  
+  func categoryEntityToModel(_ category: CategoryEntity) -> CategoryModel {
+    return CategoryModel(name: category.wrappedName, symbol: category.wrappedSymbol, colorR: category.colorR, colorG: category.colorG, colorB: category.colorB, colorA: category.colorA)
+
   }
   
 }

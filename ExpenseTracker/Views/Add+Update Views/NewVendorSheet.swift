@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct NewVendorSheet: View {
-
   @EnvironmentObject var data: CoreDataManager
   
   @StateObject var viewModel = NewVendorSheetViewModel()

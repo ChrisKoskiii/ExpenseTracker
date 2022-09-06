@@ -11,7 +11,6 @@ struct VendorListView: View {
   @Environment(\.presentationMode) var presentationMode
   
   @EnvironmentObject var data:  CoreDataManager
-  @ObservedObject var expensesVM: ExpensesViewModel
   
   @Binding var selectedVendor: VendorModel?
   @Binding var vendorText: String
@@ -25,7 +24,7 @@ struct VendorListView: View {
       }
       ForEach(data.savedVendors, id: \.self) { item in
         Button {
-          selectedVendor = expensesVM.vendorEntityToModel(item)
+          selectedVendor = vendorEntityToModel(item)
           vendorText = item.wrappedName
           presentationMode.wrappedValue.dismiss()
         } label: {
@@ -51,6 +50,10 @@ struct VendorListView: View {
       data.deleteVendor(item)
       data.savedVendors.remove(at: index)
     }
+  }
+  
+  func vendorEntityToModel(_ vendor: VendorEntity) -> VendorModel {
+    return VendorModel(name: vendor.wrappedName)
   }
   
 }
