@@ -11,12 +11,9 @@ struct NewCategorySheet: View {
   @Environment(\.presentationMode) var presentationMode
   @EnvironmentObject var data: CoreDataManager
   
-  @StateObject var vm = CategoryViewModel()
+  @StateObject var viewModel = CategoryViewModel()
   
   @State var symbolColor = Color.brandPrimary
-  @State private var nameText: String = ""
-  @State private var currentSymbol: String = "photo"
-  
   let symbolsArray: [String] = [
     "car.fill",
     "fuelpump.fill",
@@ -84,9 +81,9 @@ struct NewCategorySheet: View {
   var body: some View {
     VStack {
       HStack {
-        TextField("Category name", text: $nameText)
+        TextField("Category name", text: $viewModel.name)
           .textfieldStyle()
-        Image(systemName: currentSymbol)
+        Image(systemName: viewModel.symbol)
           .resizable()
           .scaledToFit()
           .frame(width: 30, height: 30)
@@ -101,23 +98,14 @@ struct NewCategorySheet: View {
         LazyVGrid(columns: columns, spacing: 20) {
           ForEach(0..<symbolsArray.count) { symbol in
             Button {
-              currentSymbol = symbolsArray[symbol]
-              let red = Double(symbolColor.components.r)
-              let green = Double(symbolColor.components.g)
-              let blue = Double(symbolColor.components.b)
-              let alpha = Double(symbolColor.components.a)
+              viewModel.symbol = symbolsArray[symbol]
+              viewModel.red = Double(symbolColor.components.r)
+              viewModel.green = Double(symbolColor.components.g)
+              viewModel.blue = Double(symbolColor.components.b)
+              viewModel.alpha = Double(symbolColor.components.a)
               
-              vm.makeCategoryModel(name: nameText, symbol: currentSymbol, colorR: red, colorG: green, colorB: blue, colorA: alpha)
+              viewModel.makeCategoryModel()
               
-              if let category = vm.storedCategory {
-                data.addCategory(category)
-              }
-              
-              vm.storedCategory = nil
-              
-              data.fetchCategories()
-              
-              presentationMode.wrappedValue.dismiss()
             } label: {
               Image(systemName: symbolsArray[symbol])
                 .resizable()
@@ -130,7 +118,12 @@ struct NewCategorySheet: View {
       }
       .padding()
       Button {
-        
+        if let category = viewModel.storedCategory {
+          data.addCategory(category)
+        }
+        viewModel.storedCategory = nil
+        data.fetchCategories()
+        presentationMode.wrappedValue.dismiss()
       } label: {
         Text("Add Category")
           .addButtonStyle()
