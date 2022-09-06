@@ -12,6 +12,7 @@ struct DetailExpenseView: View {
   
   @EnvironmentObject var coreVM:  CoreDataManager
   @ObservedObject var expensesVM: ExpensesViewModel
+  @StateObject var viewModel = DetailExpenseViewModel()
   
   @State var detailExpense:       ExpenseEntity
   
@@ -111,7 +112,7 @@ struct DetailExpenseView: View {
           .textfieldStyle()
         HStack {
           Spacer()
-          NavigationLink(destination: VendorListView(expensesVM: expensesVM)) {
+          NavigationLink(destination: VendorListView(expensesVM: expensesVM, selectedVendor: $viewModel.selectedVendor)) {
             Image(systemName: "chevron.right")}
           .frame(width: 20)
           .padding(.trailing, 20)
@@ -123,7 +124,7 @@ struct DetailExpenseView: View {
           .textfieldStyle()
         HStack {
           Spacer()
-          NavigationLink(destination: CategoryListView(expensesVM: expensesVM)) {
+          NavigationLink(destination: CategoryListView(expensesVM: expensesVM, selectedCategory: $viewModel.selectedCategory)) {
             HStack {
               Image(systemName: detailExpense.category.wrappedSymbol)
                 .foregroundColor(coreVM.categoryColor(for: detailExpense.category))

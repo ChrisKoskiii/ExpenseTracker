@@ -13,11 +13,13 @@ struct VendorListView: View {
   @EnvironmentObject var data:  CoreDataManager
   @ObservedObject var expensesVM: ExpensesViewModel
   
+  @Binding var selectedVendor: VendorModel?
+  
   var body: some View {
     List {
       ForEach(data.savedVendors, id: \.self) { item in
         Button {
-          expensesVM.selectedVendor = item.name
+          selectedVendor = expensesVM.vendorEntityToModel(item)
           presentationMode.wrappedValue.dismiss()
         } label: {
           Text(item.wrappedName)

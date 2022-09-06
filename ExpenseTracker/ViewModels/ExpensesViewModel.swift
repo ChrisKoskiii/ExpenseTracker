@@ -62,8 +62,12 @@ class ExpensesViewModel: ObservableObject {
   }
   
   func categoryEntityToModel(_ category: CategoryEntity) -> CategoryModel {
-    let myModel = CategoryModel(name: category.wrappedName, symbol: category.wrappedSymbol, colorR: category.colorR, colorG: category.colorG, colorB: category.colorB, colorA: category.colorA)
-    return myModel
+    return CategoryModel(name: category.wrappedName, symbol: category.wrappedSymbol, colorR: category.colorR, colorG: category.colorG, colorB: category.colorB, colorA: category.colorA)
+
+  }
+  
+  func vendorEntityToModel(_ vendor: VendorEntity) -> VendorModel {
+    return VendorModel(name: vendor.wrappedName)
   }
   
   func categoryColor() -> Color {

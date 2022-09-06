@@ -12,7 +12,8 @@ struct CategoryListView: View {
   
   @EnvironmentObject var data:    CoreDataManager
   @ObservedObject var expensesVM: ExpensesViewModel
-//  @Binding var expenseCategory: CategoryModel
+  
+  @Binding var selectedCategory: CategoryModel?
   
   @State private var showingSheet = false
   
@@ -25,7 +26,7 @@ struct CategoryListView: View {
         let symbolColor = Color(red: item.colorR, green: item.colorG, blue: item.colorB, opacity: item.colorA)
         HStack {
           Button {
-//            expenseCategory = expensesVM.categoryEntityToModel(item)
+            selectedCategory = expensesVM.categoryEntityToModel(item)
             presentationMode.wrappedValue.dismiss()
           } label: {
             Text(item.wrappedName)

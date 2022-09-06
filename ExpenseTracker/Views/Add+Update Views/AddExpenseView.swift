@@ -13,11 +13,11 @@ struct AddExpenseView: View {
   @ObservedObject var expensesVM: ExpensesViewModel
   @StateObject var viewModel = AddExpenseViewModel()
   
-//  private var bindableCategoryString: Binding<String> { Binding (
-//    get: { self.expensesVM.selectedCategory?.name ?? "" },
-//    set: { _ in }
-//  )
-//  }
+  //  private var bindableCategoryString: Binding<String> { Binding (
+  //    get: { self.expensesVM.selectedCategory?.name ?? "" },
+  //    set: { _ in }
+  //  )
+  //  }
   
   //Move this to viewModel
   @State private var dateValue: Date = Date.now
@@ -49,18 +49,19 @@ struct AddExpenseView: View {
           Divider()
           
           CustomItemPicker(item: viewModel.vendorText) {
-            VendorListView(expensesVM: expensesVM)
+            VendorListView(expensesVM: expensesVM, selectedVendor: $viewModel.selectedVendor)
           }
           
           
           Divider()
           
           CustomItemPicker(item: viewModel.categoryText) {
-            CategoryListView(expensesVM: expensesVM) }
+            CategoryListView(expensesVM: expensesVM, selectedCategory: $viewModel.selectedCategory) }
           
         }
         .cardBackground()
         .padding(.horizontal)
+        
         scanButton
         
         addExpenseButton
@@ -116,19 +117,11 @@ struct AddExpenseView: View {
       if emptyTextFields() {
         viewModel.presentAlert.toggle()
       } else {
-        expensesVM.makeNewExpense(category: expensesVM.selectedCategory?.name ?? "Unknown",
-                                  cost: viewModel.costText,
-                                  date: dateValue,
-                                  title: viewModel.titleText,
-                                  vendor: expensesVM.selectedVendor!,
-                                  receipt: viewModel.imageData,
-                                  symbol: expensesVM.selectedCategory?.symbol ?? "dollarsign.circle",
-                                  colorR: expensesVM.selectedCategory?.colorR ?? 0.0,
-                                  colorG: expensesVM.selectedCategory?.colorG ?? 0.0,
-                                  colorB: expensesVM.selectedCategory?.colorB ?? 0.0,
-                                  colorA: expensesVM.selectedCategory?.colorA ?? 0.0
-        ) { expense in
-          coreData.addExpense(expense)
+        if let myCategory = viewModel.selectedCategory,
+           let myVendor = viewModel.selectedVendor {
+          viewModel.makeNewExpense(category: myCategory, vendor: myVendor, date: dateValue) { expense in
+            coreData.addExpense(expense)
+          }
         }
         presentationMode.wrappedValue.dismiss()
         //        if !expensesVM.categories.contains(expensesVM.selectedCategory!) {

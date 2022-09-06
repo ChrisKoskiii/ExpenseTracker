@@ -23,10 +23,24 @@ class AddExpenseViewModel: ObservableObject {
   @Published var imageData: Data?
   @Published var scannedImage: UIImage?
   
+  @Published var selectedCategory: CategoryModel?
+  @Published var selectedVendor: VendorModel?
+  
   var formatter: NumberFormatter = {
     let formatter = NumberFormatter()
     formatter.numberStyle = .currency
     formatter.maximumFractionDigits = 2
     return formatter
   }()
+  
+  
+  func makeNewExpense(category: CategoryModel, vendor: VendorModel, date: Date, completion: (ExpenseModel) -> ()) {
+    let newExpense = ExpenseModel(category: category,
+                                  cost: costText,
+                                  date: date,
+                                  title: titleText,
+                                  vendor: vendor,
+                                  receipt: imageData)
+    completion(newExpense)
+  }
 }
