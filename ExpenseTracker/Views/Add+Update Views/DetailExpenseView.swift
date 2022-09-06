@@ -112,7 +112,7 @@ struct DetailExpenseView: View {
           .textfieldStyle()
         HStack {
           Spacer()
-          NavigationLink(destination: VendorListView(expensesVM: expensesVM, selectedVendor: $viewModel.selectedVendor)) {
+          NavigationLink(destination: VendorListView(expensesVM: expensesVM, selectedVendor: $viewModel.selectedVendor, vendorText: $detailExpense.vendor.wrappedName)) {
             Image(systemName: "chevron.right")}
           .frame(width: 20)
           .padding(.trailing, 20)
@@ -124,7 +124,7 @@ struct DetailExpenseView: View {
           .textfieldStyle()
         HStack {
           Spacer()
-          NavigationLink(destination: CategoryListView(expensesVM: expensesVM, selectedCategory: $viewModel.selectedCategory)) {
+          NavigationLink(destination: CategoryListView(expensesVM: expensesVM, selectedCategory: $viewModel.selectedCategory, categoryText: $detailExpense.category.wrappedName)) {
             HStack {
               Image(systemName: detailExpense.category.wrappedSymbol)
                 .foregroundColor(coreVM.categoryColor(for: detailExpense.category))

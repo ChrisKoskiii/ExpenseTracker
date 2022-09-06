@@ -168,6 +168,13 @@ class CoreDataManager: ObservableObject {
     saveData()
   }
   
+  func addVendor(_ vendor: VendorModel) {
+    let newVendor = VendorEntity(context: container.viewContext)
+    newVendor.name = vendor.name
+    
+    saveData()
+  }
+  
   //Maybe we can reduce three delete functions to one with generics?
   func deleteExpense(_ expense: ExpenseEntity) {
     container.viewContext.delete(expense)

@@ -49,14 +49,14 @@ struct AddExpenseView: View {
           Divider()
           
           CustomItemPicker(item: viewModel.vendorText) {
-            VendorListView(expensesVM: expensesVM, selectedVendor: $viewModel.selectedVendor)
+            VendorListView(expensesVM: expensesVM, selectedVendor: $viewModel.selectedVendor, vendorText: $viewModel.vendorText)
           }
           
           
           Divider()
           
           CustomItemPicker(item: viewModel.categoryText) {
-            CategoryListView(expensesVM: expensesVM, selectedCategory: $viewModel.selectedCategory) }
+            CategoryListView(expensesVM: expensesVM, selectedCategory: $viewModel.selectedCategory, categoryText: $viewModel.categoryText) }
           
         }
         .cardBackground()

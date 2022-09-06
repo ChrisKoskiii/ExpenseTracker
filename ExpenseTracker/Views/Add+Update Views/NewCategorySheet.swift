@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct NewCategorySheet: View {
-  @Environment(\.presentationMode) var presentationMode
   @EnvironmentObject var data: CoreDataManager
   
   @StateObject var viewModel = CategoryViewModel()
   
   @State var symbolColor = Color.brandPrimary
+  @Binding var isPresented: Bool
+  
   let symbolsArray: [String] = [
     "car.fill",
     "fuelpump.fill",
@@ -123,7 +124,7 @@ struct NewCategorySheet: View {
         }
         viewModel.storedCategory = nil
         data.fetchCategories()
-        presentationMode.wrappedValue.dismiss()
+        isPresented = false
       } label: {
         Text("Add Category")
           .addButtonStyle()
@@ -135,7 +136,7 @@ struct NewCategorySheet: View {
 
 struct NewCategorySheet_Previews: PreviewProvider {
   static var previews: some View {
-    NewCategorySheet()
+    NewCategorySheet(isPresented: .constant(true))
       .environmentObject(CoreDataManager())
   }
   

@@ -14,12 +14,19 @@ struct VendorListView: View {
   @ObservedObject var expensesVM: ExpensesViewModel
   
   @Binding var selectedVendor: VendorModel?
+  @Binding var vendorText: String
+  
+  @State private var showingSheet = false
   
   var body: some View {
     List {
+      Button("Add new") {
+        showingSheet.toggle()
+      }
       ForEach(data.savedVendors, id: \.self) { item in
         Button {
           selectedVendor = expensesVM.vendorEntityToModel(item)
+          vendorText = item.wrappedName
           presentationMode.wrappedValue.dismiss()
         } label: {
           Text(item.wrappedName)
@@ -30,6 +37,9 @@ struct VendorListView: View {
     .background(Color(.secondarySystemBackground))
     .navigationTitle("Vendors")
     .navigationBarTitleDisplayMode(.inline)
+    .sheet(isPresented: $showingSheet) {
+      NewVendorSheet(isPresented: $showingSheet)
+    }
   }
   // Getting fatal error when deleting from list
 //  func deleteItem(at offsets: IndexSet) {

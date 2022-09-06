@@ -14,6 +14,7 @@ struct CategoryListView: View {
   @ObservedObject var expensesVM: ExpensesViewModel
   
   @Binding var selectedCategory: CategoryModel?
+  @Binding var categoryText: String
   
   @State private var showingSheet = false
   
@@ -27,6 +28,7 @@ struct CategoryListView: View {
         HStack {
           Button {
             selectedCategory = expensesVM.categoryEntityToModel(item)
+            categoryText = item.wrappedName
             presentationMode.wrappedValue.dismiss()
           } label: {
             Text(item.wrappedName)
@@ -34,7 +36,7 @@ struct CategoryListView: View {
           }
           .buttonStyle(.borderless)
           Spacer()
-          NavigationLink(destination: NewCategorySheet()) {
+          NavigationLink(destination: NewCategorySheet(isPresented: $showingSheet)) {
             Image(systemName: item.wrappedSymbol)
               .resizable()
               .scaledToFit()
@@ -52,7 +54,7 @@ struct CategoryListView: View {
     .navigationTitle("Categories")
     .navigationBarTitleDisplayMode(.inline)
     .sheet(isPresented: $showingSheet) {
-      NewCategorySheet()
+      NewCategorySheet(isPresented: $showingSheet)
     }
   }
   
