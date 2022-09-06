@@ -152,8 +152,8 @@ struct AddExpenseView: View {
   func emptyTextFields() -> Bool {
     if viewModel.titleText.isEmpty ||
         viewModel.costText.isZero ||
-        expensesVM.selectedVendor == nil ||
-        expensesVM.selectedCategory?.name == "" {
+        viewModel.selectedCategory == nil ||
+        viewModel.selectedVendor == nil {
       return true
     } else { return false
     }
