@@ -11,33 +11,18 @@ struct AddExpenseView: View {
   @Environment(\.presentationMode) var presentationMode
   @EnvironmentObject var coreData:  CoreDataManager
   @ObservedObject var expensesVM: ExpensesViewModel
+  @StateObject var viewModel = AddExpenseViewModel()
   
-  //Scanner state
-  @State private var cameraIsPresented  = false
-  @State private var showScanner        = false
-  @State private var isRecognizing      = false
+//  private var bindableCategoryString: Binding<String> { Binding (
+//    get: { self.expensesVM.selectedCategory?.name ?? "" },
+//    set: { _ in }
+//  )
+//  }
   
-  //Alert
-  @State private var presentAlert       = false
-  
-  //Form inputs
-  @State private var titleText: String    = ""
-  @State private var costText             = 0.00
-  @State private var dateValue: Date      = Date.now
-  @State private var categoryText: String = "Select Category"
-  @State private var vendorText: String   = "Select Vendor"
+  //Move this to viewModel
+  @State private var dateValue: Date = Date.now
   private var dateString: String {
     dateValue.formatDate()
-  }
-  
-  //Scanned image vars
-  @State private var imageData: Data?
-  @State private var scannedImage: UIImage?
-  
-  private var bindableCategoryString: Binding<String> { Binding (
-    get: { self.expensesVM.selectedCategory?.name ?? "" },
-    set: { _ in }
-  )
   }
   
   //Currency textfield formatter
@@ -55,22 +40,22 @@ struct AddExpenseView: View {
           DatePicker(dateValue.formatDate(), selection: $dateValue, displayedComponents: [.date])
             .textfieldStyle()
           Divider()
-          TextField("Enter title", text: $titleText)
+          TextField("Enter title", text: $viewModel.titleText)
             .textfieldStyle()
           Divider()
-          TextField("$", value: $costText, formatter: formatter)
+          TextField("$", value: $viewModel.costText, formatter: formatter)
             .textfieldStyle()
             .keyboardType(.decimalPad)
           Divider()
           
-          CustomItemPicker(item: vendorText) {
+          CustomItemPicker(item: viewModel.vendorText) {
             VendorListView(expensesVM: expensesVM)
           }
           
           
           Divider()
           
-          CustomItemPicker(item: categoryText) {
+          CustomItemPicker(item: viewModel.categoryText) {
             CategoryListView(expensesVM: expensesVM) }
           
         }
@@ -80,7 +65,7 @@ struct AddExpenseView: View {
         
         addExpenseButton
         
-        if scannedImage != nil {
+        if viewModel.scannedImage != nil {
           scannedImageView
         }
         
@@ -89,31 +74,31 @@ struct AddExpenseView: View {
     }
     .background(Color(.secondarySystemBackground))
     .navigationTitle("Add expense")
-    .alert("Please fill out all fields.", isPresented: $presentAlert, actions: {
+    .alert("Please fill out all fields.", isPresented: $viewModel.presentAlert, actions: {
     })
-    .sheet(isPresented: $showScanner, content: {
+    .sheet(isPresented: $viewModel.showScanner, content: {
       ScannerView { result in
         switch result {
         case .success(let scannedImages):
-          isRecognizing = true
-          scannedImage = scannedImages.first!
-          imageData = coreData.getImageData(scannedImage!)
+          viewModel.isRecognizing = true
+          viewModel.scannedImage = scannedImages.first!
+          viewModel.imageData = coreData.getImageData(viewModel.scannedImage!)
         case .failure(let error):
           print(error.localizedDescription)
         }
         
-        showScanner = false
+        viewModel.showScanner = false
         
       } didCancelScanning: {
         // Dismiss the scanner controller and the sheet.
-        showScanner = false
+        viewModel.showScanner = false
       }
     })
   }
   
   var scanButton: some View {
     Button {
-      showScanner = true
+      viewModel.showScanner = true
     } label: {
       HStack {
         Image(systemName: "doc.text.viewfinder")
@@ -129,14 +114,14 @@ struct AddExpenseView: View {
   var addExpenseButton: some View {
     Button {
       if emptyTextFields() {
-        presentAlert.toggle()
+        viewModel.presentAlert.toggle()
       } else {
         expensesVM.makeNewExpense(category: expensesVM.selectedCategory?.name ?? "Unknown",
-                                  cost: costText,
+                                  cost: viewModel.costText,
                                   date: dateValue,
-                                  title: titleText,
+                                  title: viewModel.titleText,
                                   vendor: expensesVM.selectedVendor!,
-                                  receipt: imageData,
+                                  receipt: viewModel.imageData,
                                   symbol: expensesVM.selectedCategory?.symbol ?? "dollarsign.circle",
                                   colorR: expensesVM.selectedCategory?.colorR ?? 0.0,
                                   colorG: expensesVM.selectedCategory?.colorG ?? 0.0,
@@ -163,8 +148,8 @@ struct AddExpenseView: View {
   }
   
   var scannedImageView: some View {
-    NavigationLink(destination: ScannedImageView(scannedImage: scannedImage!)) {
-      Image(uiImage: scannedImage!)
+    NavigationLink(destination: ScannedImageView(scannedImage: viewModel.scannedImage!)) {
+      Image(uiImage: viewModel.scannedImage!)
         .resizable()
         .scaledToFit()
         .frame(width: 150, height: 150)
@@ -172,8 +157,8 @@ struct AddExpenseView: View {
   }
   
   func emptyTextFields() -> Bool {
-    if titleText.isEmpty ||
-        costText.isZero ||
+    if viewModel.titleText.isEmpty ||
+        viewModel.costText.isZero ||
         expensesVM.selectedVendor == nil ||
         expensesVM.selectedCategory?.name == "" {
       return true

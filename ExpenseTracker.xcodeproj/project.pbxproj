@@ -19,6 +19,7 @@
 		9E187D4528936D8600142000 /* DocumentScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E187D4428936D8600142000 /* DocumentScanner.swift */; };
 		9E1E3D292894687B004FE485 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1E3D282894687B004FE485 /* Date+Extension.swift */; };
 		9E2129F628C672BD00D50C38 /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2129F528C672BD00D50C38 /* CategoryViewModel.swift */; };
+		9E2129F828C7B21400D50C38 /* AddExpenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2129F728C7B21400D50C38 /* AddExpenseViewModel.swift */; };
 		9E34DE3928AEADF500235442 /* UIApplication+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E34DE3828AEADF500235442 /* UIApplication+Ext.swift */; };
 		9E34DE3B28AEB3E500235442 /* CategoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E34DE3A28AEB3E500235442 /* CategoryListView.swift */; };
 		9E34DE3D28AEB3F500235442 /* VendorListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E34DE3C28AEB3F500235442 /* VendorListView.swift */; };
@@ -68,6 +69,7 @@
 		9E187D4428936D8600142000 /* DocumentScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentScanner.swift; sourceTree = "<group>"; };
 		9E1E3D282894687B004FE485 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		9E2129F528C672BD00D50C38 /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
+		9E2129F728C7B21400D50C38 /* AddExpenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseViewModel.swift; sourceTree = "<group>"; };
 		9E34DE3828AEADF500235442 /* UIApplication+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Ext.swift"; sourceTree = "<group>"; };
 		9E34DE3A28AEB3E500235442 /* CategoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListView.swift; sourceTree = "<group>"; };
 		9E34DE3C28AEB3F500235442 /* VendorListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorListView.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				9E5824F628A1A6EE00C80A73 /* ReportsViewModel.swift */,
 				9E58254B28A5EEE800C80A73 /* ExpensesViewModel.swift */,
 				9E2129F528C672BD00D50C38 /* CategoryViewModel.swift */,
+				9E2129F728C7B21400D50C38 /* AddExpenseViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -435,6 +438,7 @@
 				9E187D4328936A0E00142000 /* AddExpenseView.swift in Sources */,
 				9E187D4528936D8600142000 /* DocumentScanner.swift in Sources */,
 				9EF7456828B6F10C0058F681 /* CustomModifiers.swift in Sources */,
+				9E2129F828C7B21400D50C38 /* AddExpenseViewModel.swift in Sources */,
 				9E2129F628C672BD00D50C38 /* CategoryViewModel.swift in Sources */,
 				9E187D3F2893055000142000 /* View+Extensions.swift in Sources */,
 				9E7F71D828BFDCE900B0B5E0 /* VendorEntity+CoreDataClass.swift in Sources */,
