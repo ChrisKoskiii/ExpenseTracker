@@ -32,6 +32,7 @@ struct VendorListView: View {
           Text(item.wrappedName)
         }
       }
+      .onDelete(perform: deleteItem)
     }
     .listStyle(.plain)
     .background(Color(.secondarySystemBackground))
@@ -41,13 +42,14 @@ struct VendorListView: View {
       NewVendorSheet(isPresented: $showingSheet)
     }
   }
-  // Getting fatal error when deleting from list
-//  func deleteItem(at offsets: IndexSet) {
-//    for index in offsets {
-//      let item = data.savedVendors[index]
-//      data.deleteVendor(item)
-//    }
-//  }
+
+  func deleteItem(at offsets: IndexSet) {
+    for index in offsets {
+      let item = data.savedVendors[index]
+      data.deleteVendor(item)
+      data.savedVendors.remove(at: index)
+    }
+  }
   
 }
 

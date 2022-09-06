@@ -12,7 +12,6 @@ struct NewCategorySheet: View {
   
   @StateObject var viewModel = CategoryViewModel()
   
-  @State var symbolColor = Color.brandPrimary
   @Binding var isPresented: Bool
   
   let symbolsArray: [String] = [
@@ -88,37 +87,32 @@ struct NewCategorySheet: View {
           .resizable()
           .scaledToFit()
           .frame(width: 30, height: 30)
-          .foregroundColor(symbolColor)
+          .foregroundColor(viewModel.symbolColor)
           .padding(.trailing)
       }
       .cardBackground()
       .padding()
-      ColorPicker("Set the symbol color", selection: $symbolColor)
+      ColorPicker("Set the symbol color", selection: $viewModel.symbolColor)
         .padding()
       ScrollView {
         LazyVGrid(columns: columns, spacing: 20) {
           ForEach(0..<symbolsArray.count) { symbol in
             Button {
               viewModel.symbol = symbolsArray[symbol]
-              viewModel.red = Double(symbolColor.components.r)
-              viewModel.green = Double(symbolColor.components.g)
-              viewModel.blue = Double(symbolColor.components.b)
-              viewModel.alpha = Double(symbolColor.components.a)
-              
-              viewModel.makeCategoryModel()
               
             } label: {
               Image(systemName: symbolsArray[symbol])
                 .resizable()
                 .scaledToFit()
                 .frame(width: 30, height: 30)
-                .foregroundColor(symbolColor)
+                .foregroundColor(viewModel.symbolColor)
             }
           }
         }
       }
       .padding()
       Button {
+        viewModel.makeCategoryModel()
         if let category = viewModel.storedCategory {
           data.addCategory(category)
         }
