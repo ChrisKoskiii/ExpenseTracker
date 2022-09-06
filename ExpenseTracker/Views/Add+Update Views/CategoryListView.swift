@@ -11,26 +11,21 @@ struct CategoryListView: View {
   @Environment(\.presentationMode) var presentationMode
   
   @EnvironmentObject var data:    CoreDataManager
-  @ObservedObject var expensesVM:   ExpensesViewModel
+  @ObservedObject var expensesVM: ExpensesViewModel
+//  @Binding var expenseCategory: CategoryModel
   
-  @State var detailExpenseCategory: CategoryEntity?
+  @State private var showingSheet = false
   
   var body: some View {
     List {
+      Button("Add new") {
+        showingSheet.toggle()
+      }
       ForEach(data.savedCategories, id: \.self) { item in
         let symbolColor = Color(red: item.colorR, green: item.colorG, blue: item.colorB, opacity: item.colorA)
         HStack {
           Button {
-            if detailExpenseCategory == nil {
-              expensesVM.newCategory(name: item.wrappedName, symbol: item.wrappedSymbol, colorR: item.colorR, colorG: item.colorG, colorB: item.colorB, colorA: item.colorA)
-            } else {
-              detailExpenseCategory?.name = item.name
-              detailExpenseCategory?.symbol = item.symbol
-              detailExpenseCategory?.colorR = item.colorR
-              detailExpenseCategory?.colorG = item.colorG
-              detailExpenseCategory?.colorB = item.colorB
-              detailExpenseCategory?.colorA = item.colorA
-            }
+//            expenseCategory = expensesVM.categoryEntityToModel(item)
             presentationMode.wrappedValue.dismiss()
           } label: {
             Text(item.wrappedName)
@@ -38,7 +33,7 @@ struct CategoryListView: View {
           }
           .buttonStyle(.borderless)
           Spacer()
-          NavigationLink(destination: CategoryPickerView(category: item)) {
+          NavigationLink(destination: NewCategorySheet()) {
             Image(systemName: item.wrappedSymbol)
               .resizable()
               .scaledToFit()
@@ -55,6 +50,9 @@ struct CategoryListView: View {
     .background(Color(.secondarySystemBackground))
     .navigationTitle("Categories")
     .navigationBarTitleDisplayMode(.inline)
+    .sheet(isPresented: $showingSheet) {
+      NewCategorySheet()
+    }
   }
   
   func deleteItem(at offsets: IndexSet) {

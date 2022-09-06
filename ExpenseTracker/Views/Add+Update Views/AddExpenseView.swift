@@ -21,10 +21,11 @@ struct AddExpenseView: View {
   @State private var presentAlert       = false
   
   //Form inputs
-  @State private var titleText: String  = ""
-  @State private var costText           = 0.00
-  @State private var dateValue: Date    = Date.now
-  
+  @State private var titleText: String    = ""
+  @State private var costText             = 0.00
+  @State private var dateValue: Date      = Date.now
+  @State private var categoryText: String = "Select Category"
+  @State private var vendorText: String   = "Select Vendor"
   private var dateString: String {
     dateValue.formatDate()
   }
@@ -36,7 +37,7 @@ struct AddExpenseView: View {
   private var bindableCategoryString: Binding<String> { Binding (
     get: { self.expensesVM.selectedCategory?.name ?? "" },
     set: { _ in }
-      )
+  )
   }
   
   //Currency textfield formatter
@@ -53,50 +54,25 @@ struct AddExpenseView: View {
         VStack(spacing: 0) {
           DatePicker(dateValue.formatDate(), selection: $dateValue, displayedComponents: [.date])
             .textfieldStyle()
-        Divider()
+          Divider()
           TextField("Enter title", text: $titleText)
             .textfieldStyle()
-        Divider()
+          Divider()
           TextField("$", value: $costText, formatter: formatter)
             .textfieldStyle()
             .keyboardType(.decimalPad)
           Divider()
-          ZStack {
-            TextField("Enter vendor", text: $expensesVM.selectedVendor ?? "")
-              .textfieldStyle()
-            
-            HStack {
-              
-              Spacer()
-              
-              NavigationLink(destination: VendorListView(expensesVM: expensesVM)) {
-                Image(systemName: "chevron.right")}
-              .frame(width: 20)
-              .padding(.trailing, 20)
-            }
+          
+          CustomItemPicker(item: vendorText) {
+            VendorListView(expensesVM: expensesVM)
           }
+          
+          
           Divider()
-          ZStack {
-            TextField("Enter category", text: bindableCategoryString)
-              .textfieldStyle()
-            
-            HStack {
-              
-              Spacer()
-              
-              NavigationLink(destination: CategoryListView(expensesVM: expensesVM)) {
-                
-                HStack {
-                  Image(systemName: expensesVM.selectedCategory?.symbol ?? "dollarsign.circle")
-                    .foregroundColor(expensesVM.categoryColor())
-                  Image(systemName: "chevron.right")
-                }
-              }
-              .frame(width: 20)
-              .padding(.trailing, 20)
-            }
-          }
-
+          
+          CustomItemPicker(item: categoryText) {
+            CategoryListView(expensesVM: expensesVM) }
+          
         }
         .cardBackground()
         .padding(.horizontal)
@@ -170,12 +146,12 @@ struct AddExpenseView: View {
           coreData.addExpense(expense)
         }
         presentationMode.wrappedValue.dismiss()
-//        if !expensesVM.categories.contains(expensesVM.selectedCategory!) {
-//          expensesVM.categories.append(expensesVM.selectedCategory!)
-//        }
-//        if !expensesVM.vendors.contains(expensesVM.selectedVendor!) {
-//          expensesVM.vendors.append(expensesVM.selectedVendor!)
-//        }
+        //        if !expensesVM.categories.contains(expensesVM.selectedCategory!) {
+        //          expensesVM.categories.append(expensesVM.selectedCategory!)
+        //        }
+        //        if !expensesVM.vendors.contains(expensesVM.selectedVendor!) {
+        //          expensesVM.vendors.append(expensesVM.selectedVendor!)
+        //        }
         expensesVM.selectedVendor = nil
         expensesVM.selectedCategory = nil
         coreData.fetchData()
@@ -216,5 +192,30 @@ struct AddExpenseView_Previews: PreviewProvider {
       AddExpenseView(expensesVM: ExpensesViewModel())
     }
     .preferredColorScheme(.dark)
+  }
+}
+
+struct CustomItemPicker<Content:View>: View {
+  var item: String
+  var content: () -> Content
+  
+  init(item: String, @ViewBuilder content: @escaping () -> Content) {
+    self.item = item
+    self.content = content
+  }
+  var body: some View {
+    NavigationLink(destination: content) {
+      HStack {
+        Text(item)
+          .font(.headline)
+          .frame(maxWidth: .infinity, alignment: .leading)
+          .frame(height: 55)
+          .padding(.horizontal)
+          .cornerRadius(10)
+        Image(systemName: "chevron.right")
+      }
+      .foregroundColor(.recentTextColor)
+      .padding(.horizontal)
+    }
   }
 }

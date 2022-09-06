@@ -61,6 +61,11 @@ class ExpensesViewModel: ObservableObject {
     selectedCategory = CategoryModel(name: name, symbol: symbol, colorR: colorR, colorG: colorG, colorB: colorB, colorA: colorA)
   }
   
+  func categoryEntityToModel(_ category: CategoryEntity) -> CategoryModel {
+    let myModel = CategoryModel(name: category.wrappedName, symbol: category.wrappedSymbol, colorR: category.colorR, colorG: category.colorG, colorB: category.colorB, colorA: category.colorA)
+    return myModel
+  }
+  
   func categoryColor() -> Color {
     if let category = selectedCategory {
     return Color(red: category.colorR, green: category.colorG, blue: category.colorB, opacity: category.colorA)

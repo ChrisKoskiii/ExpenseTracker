@@ -123,7 +123,7 @@ struct DetailExpenseView: View {
           .textfieldStyle()
         HStack {
           Spacer()
-          NavigationLink(destination: CategoryListView(expensesVM: expensesVM, detailExpenseCategory: detailExpense.category)) {
+          NavigationLink(destination: CategoryListView(expensesVM: expensesVM)) {
             HStack {
               Image(systemName: detailExpense.category.wrappedSymbol)
                 .foregroundColor(coreVM.categoryColor(for: detailExpense.category))

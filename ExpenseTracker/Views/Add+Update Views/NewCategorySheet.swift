@@ -7,10 +7,15 @@
 
 import SwiftUI
 
-struct CategoryPickerView: View {
+struct NewCategorySheet: View {
   @Environment(\.presentationMode) var presentationMode
+  @EnvironmentObject var data: CoreDataManager
+  
+  @StateObject var vm = CategoryViewModel()
   
   @State var symbolColor = Color.brandPrimary
+  @State private var nameText: String = ""
+  @State private var currentSymbol: String = "photo"
   
   let symbolsArray: [String] = [
     "car.fill",
@@ -76,41 +81,69 @@ struct CategoryPickerView: View {
     GridItem(.adaptive(minimum: 40))
   ]
   
-  @State var category: CategoryEntity?
-  
   var body: some View {
     VStack {
+      HStack {
+        TextField("Category name", text: $nameText)
+          .textfieldStyle()
+        Image(systemName: currentSymbol)
+          .resizable()
+          .scaledToFit()
+          .frame(width: 30, height: 30)
+          .foregroundColor(symbolColor)
+          .padding(.trailing)
+      }
+      .cardBackground()
+      .padding()
       ColorPicker("Set the symbol color", selection: $symbolColor)
+        .padding()
       ScrollView {
         LazyVGrid(columns: columns, spacing: 20) {
           ForEach(0..<symbolsArray.count) { symbol in
             Button {
+              currentSymbol = symbolsArray[symbol]
               let red = Double(symbolColor.components.r)
               let green = Double(symbolColor.components.g)
               let blue = Double(symbolColor.components.b)
               let alpha = Double(symbolColor.components.a)
-              category?.colorA = alpha
-              category?.colorB = blue
-              category?.colorG = green
-              category?.colorR = red 
-              category!.symbol = symbolsArray[symbol]
+              
+              vm.makeCategoryModel(name: nameText, symbol: currentSymbol, colorR: red, colorG: green, colorB: blue, colorA: alpha)
+              
+              if let category = vm.storedCategory {
+                data.addCategory(category)
+              }
+              
+              vm.storedCategory = nil
+              
+              data.fetchCategories()
+              
               presentationMode.wrappedValue.dismiss()
             } label: {
-            Image(systemName: symbolsArray[symbol])
-              .resizable()
-              .scaledToFit()
-              .frame(width: 30, height: 30)
-              .foregroundColor(symbolColor)
+              Image(systemName: symbolsArray[symbol])
+                .resizable()
+                .scaledToFit()
+                .frame(width: 30, height: 30)
+                .foregroundColor(symbolColor)
             }
           }
         }
       }
+      .padding()
+      Button {
+        
+      } label: {
+        Text("Add Category")
+          .addButtonStyle()
+      }
     }
+    .background(Color(.secondarySystemBackground))
   }
 }
 
-struct CategoryPickerView_Previews: PreviewProvider {
+struct NewCategorySheet_Previews: PreviewProvider {
   static var previews: some View {
-    CategoryPickerView()
+    NewCategorySheet()
+      .environmentObject(CoreDataManager())
   }
+  
 }

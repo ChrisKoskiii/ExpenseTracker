@@ -156,6 +156,18 @@ class CoreDataManager: ObservableObject {
     saveData()
   }
   
+  func addCategory(_ category: CategoryModel) {
+    let newCategory = CategoryEntity(context: container.viewContext)
+    newCategory.name = category.name
+    newCategory.symbol = category.symbol
+    newCategory.colorR = category.colorR
+    newCategory.colorG = category.colorG
+    newCategory.colorB = category.colorG
+    newCategory.colorA = category.colorA
+    
+    saveData()
+  }
+  
   //Maybe we can reduce three delete functions to one with generics?
   func deleteExpense(_ expense: ExpenseEntity) {
     container.viewContext.delete(expense)
