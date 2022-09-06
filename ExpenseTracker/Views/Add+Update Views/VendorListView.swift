@@ -38,7 +38,9 @@ struct VendorListView: View {
     .background(Color(.secondarySystemBackground))
     .navigationTitle("Vendors")
     .navigationBarTitleDisplayMode(.inline)
-    .sheet(isPresented: $showingSheet) {
+    .sheet(isPresented: $showingSheet, onDismiss: {
+      data.fetchVendors() 
+    }) {
       NewVendorSheet(isPresented: $showingSheet)
     }
   }

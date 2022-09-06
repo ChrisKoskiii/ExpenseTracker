@@ -43,6 +43,7 @@ struct HomeView: View {
       .navigationTitle("Overview")
       .navigationBarTitleDisplayMode(.large)
     }
+    .navigationViewStyle(.stack)
   }
   
   var recentTransactionText: some View {

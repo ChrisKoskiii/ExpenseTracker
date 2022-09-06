@@ -87,8 +87,8 @@ struct DetailExpenseView: View {
     }
     .alert("Are you sure you want to delete this expense?", isPresented: $showingAlert) {
       Button("Delete", role: .destructive) {
-        coreVM.deleteExpense(detailExpense)
         presentationMode.wrappedValue.dismiss()
+        coreVM.deleteExpense(detailExpense)
       }
       .foregroundColor(.red)
       Button("Cancel", role: .cancel) { }
@@ -113,7 +113,7 @@ struct DetailExpenseView: View {
         HStack {
           Spacer()
           NavigationLink(destination: VendorListView(expensesVM: expensesVM, selectedVendor: $viewModel.selectedVendor, vendorText: $detailExpense.vendor.wrappedName)) {
-            Image(systemName: "chevron.right")}
+            Image(systemName: detailExpense.category.wrappedSymbol)}
           .frame(width: 20)
           .padding(.trailing, 20)
         }

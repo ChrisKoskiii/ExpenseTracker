@@ -41,6 +41,7 @@ struct ExpensesView: View {
         startDate: expensesVM.monthStart,
         endDate: expensesVM.monthEnd, timeframe: TimeFrame.month)
     }
+    .navigationViewStyle(.stack)
   }
   
   var expenseList: some View {

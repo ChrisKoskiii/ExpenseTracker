@@ -23,7 +23,6 @@ struct NewVendorSheet: View {
           if let vendor = viewModel.storedVendor {
             data.addVendor(vendor)
             viewModel.storedVendor = nil
-            data.fetchVendors()
             isPresented = false
           }
         }

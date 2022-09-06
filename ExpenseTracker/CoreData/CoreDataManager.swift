@@ -162,7 +162,7 @@ class CoreDataManager: ObservableObject {
     newCategory.symbol = category.symbol
     newCategory.colorR = category.colorR
     newCategory.colorG = category.colorG
-    newCategory.colorB = category.colorG
+    newCategory.colorB = category.colorB
     newCategory.colorA = category.colorA
     
     saveData()
