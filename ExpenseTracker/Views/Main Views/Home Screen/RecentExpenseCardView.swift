@@ -11,13 +11,10 @@ import CoreMotion
 struct RecentExpenseCardView: View {
   @Environment(\.colorScheme) var colorScheme
   
+  @EnvironmentObject var tools: GlobalTools
+  
   var recentExpense: ExpenseEntity
   
-  var formatter: NumberFormatter = {
-    let formatter = NumberFormatter()
-    formatter.maximumFractionDigits = 2
-    return formatter
-  }()
   
   var body: some View {
     ZStack {
@@ -47,7 +44,7 @@ struct RecentExpenseCardView: View {
         }
         Spacer()
         
-        let costString = formatter.string(from: NSNumber(value: recentExpense.cost))!
+        let costString = tools.myFormatter.string(from: NSNumber(value: recentExpense.cost))!
         
         HStack(spacing: 0) {
           VStack {

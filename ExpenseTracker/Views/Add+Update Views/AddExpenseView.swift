@@ -9,17 +9,11 @@ import SwiftUI
 
 struct AddExpenseView: View {
   @Environment(\.presentationMode) var presentationMode
-  @EnvironmentObject var coreData:  CoreDataManager
-  @ObservedObject var expensesVM: ExpensesViewModel
-  @StateObject var viewModel = AddExpenseViewModel()
   
-  //Currency textfield formatter
-  var formatter: NumberFormatter = {
-    let formatter = NumberFormatter()
-    formatter.numberStyle = .currency
-    formatter.maximumFractionDigits = 2
-    return formatter
-  }()
+  @EnvironmentObject var coreData:  CoreDataManager
+  @EnvironmentObject var tools: GlobalTools
+  
+  @StateObject var viewModel = AddExpenseViewModel()
   
   var body: some View {
     ScrollView {
@@ -31,7 +25,7 @@ struct AddExpenseView: View {
           TextField("Enter title", text: $viewModel.titleText)
             .textfieldStyle()
           Divider()
-          TextField("$", value: $viewModel.costText, formatter: formatter)
+          TextField("$", value: $viewModel.costText, formatter: tools.myFormatter)
             .textfieldStyle()
             .keyboardType(.decimalPad)
           Divider()
@@ -144,10 +138,10 @@ struct AddExpenseView: View {
 struct AddExpenseView_Previews: PreviewProvider {
   static var previews: some View {
     NavigationView {
-      AddExpenseView(expensesVM: ExpensesViewModel())
+      AddExpenseView()
     }
     NavigationView {
-      AddExpenseView(expensesVM: ExpensesViewModel())
+      AddExpenseView()
     }
     .preferredColorScheme(.dark)
   }

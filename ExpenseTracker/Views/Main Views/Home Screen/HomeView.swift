@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct HomeView: View {
-  
   @EnvironmentObject var coreVM:  CoreDataManager
+  
   @ObservedObject var expensesVM: ExpensesViewModel
   
   var body: some View {
@@ -27,7 +27,7 @@ struct HomeView: View {
       }
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
-          NavigationLink(destination: AddExpenseView(expensesVM: expensesVM)) {
+          NavigationLink(destination: AddExpenseView()) {
             
             ZStack {
               Circle()

@@ -9,11 +9,11 @@ import SwiftUI
 import Combine
 
 class AddExpenseViewModel: ObservableObject {
-  @Published var cameraIsPresented  = false
-  @Published var showScanner        = false
-  @Published var isRecognizing      = false
+  @Published var cameraIsPresented    = false
+  @Published var showScanner          = false
+  @Published var isRecognizing        = false
   
-  @Published var presentAlert       = false
+  @Published var presentAlert         = false
   
   @Published var titleText: String    = ""
   @Published var costText             = 0.00
@@ -26,14 +26,6 @@ class AddExpenseViewModel: ObservableObject {
   
   @Published var selectedCategory: CategoryModel?
   @Published var selectedVendor: VendorModel?
-  
-  var formatter: NumberFormatter = {
-    let formatter = NumberFormatter()
-    formatter.numberStyle = .currency
-    formatter.maximumFractionDigits = 2
-    return formatter
-  }()
-  
   
   func makeNewExpense(category: CategoryModel, vendor: VendorModel, date: Date, completion: (ExpenseModel) -> ()) {
     let newExpense = ExpenseModel(category: category,

@@ -8,8 +8,10 @@
 import Foundation
 
 class HomeViewModel: ObservableObject {
-  @Published var total: Double = 0.0
+  
+  @Published var total: Double     = 0.0
   @Published var selectedTimeFrame = "week"
+  
   @Published var dateRangeExpenses: [ExpenseEntity] = []
   
   func setViewTotal(text: String, total: Double) {

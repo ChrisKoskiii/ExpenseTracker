@@ -10,7 +10,7 @@ import SwiftUI
 struct NewCategorySheet: View {
   @EnvironmentObject var data: CoreDataManager
   
-  @StateObject var viewModel = CategoryViewModel()
+  @StateObject var viewModel = CategoriesViewModel()
   
   @Binding var isPresented: Bool
   

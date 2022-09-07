@@ -10,8 +10,10 @@ import SwiftUI
 struct DetailExpenseView: View {
   @Environment(\.presentationMode) var presentationMode
   
+  @EnvironmentObject var tools: GlobalTools
   @EnvironmentObject var coreVM:  CoreDataManager
   @ObservedObject var expensesVM: ExpensesViewModel
+  
   @StateObject var viewModel = DetailExpenseViewModel()
   
   @State var detailExpense:       ExpenseEntity
@@ -28,14 +30,6 @@ struct DetailExpenseView: View {
   private var dateString: String {
     detailExpense.wrappedDate.formatDate()
   }
-  
-  
-  //Current textfield formatter
-  var formatter: NumberFormatter = {
-    let formatter = NumberFormatter()
-    formatter.numberStyle = .currency
-    return formatter
-  }()
   
   var body: some View {
     ScrollView {
@@ -103,7 +97,7 @@ struct DetailExpenseView: View {
       TextField("Enter title", text: $detailExpense.wrappedTitle)
         .textfieldStyle()
       Divider()
-      TextField("Enter cost", value: $detailExpense.cost, formatter: formatter)
+      TextField("Enter cost", value: $detailExpense.cost, formatter: tools.myFormatter)
         .textfieldStyle()
         .keyboardType(.decimalPad)
       Divider()

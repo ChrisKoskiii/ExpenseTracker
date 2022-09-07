@@ -11,5 +11,4 @@ class DetailExpenseViewModel: ObservableObject {
   @Published var selectedCategory: CategoryModel?
   @Published var selectedVendor: VendorModel?
   
-  
 }

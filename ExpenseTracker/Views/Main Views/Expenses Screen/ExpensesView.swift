@@ -10,14 +10,8 @@ import SwiftUI
 struct ExpensesView: View {
 
   @EnvironmentObject var coreVM:  CoreDataManager
+  @EnvironmentObject var tools:   GlobalTools
   @ObservedObject var expensesVM: ExpensesViewModel
-  
-  var formatter: NumberFormatter = {
-    let formatter = NumberFormatter()
-    formatter.numberStyle = .currency
-    formatter.maximumFractionDigits = 2
-    return formatter
-  }()
   
   var body: some View {
     NavigationView {
@@ -64,7 +58,7 @@ struct ExpensesView: View {
             }
             
             Spacer()
-            let costString = formatter.string(from: NSNumber(value: expense.cost))!
+            let costString = tools.myFormatter.string(from: NSNumber(value: expense.cost))!
             Text(costString)
               .font(.title3)
           }
@@ -83,7 +77,7 @@ struct AddExpenseButton: View {
   @ObservedObject var expensesVM: ExpensesViewModel
   
   var body: some View {
-    NavigationLink(destination: AddExpenseView(expensesVM: expensesVM)) {
+    NavigationLink(destination: AddExpenseView()) {
       ZStack {
         Circle()
           .frame(width: 30, height: 30)

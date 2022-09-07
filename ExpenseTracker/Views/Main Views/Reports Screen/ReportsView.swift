@@ -10,17 +10,11 @@ import SwiftUI
 struct ReportsView: View {
   
   @EnvironmentObject var coreVM:  CoreDataManager
+  @EnvironmentObject var tools:   GlobalTools
   @StateObject var reportsVM    = ReportsViewModel()
   
   @State var startDate: Date
   @State var endDate:   Date
-  
-  var formatter: NumberFormatter = {
-    let formatter = NumberFormatter()
-    formatter.numberStyle = .currency
-    formatter.maximumFractionDigits = 2
-    return formatter
-  }()
   
   var body: some View {
     
@@ -80,7 +74,7 @@ struct ReportsView: View {
           
           Spacer()
           
-          let costString = formatter.string(from: NSNumber(value: category.cost))!
+          let costString = tools.myFormatter.string(from: NSNumber(value: category.cost))!
           
           Text(costString)
             .font(.caption)

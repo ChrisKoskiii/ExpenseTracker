@@ -24,11 +24,13 @@ struct ExpenseTrackerApp: App {
   
   @StateObject var coreVM     = CoreDataManager()
   @StateObject var expensesVM = ExpensesViewModel()
+  @StateObject var globals    = GlobalTools(myFormatter: NumberFormatter())
   
   var body: some Scene {
     WindowGroup {
       TabViewScreen(expensesVM: expensesVM)
         .environmentObject(coreVM)
+        .environmentObject(globals)
         .preferredColorScheme(isDarkMode ? .dark : .light)
         .onAppear {
            UITableView.appearance().backgroundColor = .systemGray5
