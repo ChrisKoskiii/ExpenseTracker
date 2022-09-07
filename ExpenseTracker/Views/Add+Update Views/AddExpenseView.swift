@@ -28,23 +28,18 @@ struct AddExpenseView: View {
           TextField("$", value: $viewModel.costText, formatter: tools.myFormatter)
             .textfieldStyle()
             .keyboardType(.decimalPad)
-          Divider()
-          
-          CustomItemPicker(item: viewModel.vendorText) {
-            VendorListView(selectedVendor: $viewModel.selectedVendor, vendorText: $viewModel.vendorText)
-          }
-          
-          
-          Divider()
-          
-            CustomItemPicker(item: viewModel.categoryText) {
-              CategoryListView(selectedCategory: $viewModel.selectedCategory, categoryText: $viewModel.categoryText) }
-//            Image(systemName: viewModel.selectedCategory?.symbol ?? "photo")
-//              .resizable()
-//              .scaledToFit()
-//              .frame(width: 30, height: 30)
-//              .foregroundColor(viewModel.color ?? .brandPrimary)
-//              .padding(.leading)
+        }
+        .cardBackground()
+        .padding(.horizontal)
+        
+        CustomVendorPicker(viewModel: viewModel) {
+          VendorListView(selectedVendor: $viewModel.selectedVendor, vendorText: $viewModel.vendorText)
+        }
+        .cardBackground()
+        .padding(.horizontal)
+        
+        CustomCategoryPicker(viewModel: viewModel) {
+          CategoryListView(selectedCategory: $viewModel.selectedCategory, categoryText: $viewModel.categoryText)
         }
         .cardBackground()
         .padding(.horizontal)
@@ -152,18 +147,46 @@ struct AddExpenseView_Previews: PreviewProvider {
   }
 }
 
-struct CustomItemPicker<Content:View>: View {
-  var item: String
+struct CustomCategoryPicker<Content:View>: View {
+  @ObservedObject var viewModel: AddExpenseViewModel
+  
   var content: () -> Content
   
-  init(item: String, @ViewBuilder content: @escaping () -> Content) {
-    self.item = item
+  init(viewModel: AddExpenseViewModel, @ViewBuilder content: @escaping () -> Content) {
+    self.viewModel = viewModel
     self.content = content
   }
   var body: some View {
     NavigationLink(destination: content) {
       HStack {
-        Text(item)
+        RecentSymbol(symbol: viewModel.symbol ?? "photo", color: viewModel.color ?? .black)
+        Text(viewModel.categoryText)
+          .font(.headline)
+          .frame(maxWidth: .infinity, alignment: .leading)
+          .frame(height: 55)
+          .padding(.horizontal)
+          .cornerRadius(10)
+        Image(systemName: "chevron.right")
+      }
+      .foregroundColor(.recentTextColor)
+      .padding(.horizontal)
+    }
+  }
+}
+
+struct CustomVendorPicker<Content:View>: View {
+  @ObservedObject var viewModel: AddExpenseViewModel
+  
+  var content: () -> Content
+  
+  init(viewModel: AddExpenseViewModel, @ViewBuilder content: @escaping () -> Content) {
+    self.viewModel = viewModel
+    self.content = content
+  }
+  var body: some View {
+    NavigationLink(destination: content) {
+      HStack {
+        Text(viewModel.vendorText)
           .font(.headline)
           .frame(maxWidth: .infinity, alignment: .leading)
           .frame(height: 55)
