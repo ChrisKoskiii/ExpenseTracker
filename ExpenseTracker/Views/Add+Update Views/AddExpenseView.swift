@@ -37,9 +37,14 @@ struct AddExpenseView: View {
           
           Divider()
           
-          CustomItemPicker(item: viewModel.categoryText) {
-            CategoryListView(selectedCategory: $viewModel.selectedCategory, categoryText: $viewModel.categoryText) }
-          
+            CustomItemPicker(item: viewModel.categoryText) {
+              CategoryListView(selectedCategory: $viewModel.selectedCategory, categoryText: $viewModel.categoryText) }
+//            Image(systemName: viewModel.selectedCategory?.symbol ?? "photo")
+//              .resizable()
+//              .scaledToFit()
+//              .frame(width: 30, height: 30)
+//              .foregroundColor(viewModel.color ?? .brandPrimary)
+//              .padding(.leading)
         }
         .cardBackground()
         .padding(.horizontal)

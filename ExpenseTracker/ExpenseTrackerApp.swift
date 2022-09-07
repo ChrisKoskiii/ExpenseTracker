@@ -24,7 +24,7 @@ struct ExpenseTrackerApp: App {
   
   @StateObject var coreVM     = CoreDataManager()
   @StateObject var expensesVM = ExpensesViewModel()
-  @StateObject var globals    = GlobalTools(myFormatter: NumberFormatter())
+  @StateObject var globals    = GlobalTools()
   
   var body: some Scene {
     WindowGroup {

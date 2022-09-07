@@ -21,10 +21,17 @@ class AddExpenseViewModel: ObservableObject {
   @Published var categoryText: String = "Select Category"
   @Published var vendorText: String   = "Select Vendor"
   
+  @Published var color: Color?
+  
+  @Published var symbol: String?
   @Published var imageData: Data?
   @Published var scannedImage: UIImage?
   
-  @Published var selectedCategory: CategoryModel?
+  @Published var selectedCategory: CategoryModel? {
+    didSet {
+      color = Color.clear.getColor(from: self.selectedCategory!)
+    }
+  }
   @Published var selectedVendor: VendorModel?
   
   func makeNewExpense(category: CategoryModel, vendor: VendorModel, date: Date, completion: (ExpenseModel) -> ()) {
@@ -35,5 +42,9 @@ class AddExpenseViewModel: ObservableObject {
                                   vendor: vendor,
                                   receipt: imageData)
     completion(newExpense)
+  }
+  
+  func getSymbolColor(from category: CategoryModel) {
+    color = Color.clear.getColor(from: category)
   }
 }

@@ -10,10 +10,10 @@ import Combine
 
 class GlobalTools: ObservableObject {
 
-  @Published var myFormatter: NumberFormatter
+  @Published var myFormatter: NumberFormatter = {
+    let formatter = NumberFormatter()
+    formatter.numberStyle = .currency
+    return formatter
+  }()
   
-  init(myFormatter: NumberFormatter) {
-    self.myFormatter = myFormatter
-    myFormatter.maximumFractionDigits = 2
-  }
 }

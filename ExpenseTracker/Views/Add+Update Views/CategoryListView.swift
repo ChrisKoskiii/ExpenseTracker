@@ -14,7 +14,7 @@ struct CategoryListView: View {
   
   @Binding var selectedCategory: CategoryModel?
   @Binding var categoryText: String
-  
+
   @State private var showingSheet = false
   
   var body: some View {
@@ -28,6 +28,7 @@ struct CategoryListView: View {
           Button {
             selectedCategory = categoryEntityToModel(item)
             categoryText = item.wrappedName
+            
             presentationMode.wrappedValue.dismiss()
           } label: {
             Text(item.wrappedName)
