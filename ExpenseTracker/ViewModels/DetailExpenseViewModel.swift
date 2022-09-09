@@ -23,14 +23,16 @@ class DetailExpenseViewModel: ObservableObject {
   @Published var categorySymbol: String = "photo"
   @Published var date: Date = Date.now
   @Published var color: Color = .brandPrimary
+
   
   func getDetails(from expense: ExpenseEntity) async {
+    let category = getCategoryModel(from: expense.category)
     title = expense.wrappedTitle
     cost = expense.cost
     vendorName = getVendorModel(from: expense.vendor).name
-    categoryName = getCategoryModel(from: expense.category).name
-    categorySymbol = getCategoryModel(from: expense.category).symbol
-    
+    categoryName = category.name
+    categorySymbol = category.symbol
+    color = Color.clear.getColor(from: category)
     date = expense.wrappedDate
   }
   

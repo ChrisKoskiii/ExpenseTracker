@@ -141,17 +141,17 @@ struct DetailExpenseView: View {
   
   var updateExpenseButton: some View {
     Button {
-      expensesVM.makeNewExpense(category: detailExpense.category.wrappedName,
-                                cost: detailExpense.cost,
-                                date: detailExpense.wrappedDate,
-                                title: detailExpense.wrappedTitle,
-                                vendor: detailExpense.vendor.wrappedName,
+      expensesVM.makeNewExpense(category: viewModel.categoryName,
+                                cost: viewModel.cost,
+                                date: viewModel.date,
+                                title: viewModel.title,
+                                vendor: viewModel.vendorName,
                                 receipt: detailExpense.receipt,
-                                symbol: detailExpense.category.wrappedSymbol,
-                                colorR: detailExpense.category.colorR,
-                                colorG: detailExpense.category.colorG,
-                                colorB: detailExpense.category.colorB,
-                                colorA: detailExpense.category.colorA
+                                symbol: viewModel.categorySymbol,
+                                colorR: viewModel.color.components.r,
+                                colorG: viewModel.color.components.g,
+                                colorB: viewModel.color.components.b,
+                                colorA: viewModel.color.components.a
       ) { expense in
         coreVM.updateExpense(detailExpense, with: expense)
       }
