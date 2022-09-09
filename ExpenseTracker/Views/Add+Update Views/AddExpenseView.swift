@@ -32,13 +32,13 @@ struct AddExpenseView: View {
         .cardBackground()
         .padding(.horizontal)
         
-        CustomVendorPicker(viewModel: viewModel) {
+        AddCustomVendorPicker(viewModel: viewModel) {
           VendorListView(selectedVendor: $viewModel.selectedVendor, vendorText: $viewModel.vendorText)
         }
         .cardBackground()
         .padding(.horizontal)
         
-        CustomCategoryPicker(viewModel: viewModel) {
+        AddCustomCategoryPicker(viewModel: viewModel) {
           CategoryListView(selectedCategory: $viewModel.selectedCategory, categoryText: $viewModel.categoryText)
         }
         .cardBackground()
@@ -147,7 +147,7 @@ struct AddExpenseView_Previews: PreviewProvider {
   }
 }
 
-struct CustomCategoryPicker<Content:View>: View {
+struct AddCustomCategoryPicker<Content:View>: View {
   @ObservedObject var viewModel: AddExpenseViewModel
   
   var content: () -> Content
@@ -174,7 +174,7 @@ struct CustomCategoryPicker<Content:View>: View {
   }
 }
 
-struct CustomVendorPicker<Content:View>: View {
+struct AddCustomVendorPicker<Content:View>: View {
   @ObservedObject var viewModel: AddExpenseViewModel
   
   var content: () -> Content

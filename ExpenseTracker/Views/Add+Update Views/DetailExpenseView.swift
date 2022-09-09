@@ -26,7 +26,7 @@ struct DetailExpenseView: View {
   
   //Alert
   @State private var showingAlert       = false
-  
+  @State private var hasLoadedBefore    = false
   private var dateString: String {
     detailExpense.wrappedDate.formatDate()
   }
@@ -36,7 +36,7 @@ struct DetailExpenseView: View {
       VStack(spacing: 10) {
         
         expenseTextfields
-
+        
         scanButton
         
         updateExpenseButton
@@ -79,6 +79,12 @@ struct DetailExpenseView: View {
     .task {
       await convertData()
     }
+    .task {
+      if !hasLoadedBefore {
+      await viewModel.getDetails(from: detailExpense)
+        hasLoadedBefore = true
+      }
+    }
     .alert("Are you sure you want to delete this expense?", isPresented: $showingAlert) {
       Button("Delete", role: .destructive) {
         presentationMode.wrappedValue.dismiss()
@@ -90,45 +96,29 @@ struct DetailExpenseView: View {
   }
   
   var expenseTextfields: some View {
-    VStack(spacing: 0) {
-      DatePicker(dateString, selection: $detailExpense.wrappedDate, displayedComponents: [.date])
-        .textfieldStyle()
-      Divider()
-      TextField("Enter title", text: $detailExpense.wrappedTitle)
-        .textfieldStyle()
-      Divider()
-      TextField("Enter cost", value: $detailExpense.cost, formatter: tools.myFormatter)
-        .textfieldStyle()
-        .keyboardType(.decimalPad)
-      Divider()
-      ZStack {
-        TextField("Enter vendor", text: $detailExpense.vendor.wrappedName)
+    VStack(spacing: 10) {
+      VStack {
+        DatePicker(dateString, selection: $viewModel.date, displayedComponents: [.date])
           .textfieldStyle()
-        HStack {
-          Spacer()
-          NavigationLink(destination: VendorListView(selectedVendor: $viewModel.selectedVendor, vendorText: $detailExpense.vendor.wrappedName)) {
-            Image(systemName: detailExpense.category.wrappedSymbol)}
-          .frame(width: 20)
-          .padding(.trailing, 20)
-        }
-      }
-      Divider()
-      ZStack {
-        TextField("Enter category", text: $detailExpense.category.wrappedName)
+        Divider()
+        TextField("Enter title", text: $viewModel.title)
           .textfieldStyle()
-        HStack {
-          Spacer()
-          NavigationLink(destination: CategoryListView(selectedCategory: $viewModel.selectedCategory, categoryText: $detailExpense.category.wrappedName)) {
-            HStack {
-              Image(systemName: detailExpense.category.wrappedSymbol)
-                .foregroundColor(coreVM.categoryColor(for: detailExpense.category))
-              Image(systemName: "chevron.right")
-            }
-          }
-          .frame(width: 20)
-          .padding(.trailing, 20)
-        }
+        Divider()
+        TextField("Enter cost", value: $viewModel.cost, formatter: tools.myFormatter)
+          .textfieldStyle()
+          .keyboardType(.decimalPad)
       }
+      DetailCustomVendorPicker(viewModel: viewModel) {
+        VendorListView(selectedVendor: $viewModel.selectedVendor, vendorText: $viewModel.vendorName)
+      }
+      .cardBackground()
+      .padding(.horizontal)
+      
+      DetailCustomCategoryPicker(viewModel: viewModel) {
+        CategoryListView(selectedCategory: $viewModel.selectedCategory, categoryText: $viewModel.categoryName)
+      }
+      .cardBackground()
+      .padding(.horizontal)
     }
     .cardBackground()
     .padding(.horizontal)
@@ -165,15 +155,15 @@ struct DetailExpenseView: View {
       ) { expense in
         coreVM.updateExpense(detailExpense, with: expense)
       }
-//      if !expensesVM.categories.contains(expensesVM.selectedCategory!) {
-//        expensesVM.categories.append(expensesVM.selectedCategory!)
-//      }
-//      if !expensesVM.vendors.contains(expensesVM.selectedVendor!) {
-//        expensesVM.vendors.append(expensesVM.selectedVendor!)
-//      }
+      //      if !expensesVM.categories.contains(expensesVM.selectedCategory!) {
+      //        expensesVM.categories.append(expensesVM.selectedCategory!)
+      //      }
+      //      if !expensesVM.vendors.contains(expensesVM.selectedVendor!) {
+      //        expensesVM.vendors.append(expensesVM.selectedVendor!)
+      //      }
       expensesVM.selectedCategory = nil
       expensesVM.selectedVendor = nil
-        presentationMode.wrappedValue.dismiss()
+      presentationMode.wrappedValue.dismiss()
     } label: {
       Text("Update Expense")
         .addButtonStyle()
@@ -215,6 +205,59 @@ struct DetailExpenseView: View {
         detailExpense.category.wrappedName.isEmpty {
       return true
     } else { return false
+    }
+  }
+}
+
+struct DetailCustomCategoryPicker<Content:View>: View {
+  @ObservedObject var viewModel: DetailExpenseViewModel
+  
+  var content: () -> Content
+  
+  init(viewModel: DetailExpenseViewModel, @ViewBuilder content: @escaping () -> Content) {
+    self.viewModel = viewModel
+    self.content = content
+  }
+  var body: some View {
+    NavigationLink(destination: content) {
+      HStack {
+        RecentSymbol(symbol: viewModel.categorySymbol, color: viewModel.color)
+        Text(viewModel.categoryName)
+          .font(.headline)
+          .frame(maxWidth: .infinity, alignment: .leading)
+          .frame(height: 55)
+          .padding(.horizontal)
+          .cornerRadius(10)
+        Image(systemName: "chevron.right")
+      }
+      .foregroundColor(.recentTextColor)
+      .padding(.horizontal)
+    }
+  }
+}
+
+struct DetailCustomVendorPicker<Content:View>: View {
+  @ObservedObject var viewModel: DetailExpenseViewModel
+  
+  var content: () -> Content
+  
+  init(viewModel: DetailExpenseViewModel, @ViewBuilder content: @escaping () -> Content) {
+    self.viewModel = viewModel
+    self.content = content
+  }
+  var body: some View {
+    NavigationLink(destination: content) {
+      HStack {
+        Text(viewModel.vendorName)
+          .font(.headline)
+          .frame(maxWidth: .infinity, alignment: .leading)
+          .frame(height: 55)
+          .padding(.horizontal)
+          .cornerRadius(10)
+        Image(systemName: "chevron.right")
+      }
+      .foregroundColor(.recentTextColor)
+      .padding(.horizontal)
     }
   }
 }
