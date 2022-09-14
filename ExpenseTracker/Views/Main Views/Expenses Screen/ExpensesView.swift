@@ -9,9 +9,9 @@ import SwiftUI
 
 struct ExpensesView: View {
 
-  @EnvironmentObject var coreVM:  CoreDataManager
-  @EnvironmentObject var tools:   GlobalTools
-  @ObservedObject var expensesVM: ExpensesViewModel
+  @EnvironmentObject var dataManager: CoreDataManager
+  @EnvironmentObject var tools:       GlobalTools
+  @ObservedObject var expensesVM:     ExpensesViewModel
   
   var body: some View {
     NavigationView {
@@ -22,16 +22,16 @@ struct ExpensesView: View {
         .toolbar {
           
           ToolbarItem(placement: .navigationBarTrailing) {
-            AddExpenseButton(coreVM: coreVM, expensesVM: expensesVM)
+            AddExpenseButton(dataManager: dataManager, expensesVM: expensesVM)
           }
           
           ToolbarItem(placement: .principal) {
-            MonthSelector(coreVM: coreVM, expensesVM: expensesVM)
+            MonthSelector(dataManager: dataManager, expensesVM: expensesVM)
           }
         }
     }
-    .onAppear {
-      coreVM.getDateRangeExpenses(
+    .task {
+      dataManager.getDateRangeExpenses(
         startDate: expensesVM.monthStart,
         endDate: expensesVM.monthEnd, timeframe: TimeFrame.month)
     }
@@ -42,7 +42,7 @@ struct ExpensesView: View {
     
     List {
       
-      ForEach(coreVM.monthlyExpenses, id: \.self) { expense in
+      ForEach(dataManager.monthlyExpenses, id: \.self) { expense in
         
         NavigationLink(destination: DetailExpenseView(expensesVM: expensesVM, detailExpense: expense)) {
           
@@ -65,15 +65,16 @@ struct ExpensesView: View {
         }
       }
     }
-    //allows for pull to refresh
     .refreshable {
-
+      dataManager.getDateRangeExpenses(
+        startDate: expensesVM.monthStart,
+        endDate: expensesVM.monthEnd, timeframe: TimeFrame.month)
     }
   }
 }
 
 struct AddExpenseButton: View {
-  @ObservedObject var coreVM: CoreDataManager
+  @ObservedObject var dataManager: CoreDataManager
   @ObservedObject var expensesVM: ExpensesViewModel
   
   var body: some View {
@@ -90,13 +91,13 @@ struct AddExpenseButton: View {
 }
 
 struct MonthSelector: View {
-  @ObservedObject var coreVM: CoreDataManager
+  @ObservedObject var dataManager: CoreDataManager
   @ObservedObject var expensesVM: ExpensesViewModel
   var body: some View {
     HStack {
       Button {
         expensesVM.subtractMonth()
-        coreVM.getDateRangeExpenses(
+        dataManager.getDateRangeExpenses(
           startDate: expensesVM.monthStart,
           endDate: expensesVM.monthEnd, timeframe: TimeFrame.month)
       } label: {
@@ -109,7 +110,7 @@ struct MonthSelector: View {
         .frame(width: 80)
       Button {
         expensesVM.addMonth()
-        coreVM.getDateRangeExpenses(
+        dataManager.getDateRangeExpenses(
           startDate: expensesVM.monthStart,
           endDate: expensesVM.monthEnd, timeframe: TimeFrame.month)
       } label: {

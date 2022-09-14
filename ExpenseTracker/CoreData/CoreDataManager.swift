@@ -94,6 +94,52 @@ class CoreDataManager: ObservableObject {
     }
   }
   
+//  func isDuplicate(_ categoryName: String) -> (isTrue: Bool, category: CategoryEntity?) {
+//
+//    let request = NSFetchRequest<CategoryEntity>(entityName: "CategoryEntity")
+//
+//    let query = categoryName
+//
+//    request.sortDescriptors = []
+//    request.predicate = NSPredicate(format: "name LIKE %@", query)
+//
+//    do {
+//      let fetchedResult = try container.viewContext.fetch(request)
+//      print(fetchedResult as Any)
+//      if fetchedResult.isEmpty {
+//        return (false, nil)
+//      } else {
+//        return (true, fetchedResult.first)
+//      }
+//    } catch let error {
+//      print("Error checking for matched category, \(error.localizedDescription)")
+//      return (false, nil)
+//    }
+//  }
+  
+  func isDuplicate<T: NSManagedObject>(_ name: String, _ entityName: String) -> (isTrue: Bool, returnedEntity: T?) {
+    
+    let request = NSFetchRequest<T>(entityName: entityName)
+    
+    let query = name
+    
+    request.sortDescriptors = []
+    request.predicate = NSPredicate(format: "name LIKE %@", query)
+    
+    do {
+      let fetchedResult = try container.viewContext.fetch(request)
+      print(fetchedResult as Any)
+      if fetchedResult.isEmpty {
+        return (false, nil)
+      } else {
+        return (true, fetchedResult.first)
+      }
+    } catch let error {
+      print("Error checking for matched entry, \(error.localizedDescription)")
+      return (false, nil)
+    }
+  }
+  
   func getRecent(expenses: [ExpenseEntity]) {
     recentExpenses = Array(savedExpenses.prefix(5))
   }
@@ -138,16 +184,27 @@ class CoreDataManager: ObservableObject {
       newExpense.receipt = receiptData
     }
     
-    let newCategory = CategoryEntity(context: container.viewContext)
-    newCategory.name = expense.category.name
-    newCategory.symbol = expense.category.symbol
-    newCategory.colorA = expense.category.colorA
-    newCategory.colorB = expense.category.colorB
-    newCategory.colorG = expense.category.colorG
-    newCategory.colorR = expense.category.colorR
+    let categoryResult = isDuplicate(expense.category.name, "CategoryEntity")
     
-    newExpense.category = newCategory
+    if categoryResult.isTrue {
+      newExpense.category = categoryResult.returnedEntity! as! CategoryEntity//Safe to force unwrap, only returns true if there is something there
+    } else {
+      let newCategory = CategoryEntity(context: container.viewContext)
+      newCategory.name = expense.category.name
+      newCategory.symbol = expense.category.symbol
+      newCategory.colorA = expense.category.colorA
+      newCategory.colorB = expense.category.colorB
+      newCategory.colorG = expense.category.colorG
+      newCategory.colorR = expense.category.colorR
+      
+      newExpense.category = newCategory
+    }
     
+    let vendorResult = isDuplicate(expense.vendor.name, "VendorEntity")
+    
+    if vendorResult.isTrue {
+      newExpense.vendor = vendorResult.returnedEntity! as! VendorEntity
+    }
     let newVendor = VendorEntity(context: container.viewContext)
     newVendor.name = expense.vendor.name
     
@@ -157,6 +214,7 @@ class CoreDataManager: ObservableObject {
   }
   
   func addCategory(_ category: CategoryModel) {
+    
     let newCategory = CategoryEntity(context: container.viewContext)
     newCategory.name = category.name
     newCategory.symbol = category.symbol
@@ -192,15 +250,27 @@ class CoreDataManager: ObservableObject {
   func updateExpense(_ entity: ExpenseEntity, with expense: ExpenseModel) {
     entity.title = expense.title
     entity.cost = expense.cost
-    entity.vendor.name = expense.vendor.name
-    entity.category.name = expense.category.name
-    entity.category.symbol = expense.category.symbol
     entity.date = expense.date
     entity.receipt = expense.receipt
-    entity.category.colorR = expense.category.colorR
-    entity.category.colorG = expense.category.colorG
-    entity.category.colorB = expense.category.colorB
-    entity.category.colorA = expense.category.colorA
+    
+    let categoryResult = isDuplicate(expense.category.name, "CategoryEntity")
+    if categoryResult.isTrue {
+      entity.category = categoryResult.returnedEntity! as! CategoryEntity
+    } else {
+      entity.category.name = expense.category.name
+      entity.category.symbol = expense.category.symbol
+      entity.category.colorR = expense.category.colorR
+      entity.category.colorG = expense.category.colorG
+      entity.category.colorB = expense.category.colorB
+      entity.category.colorA = expense.category.colorA
+    }
+    
+    let vendorResult = isDuplicate(expense.category.name, "CategoryEntity")
+    if vendorResult.isTrue {
+      entity.vendor = vendorResult.returnedEntity! as! VendorEntity
+    } else {
+      entity.vendor.name = expense.vendor.name
+    }
     
     saveData()
   }

@@ -12,6 +12,8 @@ struct NewCategorySheet: View {
   
   @StateObject var viewModel = CategoriesViewModel()
   
+  @State var showExistingAlert = false
+  
   @Binding var isPresented: Bool
   
   let columns = [
@@ -54,17 +56,23 @@ struct NewCategorySheet: View {
       Button {
         viewModel.makeCategoryModel()
         if let category = viewModel.storedCategory {
-          data.addCategory(category)
+          let result = data.isDuplicate(category.name, "CategoryEntity")
+          if result.isTrue {
+            showExistingAlert = true
+          } else {
+            data.addCategory(category)
+            viewModel.storedCategory = nil
+            data.fetchCategories()
+            isPresented = false
+          }
         }
-        viewModel.storedCategory = nil
-        data.fetchCategories()
-        isPresented = false
       } label: {
         Text("Add Category")
           .addButtonStyle()
       }
     }
     .background(Color(.secondarySystemBackground))
+    .alert("Category already exists", isPresented: $showExistingAlert) { }
   }
 }
 

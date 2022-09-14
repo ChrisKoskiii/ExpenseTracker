@@ -81,7 +81,7 @@ struct DetailExpenseView: View {
     }
     .task {
       if !hasLoadedBefore {
-      await viewModel.getDetails(from: detailExpense)
+      viewModel.getDetails(from: detailExpense)
         hasLoadedBefore = true
       }
     }

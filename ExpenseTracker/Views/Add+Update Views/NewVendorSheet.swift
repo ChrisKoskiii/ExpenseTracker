@@ -14,18 +14,26 @@ struct NewVendorSheet: View {
   
   @Binding var isPresented: Bool
   
+  @State private var showExistingAlert = false
+  
     var body: some View {
       VStack {
       TextField("Vendor Name", text: $viewModel.name)
         Button("Add Vendor") {
           viewModel.makeNewVendorModel()
           if let vendor = viewModel.storedVendor {
-            data.addVendor(vendor)
-            viewModel.storedVendor = nil
-            isPresented = false
+            let result = data.isDuplicate(vendor.name, "VendorEntity")
+            if result.isTrue {
+              showExistingAlert = true
+            } else {
+              data.addVendor(vendor)
+              viewModel.storedVendor = nil
+              isPresented = false
+            }
           }
         }
       }
+      .alert("Category already exists", isPresented: $showExistingAlert) { }
     }
 }
 

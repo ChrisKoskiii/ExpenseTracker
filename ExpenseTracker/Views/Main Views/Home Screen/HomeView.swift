@@ -44,6 +44,9 @@ struct HomeView: View {
       .navigationBarTitleDisplayMode(.large)
     }
     .navigationViewStyle(.stack)
+    .task {
+      coreVM.fetchData()
+    }
   }
   
   var recentTransactionText: some View {

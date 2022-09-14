@@ -25,7 +25,7 @@ class DetailExpenseViewModel: ObservableObject {
   @Published var color: Color = .brandPrimary
 
   
-  func getDetails(from expense: ExpenseEntity) async {
+  func getDetails(from expense: ExpenseEntity) {
     let category = getCategoryModel(from: expense.category)
     title = expense.wrappedTitle
     cost = expense.cost

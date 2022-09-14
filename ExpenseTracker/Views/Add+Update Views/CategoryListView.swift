@@ -10,7 +10,7 @@ import SwiftUI
 struct CategoryListView: View {
   @Environment(\.presentationMode) var presentationMode
   
-  @EnvironmentObject var data:    CoreDataManager
+  @EnvironmentObject var dataManager:    CoreDataManager
   
   @Binding var selectedCategory: CategoryModel?
   @Binding var categoryText: String
@@ -22,7 +22,7 @@ struct CategoryListView: View {
       Button("Add new") {
         showingSheet.toggle()
       }
-      ForEach(data.savedCategories, id: \.self) { item in
+      ForEach(dataManager.savedCategories, id: \.self) { item in
         let symbolColor = Color(red: item.colorR, green: item.colorG, blue: item.colorB, opacity: item.colorA)
         HStack {
           Button {
@@ -60,9 +60,9 @@ struct CategoryListView: View {
   
   func deleteItem(at offsets: IndexSet) {
     for index in offsets {
-      let item = data.savedCategories[index]
-      data.deleteCategory(item)
-      data.savedCategories.remove(at: index)
+      let item = dataManager.savedCategories[index]
+      dataManager.deleteCategory(item)
+      dataManager.savedCategories.remove(at: index)
     }
   }
   
