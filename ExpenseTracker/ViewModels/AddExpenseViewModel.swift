@@ -20,10 +20,10 @@ class AddExpenseViewModel: ObservableObject {
   @Published var dateValue: Date      = Date.now
   @Published var categoryText: String = "Select Category"
   @Published var vendorText: String   = "Select Vendor"
+  @Published var symbol: String       = "photo"
   
   @Published var color: Color?
   
-  @Published var symbol: String?
   @Published var imageData: Data?
   @Published var scannedImage: UIImage?
   

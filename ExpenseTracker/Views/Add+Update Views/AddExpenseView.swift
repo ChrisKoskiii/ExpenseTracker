@@ -39,7 +39,7 @@ struct AddExpenseView: View {
         .padding(.horizontal)
         
         AddCustomCategoryPicker(viewModel: viewModel) {
-          CategoryListView(selectedCategory: $viewModel.selectedCategory, categoryText: $viewModel.categoryText)
+          CategoryListView(selectedCategory: $viewModel.selectedCategory, categoryText: $viewModel.categoryText, categorySymbol: $viewModel.symbol)
         }
         .cardBackground()
         .padding(.horizontal)
@@ -159,7 +159,7 @@ struct AddCustomCategoryPicker<Content:View>: View {
   var body: some View {
     NavigationLink(destination: content) {
       HStack {
-        RecentSymbol(symbol: viewModel.symbol ?? "photo", color: viewModel.color ?? .black)
+        RecentSymbol(symbol: viewModel.symbol, color: viewModel.color ?? .black)
         Text(viewModel.categoryText)
           .font(.headline)
           .frame(maxWidth: .infinity, alignment: .leading)

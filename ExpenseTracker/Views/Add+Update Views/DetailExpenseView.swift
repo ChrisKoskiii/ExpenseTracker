@@ -118,7 +118,7 @@ struct DetailExpenseView: View {
       .padding(.horizontal)
       
       DetailCustomCategoryPicker(viewModel: viewModel) {
-        CategoryListView(selectedCategory: $viewModel.selectedCategory, categoryText: $viewModel.categoryName)
+        CategoryListView(selectedCategory: $viewModel.selectedCategory, categoryText: $viewModel.categoryName, categorySymbol: $viewModel.categorySymbol)
       }
       .cardBackground()
       .padding(.horizontal)
