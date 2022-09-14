@@ -31,6 +31,7 @@
 		9E34DE3F28AEBE1C00235442 /* ItemList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E34DE3E28AEBE1C00235442 /* ItemList.swift */; };
 		9E34DE4128AED43400235442 /* OperatorOverload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E34DE4028AED43400235442 /* OperatorOverload.swift */; };
 		9E3D6E0728956D58008DB55D /* DetailExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3D6E0628956D58008DB55D /* DetailExpenseView.swift */; };
+		9E57068928D16D1000A3AD57 /* AnyTransition+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E57068828D16D1000A3AD57 /* AnyTransition+Ext.swift */; };
 		9E5824F328A191E000C80A73 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5824F228A191E000C80A73 /* Category.swift */; };
 		9E5824F728A1A6EE00C80A73 /* ReportsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5824F628A1A6EE00C80A73 /* ReportsViewModel.swift */; };
 		9E58250128A2D07D00C80A73 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E58250028A2D07D00C80A73 /* CloudKit.framework */; };
@@ -86,6 +87,7 @@
 		9E34DE3E28AEBE1C00235442 /* ItemList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemList.swift; sourceTree = "<group>"; };
 		9E34DE4028AED43400235442 /* OperatorOverload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorOverload.swift; sourceTree = "<group>"; };
 		9E3D6E0628956D58008DB55D /* DetailExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailExpenseView.swift; sourceTree = "<group>"; };
+		9E57068828D16D1000A3AD57 /* AnyTransition+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnyTransition+Ext.swift"; sourceTree = "<group>"; };
 		9E5824F228A191E000C80A73 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		9E5824F628A1A6EE00C80A73 /* ReportsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportsViewModel.swift; sourceTree = "<group>"; };
 		9E5824FF28A2D00A00C80A73 /* ExpenseTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ExpenseTracker.entitlements; sourceTree = "<group>"; };
@@ -310,6 +312,7 @@
 				9E1E3D282894687B004FE485 /* Date+Extension.swift */,
 				9E187D3E2893055000142000 /* View+Extensions.swift */,
 				9E2129F928C7B88000D50C38 /* Binding+Ext.swift */,
+				9E57068828D16D1000A3AD57 /* AnyTransition+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -439,6 +442,7 @@
 				9E8E1F312894232300300E14 /* ExpensesView.swift in Sources */,
 				9E58254C28A5EEE800C80A73 /* ExpensesViewModel.swift in Sources */,
 				9E34DE3928AEADF500235442 /* UIApplication+Ext.swift in Sources */,
+				9E57068928D16D1000A3AD57 /* AnyTransition+Ext.swift in Sources */,
 				9E5824F328A191E000C80A73 /* Category.swift in Sources */,
 				9E187D3D2893010900142000 /* ExpenseContainer.xcdatamodeld in Sources */,
 				9EC58E4828C0332D003D1588 /* NewCategorySheet.swift in Sources */,

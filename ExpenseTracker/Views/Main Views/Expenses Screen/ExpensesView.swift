@@ -13,6 +13,8 @@ struct ExpensesView: View {
   @EnvironmentObject var tools:       GlobalTools
   @ObservedObject var expensesVM:     ExpensesViewModel
   
+  @State private var isLeft = false
+  
   var body: some View {
     NavigationView {
       
@@ -26,7 +28,7 @@ struct ExpensesView: View {
           }
           
           ToolbarItem(placement: .principal) {
-            MonthSelector(dataManager: dataManager, expensesVM: expensesVM)
+            MonthSelector(dataManager: dataManager, expensesVM: expensesVM, isLeft: $isLeft)
           }
         }
     }
@@ -93,13 +95,16 @@ struct AddExpenseButton: View {
 struct MonthSelector: View {
   @ObservedObject var dataManager: CoreDataManager
   @ObservedObject var expensesVM: ExpensesViewModel
+  @Binding var isLeft: Bool
   var body: some View {
     HStack {
       Button {
-        expensesVM.subtractMonth()
-        dataManager.getDateRangeExpenses(
-          startDate: expensesVM.monthStart,
-          endDate: expensesVM.monthEnd, timeframe: TimeFrame.month)
+        withAnimation(.easeInOut) {
+          expensesVM.subtractMonth()
+          dataManager.getDateRangeExpenses(
+            startDate: expensesVM.monthStart,
+            endDate: expensesVM.monthEnd, timeframe: TimeFrame.month)
+        }
       } label: {
         Image(systemName: "chevron.left")
           .font(.footnote)
@@ -109,10 +114,12 @@ struct MonthSelector: View {
         .minimumScaleFactor(0.75)
         .frame(width: 80)
       Button {
-        expensesVM.addMonth()
-        dataManager.getDateRangeExpenses(
-          startDate: expensesVM.monthStart,
-          endDate: expensesVM.monthEnd, timeframe: TimeFrame.month)
+        withAnimation(.easeInOut) {
+          expensesVM.addMonth()
+          dataManager.getDateRangeExpenses(
+            startDate: expensesVM.monthStart,
+            endDate: expensesVM.monthEnd, timeframe: TimeFrame.month)
+        }
       } label: {
         Image(systemName: "chevron.right")
           .font(.footnote)
