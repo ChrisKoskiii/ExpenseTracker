@@ -97,7 +97,7 @@ struct DetailExpenseView: View {
   
   var expenseTextfields: some View {
     VStack(spacing: 10) {
-      VStack {
+      VStack(spacing: 0) {
         DatePicker(dateString, selection: $viewModel.date, displayedComponents: [.date])
           .textfieldStyle()
         Divider()
@@ -108,6 +108,9 @@ struct DetailExpenseView: View {
           .textfieldStyle()
           .keyboardType(.decimalPad)
       }
+      .cardBackground()
+      .padding(.horizontal)
+      
       DetailCustomVendorPicker(viewModel: viewModel) {
         VendorListView(selectedVendor: $viewModel.selectedVendor, vendorText: $viewModel.vendorName)
       }
@@ -120,8 +123,6 @@ struct DetailExpenseView: View {
       .cardBackground()
       .padding(.horizontal)
     }
-    .cardBackground()
-    .padding(.horizontal)
   }
   
   var scanButton: some View {
