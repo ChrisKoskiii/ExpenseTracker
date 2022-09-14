@@ -106,7 +106,6 @@ struct AddExpenseView: View {
           }
         }
         presentationMode.wrappedValue.dismiss()
-        coreData.fetchData()
       }
     } label: {
       Text("Add Expense")

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MonthlyTotalView: View {
-  
+  @Environment(\.scenePhase) var scenePhase
   @ObservedObject var coreVM: CoreDataManager
   @StateObject var homeVM =   HomeViewModel()
   
@@ -35,15 +35,12 @@ struct MonthlyTotalView: View {
       .padding(.top, 4)
     }
     .padding(.horizontal)
-    
-    //Fetches current weekly total on launch
-    .onAppear {
+
+    .onChange(of: scenePhase) { _ in
       if let startDate = Calendar.current.date(byAdding: .day, value: -7, to: Date()) {
-        coreVM.getDateRangeExpenses(startDate: startDate, endDate: Date.now){ expenses in
-          homeVM.dateRangeExpenses = expenses
-        }
+        coreVM.getDateRangeExpenses(startDate: startDate, endDate: Date.now, timeframe: TimeFrame.week)
+        homeVM.setViewTotal(text: "week", total: coreVM.weeklyTotal)
       }
-      homeVM.setViewTotal(text: "week", total: coreVM.weeklyTotal)
     }
   }
   
@@ -78,7 +75,6 @@ struct MenuView: View {
           
           coreVM.getDateRangeExpenses(startDate: startDate, endDate: Date.now, timeframe: TimeFrame.week)
           homeVM.setViewTotal(text: "week", total: coreVM.weeklyTotal)
-          print(coreVM.weeklyTotal)
         }
         
         
@@ -89,7 +85,6 @@ struct MenuView: View {
           
           coreVM.getDateRangeExpenses(startDate: startDate, endDate: Date.now, timeframe: TimeFrame.month)
           homeVM.setViewTotal(text: "month", total: coreVM.monthlyTotal)
-          print(coreVM.monthlyTotal)
         }
         
         
@@ -100,7 +95,6 @@ struct MenuView: View {
           
           coreVM.getDateRangeExpenses(startDate: startDate, endDate: Date.now, timeframe: TimeFrame.year)
           homeVM.setViewTotal(text: "year", total: coreVM.yearlyTotal)
-          print(coreVM.yearlyTotal)
         }
       })
       

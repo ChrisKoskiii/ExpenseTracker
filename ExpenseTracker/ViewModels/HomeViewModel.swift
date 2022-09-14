@@ -22,13 +22,10 @@ class HomeViewModel: ObservableObject {
     dateRangeExpenses = expenses
     if selectedTimeFrame == "week" {
       total = getTotal(from: dateRangeExpenses)
-      print(total)
     } else if selectedTimeFrame == "month" {
       total = getTotal(from: dateRangeExpenses)
-      print(total)
     } else if selectedTimeFrame == "year" {
       total = getTotal(from: dateRangeExpenses)
-      print(total)
     }
   }
   

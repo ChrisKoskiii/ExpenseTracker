@@ -13,7 +13,7 @@ struct RecentExpenseCardView: View {
   
   @EnvironmentObject var tools: GlobalTools
   
-  var recentExpense: ExpenseEntity
+  @ObservedObject var recentExpense: ExpenseEntity
   
   
   var body: some View {

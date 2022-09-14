@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct HomeView: View {
+  @Environment(\.scenePhase) var scenePhase
+  
   @EnvironmentObject var coreVM:  CoreDataManager
   
   @ObservedObject var expensesVM: ExpensesViewModel
@@ -44,7 +46,7 @@ struct HomeView: View {
       .navigationBarTitleDisplayMode(.large)
     }
     .navigationViewStyle(.stack)
-    .task {
+    .onChange(of: scenePhase) { _ in
       coreVM.fetchData()
     }
   }
