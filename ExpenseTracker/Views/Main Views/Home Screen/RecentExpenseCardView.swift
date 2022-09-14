@@ -37,7 +37,7 @@ struct RecentExpenseCardView: View {
             .foregroundColor(.secondary)
             .font(.footnote)
           
-          Text(recentExpense.category.wrappedName)
+          Text(recentExpense.wrappedDate.formatDate())
             .foregroundColor(.secondary)
             .font(.footnote)
             .padding(.bottom, 4)

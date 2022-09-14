@@ -23,16 +23,12 @@ struct ExpensesView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
           
-          ToolbarItem(placement: .navigationBarTrailing) {
-            AddExpenseButton(dataManager: dataManager, expensesVM: expensesVM)
-          }
-          
           ToolbarItem(placement: .principal) {
             MonthSelector(dataManager: dataManager, expensesVM: expensesVM, isLeft: $isLeft)
           }
         }
     }
-    .task {
+    .onAppear {
       dataManager.getDateRangeExpenses(
         startDate: expensesVM.monthStart,
         endDate: expensesVM.monthEnd, timeframe: TimeFrame.month)
