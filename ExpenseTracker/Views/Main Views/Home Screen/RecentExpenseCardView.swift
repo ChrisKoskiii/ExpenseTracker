@@ -44,8 +44,7 @@ struct RecentExpenseCardView: View {
         }
         Spacer()
         
-        let costString = tools.myFormatter.string(from: NSNumber(value: recentExpense.cost))!
-        
+        let costString = tools.myFormatter.string(from: NSNumber(value: recentExpense.cost))!.dropFirst()
         HStack(spacing: 0) {
           VStack {
             Text("$")

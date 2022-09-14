@@ -204,12 +204,11 @@ class CoreDataManager: ObservableObject {
     
     if vendorResult.isTrue {
       newExpense.vendor = vendorResult.returnedEntity! as! VendorEntity
+    } else {
+      let newVendor = VendorEntity(context: container.viewContext)
+      newVendor.name = expense.vendor.name
+      newExpense.vendor = newVendor
     }
-    let newVendor = VendorEntity(context: container.viewContext)
-    newVendor.name = expense.vendor.name
-    
-    newExpense.vendor = newVendor
-    
     saveData()
   }
   
@@ -265,7 +264,7 @@ class CoreDataManager: ObservableObject {
       entity.category.colorA = expense.category.colorA
     }
     
-    let vendorResult = isDuplicate(expense.category.name, "CategoryEntity")
+    let vendorResult = isDuplicate(expense.vendor.name, "VendorEntity")
     if vendorResult.isTrue {
       entity.vendor = vendorResult.returnedEntity! as! VendorEntity
     } else {
