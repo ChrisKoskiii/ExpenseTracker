@@ -45,23 +45,43 @@ struct ExpensesView: View {
         NavigationLink(destination: DetailExpenseView(expensesVM: expensesVM, detailExpense: expense)) {
           
           HStack {
-            Text(expense.wrappedDate.formatDate())
-            
-            VStack(alignment: .leading) {
+            RecentSymbol(symbol: expense.category.wrappedSymbol, color: Color.clear.getColor(from: expense.category))
+              .padding(.leading, 4)
+
+            VStack(alignment: .leading, spacing: 0) {
               Text(expense.wrappedTitle)
+                .foregroundColor(.recentTextColor)
+                .lineLimit(1)
+                .font(.headline)
+              
               Text(expense.vendor.wrappedName)
+                .foregroundColor(.secondary)
                 .font(.footnote)
-              Text(expense.category.wrappedName)
+              
+              Text(expense.wrappedDate.formatDate())
+                .foregroundColor(.secondary)
                 .font(.footnote)
             }
-            
             Spacer()
-            let costString = tools.myFormatter.string(from: NSNumber(value: expense.cost))!
-            Text(costString)
-              .font(.title3)
+            
+            let costString = tools.myFormatter.string(from: NSNumber(value: expense.cost))!.dropFirst()
+            HStack(spacing: 0) {
+              VStack {
+                Text("$")
+                  .font(.footnote)
+                .foregroundColor(.recentTextColor)
+                Spacer().frame(height: 8)
+              }
+              Text(costString)
+                .foregroundColor(.recentTextColor)
+                .font(.title2)
+                .fontWeight(.semibold)
+            }
+            .padding(.trailing, 6)
           }
         }
       }
+//      .listRowBackground(Color.clear)
     }
     .refreshable {
       dataManager.getDateRangeExpenses(

@@ -98,7 +98,7 @@ struct DetailExpenseView: View {
   var expenseTextfields: some View {
     VStack(spacing: 10) {
       VStack(spacing: 0) {
-        DatePicker(dateString, selection: $viewModel.date, displayedComponents: [.date])
+        DatePicker(viewModel.date.formatDate(), selection: $viewModel.date, displayedComponents: [.date])
           .textfieldStyle()
         Divider()
         TextField("Enter title", text: $viewModel.title)
