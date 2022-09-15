@@ -44,8 +44,6 @@ struct ReportsView: View {
       .onAppear {
         coreVM.getDateRangeExpenses(startDate: startDate, endDate: endDate)
         reportsVM.getTotal(from: coreVM.dateRangeExpenses)
-        print("👹👹👹👹👹👹👹👹👹👹👹👹👹👹👹👹")
-        print(reportsVM.total)
       }
       .onDisappear {
         coreVM.categoriesDict.keys.forEach { coreVM.categoriesDict[$0] = 0.0}
@@ -56,7 +54,7 @@ struct ReportsView: View {
     VStack {
       HStack {
         
-        Text("\(startDate.formatDate()) to \(endDate.formatDate())")
+        Text("\(startDate.formatDateForReport()) to \(endDate.formatDateForReport())")
           .font(.title2)
           .padding()
         

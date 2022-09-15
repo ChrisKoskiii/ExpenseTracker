@@ -14,6 +14,12 @@ extension Date {
     return dateFormatter.string(from: self)
   }
   
+  func formatDateForReport() -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.setLocalizedDateFormatFromTemplate("M/dd/yyyy")
+    return dateFormatter.string(from: self)
+  }
+  
   func addOrSubtractMonth(month: Int) -> Date {
     Calendar.current.date(byAdding: .month, value: month, to: Date())!
   }

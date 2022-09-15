@@ -20,19 +20,9 @@ struct GenerateReportsView: View {
     NavigationView {
       Form {
         
-          DatePicker("Start date", selection: $startDate, displayedComponents: [.date])
+        DatePicker("Start date", selection: $startDate, displayedComponents: [.date])
         
-          DatePicker("End date", selection: $endDate, displayedComponents: [.date])
-        
-          Picker("Full Report or Summary", selection: $selectedChoice) {
-            
-            ForEach(reportChoices, id: \.self) {
-              
-              Text($0)
-              
-            }
-          }
-          .pickerStyle(.segmented)
+        DatePicker("End date", selection: $endDate, displayedComponents: [.date])
         
         NavigationLink(destination: ReportsView(startDate: $startDate, endDate: $endDate), label: {
           Text("Generate Report")
