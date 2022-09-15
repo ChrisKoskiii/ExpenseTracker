@@ -11,6 +11,7 @@ import SwiftUI
 class ExpensesViewModel: ObservableObject {
   
   @Published var monthText: String = "January"
+  @Published var yearText: String = "1999"
   @Published var monthStart: Date  = Date.startOfMonth(Date.now)()
   @Published var monthEnd: Date    = Date.endOfMonth(Date.now)()
   
@@ -22,17 +23,20 @@ class ExpensesViewModel: ObservableObject {
   
   init() {
     getCurrentMonthString(from: Date.now)
+    getCurrentYearString(from: Date.now)
   }
 
   func setCurrentMonth() {
     currentMonthShown = Date.now
     getCurrentMonthString(from: currentMonthShown)
+    getCurrentYearString(from: currentMonthShown)
   }
   
   func addMonth() {
     let newDate = Calendar.current.date(byAdding: .month, value: 1, to: currentMonthShown)!
     currentMonthShown = newDate
     getCurrentMonthString(from: newDate)
+    getCurrentYearString(from: newDate)
     monthStart = Date.startOfMonth(newDate)()
     monthEnd = Date.endOfMonth(newDate)()
   }
@@ -41,6 +45,7 @@ class ExpensesViewModel: ObservableObject {
     let newDate = Calendar.current.date(byAdding: .month, value: -1, to: currentMonthShown)!
     currentMonthShown = newDate
     getCurrentMonthString(from: newDate)
+    getCurrentYearString(from: newDate)
     monthStart = Date.startOfMonth(newDate)()
     monthEnd = Date.endOfMonth(newDate)()
   }
@@ -49,6 +54,12 @@ class ExpensesViewModel: ObservableObject {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "LLLL"
     monthText = dateFormatter.string(from: date)
+  }
+  
+  func getCurrentYearString(from date: Date) {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy"
+    yearText = dateFormatter.string(from: date)
   }
   
   func makeNewExpense(category: String, cost: Double, date: Date, title: String, vendor: String, receipt: Data?, symbol: String, colorR: Double, colorG: Double, colorB: Double, colorA: Double, completion: (ExpenseModel) -> ()) {

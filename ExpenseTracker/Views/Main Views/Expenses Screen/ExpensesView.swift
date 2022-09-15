@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ExpensesView: View {
-
+  
   @EnvironmentObject var dataManager: CoreDataManager
   @EnvironmentObject var tools:       GlobalTools
   @ObservedObject var expensesVM:     ExpensesViewModel
@@ -47,7 +47,7 @@ struct ExpensesView: View {
           HStack {
             RecentSymbol(symbol: expense.category.wrappedSymbol, color: Color.clear.getColor(from: expense.category))
               .padding(.leading, 4)
-
+            
             VStack(alignment: .leading, spacing: 0) {
               Text(expense.wrappedTitle)
                 .foregroundColor(.recentTextColor)
@@ -69,7 +69,7 @@ struct ExpensesView: View {
               VStack {
                 Text("$")
                   .font(.footnote)
-                .foregroundColor(.recentTextColor)
+                  .foregroundColor(.recentTextColor)
                 Spacer().frame(height: 8)
               }
               Text(costString)
@@ -81,7 +81,7 @@ struct ExpensesView: View {
           }
         }
       }
-//      .listRowBackground(Color.clear)
+      //      .listRowBackground(Color.clear)
     }
     .refreshable {
       dataManager.getDateRangeExpenses(
@@ -123,12 +123,21 @@ struct MonthSelector: View {
         }
       } label: {
         Image(systemName: "chevron.left")
-          .font(.footnote)
+          .font(.title3)
       }
-      Text(expensesVM.monthText)
-        .lineLimit(1)
-        .minimumScaleFactor(0.75)
-        .frame(width: 80)
+      VStack {
+        Text(expensesVM.monthText)
+          .font(.title3)
+          .fontWeight(.medium)
+          .lineLimit(1)
+          .minimumScaleFactor(0.75)
+          .frame(width: 100)
+        Text(expensesVM.yearText)
+          .fontWeight(.light)
+          .lineLimit(1)
+          .minimumScaleFactor(0.75)
+          .frame(width: 80)
+      }
       Button {
         withAnimation(.easeInOut) {
           expensesVM.addMonth()
@@ -138,7 +147,7 @@ struct MonthSelector: View {
         }
       } label: {
         Image(systemName: "chevron.right")
-          .font(.footnote)
+          .font(.title3)
       }
     }
   }
