@@ -154,7 +154,6 @@ class CoreDataManager: ObservableObject {
     
     do {
       let expenses = try container.viewContext.fetch(request)
-      dateRangeTotal = getTotal(from: dateRangeExpenses)
       if let safeTimeframe = timeframe {
         switch safeTimeframe {
         case .week:
@@ -167,6 +166,8 @@ class CoreDataManager: ObservableObject {
           yearlyTotal = getTotal(from: expenses)
         }
       }
+      dateRangeExpenses = expenses
+      categoryTotal()
       
     } catch let error {
       print("Error fetching expenses for date range, \(error)")

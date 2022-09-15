@@ -201,13 +201,12 @@
 			isa = PBXGroup;
 			children = (
 				9E58254928A57EAF00C80A73 /* HomeViewModel.swift */,
-				9E5824F628A1A6EE00C80A73 /* ReportsViewModel.swift */,
 				9E58254B28A5EEE800C80A73 /* ExpensesViewModel.swift */,
 				9E2129F528C672BD00D50C38 /* CategoriesViewModel.swift */,
 				9E2129F728C7B21400D50C38 /* AddExpenseViewModel.swift */,
 				9E2129FB28C7BA2400D50C38 /* DetailExpenseViewModel.swift */,
 				9E2129FF28C7C11700D50C38 /* NewVendorSheetViewModel.swift */,
-				9E212A0128C8176000D50C38 /* GlobalTools.swift */,
+				9E5824F628A1A6EE00C80A73 /* ReportsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -239,6 +238,7 @@
 		9E8E1F2128936F7F00300E14 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				9E212A0128C8176000D50C38 /* GlobalTools.swift */,
 				9EF7456728B6F10C0058F681 /* CustomModifiers.swift */,
 				9E187D4428936D8600142000 /* DocumentScanner.swift */,
 				9E34DE4028AED43400235442 /* OperatorOverload.swift */,

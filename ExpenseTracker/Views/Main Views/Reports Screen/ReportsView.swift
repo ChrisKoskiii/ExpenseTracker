@@ -13,8 +13,8 @@ struct ReportsView: View {
   @EnvironmentObject var tools:   GlobalTools
   @StateObject var reportsVM    = ReportsViewModel()
   
-  @State var startDate: Date
-  @State var endDate:   Date
+  @Binding var startDate: Date
+  @Binding var endDate:   Date
   
   var body: some View {
     
@@ -42,11 +42,13 @@ struct ReportsView: View {
       }
     
       .onAppear {
-        coreVM.getDateRangeExpenses(startDate: startDate, endDate: endDate) { expenses in
-          reportsVM.dateRangeExpenses = expenses
-        }
-        coreVM.categoryTotal()
-
+        coreVM.getDateRangeExpenses(startDate: startDate, endDate: endDate)
+        reportsVM.getTotal(from: coreVM.dateRangeExpenses)
+        print("👹👹👹👹👹👹👹👹👹👹👹👹👹👹👹👹")
+        print(reportsVM.total)
+      }
+      .onDisappear {
+        coreVM.categoriesDict.keys.forEach { coreVM.categoriesDict[$0] = 0.0}
       }
   }
   
@@ -89,7 +91,7 @@ struct ReportsView: View {
         
         Spacer()
         
-        Text("$"+String(format: "%.2f", coreVM.dateRangeTotal))
+        Text("$"+String(format: "%.2f", reportsVM.total))
           .padding(.trailing)
         
       }
@@ -140,6 +142,6 @@ struct ReportsView: View {
 
 struct ReportsView_Previews: PreviewProvider {
   static var previews: some View {
-    ReportsView(reportsVM: ReportsViewModel(), startDate: Date.now, endDate: Date.now)
+    ReportsView(reportsVM: ReportsViewModel(), startDate: .constant(Date.now), endDate: .constant(Date.now))
   }
 }
