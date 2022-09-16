@@ -9,16 +9,13 @@ import SwiftUI
 
 struct TabViewScreen: View {
   
-  @EnvironmentObject var coreVM:  CoreDataManager
-  @ObservedObject var expensesVM: ExpensesViewModel
-  
   var body: some View {
     TabView {
-      HomeView(expensesVM: expensesVM)
+      HomeView()
         .tabItem {
           Label("Home", systemImage: "house")
         }
-      ExpensesView(expensesVM: expensesVM)
+      ExpensesView()
         .tabItem {
           Label("Expenses", systemImage: "dollarsign.circle")
         }
@@ -37,6 +34,6 @@ struct TabViewScreen: View {
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
-    TabViewScreen(expensesVM: ExpensesViewModel())
+    TabViewScreen()
   }
 }

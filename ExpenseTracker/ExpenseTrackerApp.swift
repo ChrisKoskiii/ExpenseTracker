@@ -13,22 +13,14 @@ import AppCenterAnalytics
 @main
 struct ExpenseTrackerApp: App {
   
-  init() {
-    AppCenter.start(withAppSecret: "98cd03c8-e864-49d0-9918-43184332e3ba",
-                    services: [
-                      Analytics.self,
-                      Crashes.self])
-  }
-  
   @AppStorage("isDarkMode") private var isDarkMode = false
   
   @StateObject var coreVM     = CoreDataManager()
-  @StateObject var expensesVM = ExpensesViewModel()
   @StateObject var globals    = GlobalTools()
   
   var body: some Scene {
     WindowGroup {
-      TabViewScreen(expensesVM: expensesVM)
+      TabViewScreen()
         .environmentObject(coreVM)
         .environmentObject(globals)
         .preferredColorScheme(isDarkMode ? .dark : .light)

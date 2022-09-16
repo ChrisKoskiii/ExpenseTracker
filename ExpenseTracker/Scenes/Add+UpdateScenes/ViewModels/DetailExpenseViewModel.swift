@@ -55,4 +55,11 @@ class DetailExpenseViewModel: ObservableObject {
     let myVendor = VendorModel(name: vendor.wrappedName)
     return myVendor
   }
+  
+  func makeNewExpense(category: String, cost: Double, date: Date, title: String, vendor: String, receipt: Data?, symbol: String, colorR: Double, colorG: Double, colorB: Double, colorA: Double, completion: (ExpenseModel) -> ()) {
+    let categoryModel = CategoryModel(name: category, symbol: symbol, colorR: colorR, colorG: colorG, colorB: colorB, colorA: colorA)
+    let vendorModel   = VendorModel(name: vendor)
+    let expense       = ExpenseModel(category: categoryModel, cost: cost, date: date, title: title, vendor: vendorModel, receipt: receipt)
+    completion(expense)
+  }
 }

@@ -63,7 +63,7 @@ struct CategoryListView: View {
   func deleteItem(at offsets: IndexSet) {
     for index in offsets {
       let item = dataManager.savedCategories[index]
-      dataManager.deleteCategory(item)
+      dataManager.deleteEntity(item)
       dataManager.savedCategories.remove(at: index)
     }
   }

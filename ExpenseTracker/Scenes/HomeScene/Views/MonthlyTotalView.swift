@@ -38,7 +38,7 @@ struct MonthlyTotalView: View {
 
     .onChange(of: scenePhase) { _ in
       if let startDate = Calendar.current.date(byAdding: .day, value: -7, to: Date()) {
-        coreVM.getDateRangeExpenses(startDate: startDate, endDate: Date.now, timeframe: TimeFrame.week)
+        coreVM.fetchDateRangeExpenses(startDate: startDate, endDate: Date.now, timeframe: TimeFrame.week)
         homeVM.setViewTotal(text: "week", total: coreVM.weeklyTotal)
       }
     }
@@ -73,7 +73,7 @@ struct MenuView: View {
       Button("week", action: {
         if let startDate = Calendar.current.date(byAdding: .day, value: -7, to: Date()) {
           
-          coreVM.getDateRangeExpenses(startDate: startDate, endDate: Date.now, timeframe: TimeFrame.week)
+          coreVM.fetchDateRangeExpenses(startDate: startDate, endDate: Date.now, timeframe: TimeFrame.week)
           homeVM.setViewTotal(text: "week", total: coreVM.weeklyTotal)
         }
         
@@ -83,7 +83,7 @@ struct MenuView: View {
       Button("month", action: {
         if let startDate = Calendar.current.date(byAdding: .month, value: -1, to: Date()) {
           
-          coreVM.getDateRangeExpenses(startDate: startDate, endDate: Date.now, timeframe: TimeFrame.month)
+          coreVM.fetchDateRangeExpenses(startDate: startDate, endDate: Date.now, timeframe: TimeFrame.month)
           homeVM.setViewTotal(text: "month", total: coreVM.monthlyTotal)
         }
         
@@ -93,7 +93,7 @@ struct MenuView: View {
       Button("year", action: {
         if let startDate = Calendar.current.date(byAdding: .year, value: -1, to: Date()) {
           
-          coreVM.getDateRangeExpenses(startDate: startDate, endDate: Date.now, timeframe: TimeFrame.year)
+          coreVM.fetchDateRangeExpenses(startDate: startDate, endDate: Date.now, timeframe: TimeFrame.year)
           homeVM.setViewTotal(text: "year", total: coreVM.yearlyTotal)
         }
       })

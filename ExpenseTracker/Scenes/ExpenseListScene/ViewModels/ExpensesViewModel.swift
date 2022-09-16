@@ -62,13 +62,6 @@ class ExpensesViewModel: ObservableObject {
     yearText = dateFormatter.string(from: date)
   }
   
-  func makeNewExpense(category: String, cost: Double, date: Date, title: String, vendor: String, receipt: Data?, symbol: String, colorR: Double, colorG: Double, colorB: Double, colorA: Double, completion: (ExpenseModel) -> ()) {
-    let categoryModel = CategoryModel(name: category, symbol: symbol, colorR: colorR, colorG: colorG, colorB: colorB, colorA: colorA)
-    let vendorModel   = VendorModel(name: vendor)
-    let expense       = ExpenseModel(category: categoryModel, cost: cost, date: date, title: title, vendor: vendorModel, receipt: receipt)
-    completion(expense)
-  }
-  
   func newCategory(name: String, symbol: String, colorR: Double, colorG: Double, colorB: Double, colorA: Double) {
     selectedCategory = CategoryModel(name: name,
                                      symbol: symbol,

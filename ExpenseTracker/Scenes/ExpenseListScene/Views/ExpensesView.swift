@@ -11,7 +11,7 @@ struct ExpensesView: View {
   
   @EnvironmentObject var dataManager: CoreDataManager
   @EnvironmentObject var tools:       GlobalTools
-  @ObservedObject var expensesVM:     ExpensesViewModel
+  @StateObject var expensesVM =       ExpensesViewModel()
   
   @State private var isLeft = false
   
@@ -29,7 +29,7 @@ struct ExpensesView: View {
         }
     }
     .onAppear {
-      dataManager.getDateRangeExpenses(
+      dataManager.fetchDateRangeExpenses(
         startDate: expensesVM.monthStart,
         endDate: expensesVM.monthEnd, timeframe: TimeFrame.month)
     }
@@ -42,7 +42,7 @@ struct ExpensesView: View {
       
       ForEach(dataManager.monthlyExpenses, id: \.self) { expense in
         
-        NavigationLink(destination: DetailExpenseView(expensesVM: expensesVM, detailExpense: expense)) {
+        NavigationLink(destination: DetailExpenseView(detailExpense: expense)) {
           
           HStack {
             RecentSymbol(symbol: expense.category.wrappedSymbol, color: Color.clear.getColor(from: expense.category))
@@ -84,7 +84,7 @@ struct ExpensesView: View {
       //      .listRowBackground(Color.clear)
     }
     .refreshable {
-      dataManager.getDateRangeExpenses(
+      dataManager.fetchDateRangeExpenses(
         startDate: expensesVM.monthStart,
         endDate: expensesVM.monthEnd, timeframe: TimeFrame.month)
     }
@@ -117,7 +117,7 @@ struct MonthSelector: View {
       Button {
         withAnimation(.easeInOut) {
           expensesVM.subtractMonth()
-          dataManager.getDateRangeExpenses(
+          dataManager.fetchDateRangeExpenses(
             startDate: expensesVM.monthStart,
             endDate: expensesVM.monthEnd, timeframe: TimeFrame.month)
         }
@@ -141,7 +141,7 @@ struct MonthSelector: View {
       Button {
         withAnimation(.easeInOut) {
           expensesVM.addMonth()
-          dataManager.getDateRangeExpenses(
+          dataManager.fetchDateRangeExpenses(
             startDate: expensesVM.monthStart,
             endDate: expensesVM.monthEnd, timeframe: TimeFrame.month)
         }

@@ -42,7 +42,7 @@ struct ReportsView: View {
       }
     
       .onAppear {
-        coreVM.getDateRangeExpenses(startDate: startDate, endDate: endDate)
+        coreVM.fetchDateRangeExpenses(startDate: startDate, endDate: endDate)
         reportsVM.getTotal(from: coreVM.dateRangeExpenses)
       }
       .onDisappear {

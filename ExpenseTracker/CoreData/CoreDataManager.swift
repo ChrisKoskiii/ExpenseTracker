@@ -36,11 +36,12 @@ class CoreDataManager: ObservableObject {
     container.viewContext.automaticallyMergesChangesFromParent = true
     container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
     fetchData()
-    getRecent(expenses: savedExpenses)
     if let startDate = Calendar.current.date(byAdding: .day, value: -7, to: Date()) {
-      getDateRangeExpenses(startDate: startDate, endDate: Date.now, timeframe: TimeFrame.week)
+      fetchDateRangeExpenses(startDate: startDate, endDate: Date.now, timeframe: TimeFrame.week)
     }
   }
+  
+  //MARK: Fetch functions
   
   func fetchData() {
     fetchExpenses()
@@ -55,7 +56,7 @@ class CoreDataManager: ObservableObject {
     
     do {
       savedExpenses = try container.viewContext.fetch(request)
-      getRecent(expenses: savedExpenses)
+      fetchRecent(expenses: savedExpenses)
       monthlyTotal = getTotal(from: savedExpenses)
       updateCategories()
       
@@ -94,57 +95,11 @@ class CoreDataManager: ObservableObject {
     }
   }
   
-//  func isDuplicate(_ categoryName: String) -> (isTrue: Bool, category: CategoryEntity?) {
-//
-//    let request = NSFetchRequest<CategoryEntity>(entityName: "CategoryEntity")
-//
-//    let query = categoryName
-//
-//    request.sortDescriptors = []
-//    request.predicate = NSPredicate(format: "name LIKE %@", query)
-//
-//    do {
-//      let fetchedResult = try container.viewContext.fetch(request)
-//      print(fetchedResult as Any)
-//      if fetchedResult.isEmpty {
-//        return (false, nil)
-//      } else {
-//        return (true, fetchedResult.first)
-//      }
-//    } catch let error {
-//      print("Error checking for matched category, \(error.localizedDescription)")
-//      return (false, nil)
-//    }
-//  }
-  
-  func isDuplicate<T: NSManagedObject>(_ name: String, _ entityName: String) -> (isTrue: Bool, returnedEntity: T?) {
-    
-    let request = NSFetchRequest<T>(entityName: entityName)
-    
-    let query = name
-    
-    request.sortDescriptors = []
-    request.predicate = NSPredicate(format: "name LIKE %@", query)
-    
-    do {
-      let fetchedResult = try container.viewContext.fetch(request)
-      print(fetchedResult as Any)
-      if fetchedResult.isEmpty {
-        return (false, nil)
-      } else {
-        return (true, fetchedResult.first)
-      }
-    } catch let error {
-      print("Error checking for matched entry, \(error.localizedDescription)")
-      return (false, nil)
-    }
-  }
-  
-  func getRecent(expenses: [ExpenseEntity]) {
+  func fetchRecent(expenses: [ExpenseEntity]) {
     recentExpenses = Array(savedExpenses.prefix(5))
   }
   
-  func getDateRangeExpenses(startDate: Date, endDate: Date, timeframe: TimeFrame? = nil, completion: (([ExpenseEntity]) -> ())? = nil) {
+  func fetchDateRangeExpenses(startDate: Date, endDate: Date, timeframe: TimeFrame? = nil, completion: (([ExpenseEntity]) -> ())? = nil) {
     let request = NSFetchRequest<ExpenseEntity>(entityName: "ExpenseEntity")
     let sort = NSSortDescriptor(key: #keyPath(ExpenseEntity.date), ascending: false)
     
@@ -174,6 +129,14 @@ class CoreDataManager: ObservableObject {
       
     }
   }
+  
+  func fetchAllCategories() {
+    for expense in savedExpenses {
+      categoriesDict[expense.category.wrappedName] = 0
+    }
+  }
+  
+  //MARK: Add functions
   
   func addExpense(_ expense: ExpenseModel) {
     let newExpense = ExpenseEntity(context: container.viewContext)
@@ -233,19 +196,14 @@ class CoreDataManager: ObservableObject {
     saveData()
   }
   
-  //Maybe we can reduce three delete functions to one with generics?
-  func deleteExpense(_ expense: ExpenseEntity) {
-    container.viewContext.delete(expense)
+  //MARK: Delete function
+  
+  func deleteEntity(_ entity: NSManagedObject) {
+    container.viewContext.delete(entity)
     saveData()
   }
-  func deleteCategory(_ category: CategoryEntity) {
-    container.viewContext.delete(category)
-    saveData()
-  }
-  func deleteVendor(_ vendor: VendorEntity) {
-    container.viewContext.delete(vendor)
-    saveData()
-  }
+  
+  //MARK: Update functions
   
   func updateExpense(_ entity: ExpenseEntity, with expense: ExpenseModel) {
     entity.title = expense.title
@@ -275,6 +233,12 @@ class CoreDataManager: ObservableObject {
     saveData()
   }
   
+  func updateCategories() {
+    fetchAllCategories()
+  }
+  
+  //MARK: Save function
+  
   func saveData() {
     do {
       try container.viewContext.save()
@@ -283,6 +247,31 @@ class CoreDataManager: ObservableObject {
       updateCategories()
     } catch let error {
       print("Error saving , \(error)")
+    }
+  }
+  
+  //MARK: Misc functions
+  
+  func isDuplicate<T: NSManagedObject>(_ name: String, _ entityName: String) -> (isTrue: Bool, returnedEntity: T?) {
+    
+    let request = NSFetchRequest<T>(entityName: entityName)
+    
+    let query = name
+    
+    request.sortDescriptors = []
+    request.predicate = NSPredicate(format: "name LIKE %@", query)
+    
+    do {
+      let fetchedResult = try container.viewContext.fetch(request)
+      print(fetchedResult as Any)
+      if fetchedResult.isEmpty {
+        return (false, nil)
+      } else {
+        return (true, fetchedResult.first)
+      }
+    } catch let error {
+      print("Error checking for matched entry, \(error.localizedDescription)")
+      return (false, nil)
     }
   }
   
@@ -295,10 +284,6 @@ class CoreDataManager: ObservableObject {
       .reduce(0, +)
   }
   
-  func updateCategories() {
-    getAllCategories()
-  }
-  
   func categoryTotal() {
     for expense in dateRangeExpenses {
       for (key, value) in categoriesDict {
@@ -308,12 +293,6 @@ class CoreDataManager: ObservableObject {
           categoriesDict.updateValue(newValue, forKey: key)
         }
       }
-    }
-  }
-  
-  func getAllCategories() {
-    for expense in savedExpenses {
-      categoriesDict[expense.category.wrappedName] = 0
     }
   }
   

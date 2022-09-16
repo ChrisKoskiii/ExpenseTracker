@@ -47,7 +47,7 @@ struct VendorListView: View {
   func deleteItem(at offsets: IndexSet) {
     for index in offsets {
       let item = data.savedVendors[index]
-      data.deleteVendor(item)
+      data.deleteEntity(item)
       data.savedVendors.remove(at: index)
     }
   }

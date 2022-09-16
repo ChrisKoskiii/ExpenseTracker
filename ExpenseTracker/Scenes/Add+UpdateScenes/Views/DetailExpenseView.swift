@@ -12,7 +12,6 @@ struct DetailExpenseView: View {
   
   @EnvironmentObject var tools: GlobalTools
   @EnvironmentObject var coreVM:  CoreDataManager
-  @ObservedObject var expensesVM: ExpensesViewModel
   
   @StateObject var viewModel = DetailExpenseViewModel()
   
@@ -88,7 +87,7 @@ struct DetailExpenseView: View {
     .alert("Are you sure you want to delete this expense?", isPresented: $showingAlert) {
       Button("Delete", role: .destructive) {
         presentationMode.wrappedValue.dismiss()
-        coreVM.deleteExpense(detailExpense)
+        coreVM.deleteEntity(detailExpense)
       }
       .foregroundColor(.red)
       Button("Cancel", role: .cancel) { }
@@ -142,7 +141,7 @@ struct DetailExpenseView: View {
   
   var updateExpenseButton: some View {
     Button {
-      expensesVM.makeNewExpense(category: viewModel.categoryName,
+      viewModel.makeNewExpense(category: viewModel.categoryName,
                                 cost: viewModel.cost,
                                 date: viewModel.date,
                                 title: viewModel.title,
@@ -156,14 +155,6 @@ struct DetailExpenseView: View {
       ) { expense in
         coreVM.updateExpense(detailExpense, with: expense)
       }
-      //      if !expensesVM.categories.contains(expensesVM.selectedCategory!) {
-      //        expensesVM.categories.append(expensesVM.selectedCategory!)
-      //      }
-      //      if !expensesVM.vendors.contains(expensesVM.selectedVendor!) {
-      //        expensesVM.vendors.append(expensesVM.selectedVendor!)
-      //      }
-      expensesVM.selectedCategory = nil
-      expensesVM.selectedVendor = nil
       presentationMode.wrappedValue.dismiss()
     } label: {
       Text("Update Expense")
@@ -173,7 +164,7 @@ struct DetailExpenseView: View {
   
   var deleteButton: some View {
     Button {
-      coreVM.deleteExpense(detailExpense)
+      coreVM.deleteEntity(detailExpense)
       presentationMode.wrappedValue.dismiss()
     } label: {
       Text("Delete Expense")

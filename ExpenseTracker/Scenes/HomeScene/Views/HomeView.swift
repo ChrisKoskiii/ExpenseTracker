@@ -10,19 +10,17 @@ import SwiftUI
 struct HomeView: View {
   @Environment(\.scenePhase) var scenePhase
   
-  @EnvironmentObject var coreVM:  CoreDataManager
-  
-  @ObservedObject var expensesVM: ExpensesViewModel
+  @EnvironmentObject var dataManager:  CoreDataManager
   
   var body: some View {
     NavigationView {
       VStack {
         
-        MonthlyTotalView(coreVM: coreVM)
+        MonthlyTotalView(coreVM: dataManager)
         
         recentTransactionText
         
-        RecentExpensesList(coreVM: coreVM, expensesVM: expensesVM)
+        RecentExpensesList(coreVM: dataManager)
         
         Spacer()
         
@@ -47,7 +45,7 @@ struct HomeView: View {
     }
     .navigationViewStyle(.stack)
     .onChange(of: scenePhase) { _ in
-      coreVM.fetchData()
+      dataManager.fetchData()
     }
   }
   
@@ -66,10 +64,9 @@ struct HomeView: View {
 
 struct RecentExpensesList: View {
   @ObservedObject var coreVM: CoreDataManager
-  @ObservedObject var expensesVM: ExpensesViewModel
   var body: some View {
     ForEach(coreVM.recentExpenses, id: \.self) { expense in
-      NavigationLink(destination: DetailExpenseView(expensesVM: expensesVM, detailExpense: expense)) {
+      NavigationLink(destination: DetailExpenseView(detailExpense: expense)) {
         RecentExpenseCardView(recentExpense: expense)
       }
     }
@@ -80,7 +77,7 @@ struct HomeView_Previews: PreviewProvider {
   static let coreVM = CoreDataManager()
   
   static var previews: some View {
-    HomeView(expensesVM: ExpensesViewModel())
+    HomeView()
       .environmentObject(coreVM)
   }
 }
