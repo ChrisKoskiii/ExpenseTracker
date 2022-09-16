@@ -22,8 +22,11 @@ CoreData is handled in its own CoreDataManager class, and is passed to views tha
 ## Features
 
 * **Document scanning**; Users can scan and save receipts for each expense entered. That image is converted to raw data to allow saving to Core Data.
+
 * **Generate PDF Reports**; Users can generete expense reports for a chosen time frame. This was done with **PDFKit**. To implement, I had to use a UIViewControllerRepresentable to make it work with SwiftUI.
+
 * **Category symbol customization**; Users can create custom vendors and categories that create reltionships in Core Data to the expense entity. Symbols can be created using SF Symbols and SwiftUI's ColorPicker.
+
 * **CloudKit intergration**; CoreData uses a **NSPersistentCloudKitContainer** to save data to iCloud. This lets users have their expenses on all of the their devices without worrying about a username or password.
 
 
