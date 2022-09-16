@@ -4,13 +4,12 @@ ExpenseTracker is a fully featured Expense Tracking application built in SwiftUI
 
 Technologies used: 
 
-* Swift
-* SwiftUI
-* CoreData
-* CloudKit
-* PDFKit
-* VisionKit
-* MVVM
+* **Swift**
+* **SwiftUI**
+* **CoreData** for data persistence
+* **CloudKit** to allow multi device syncing
+* **PDFKit** for generating and exporting PDF reports
+* **VisionKit** for document scanning
 
 <img src="https://i.imgur.com/c94Kqla.png" width="200" height="425" />
 
