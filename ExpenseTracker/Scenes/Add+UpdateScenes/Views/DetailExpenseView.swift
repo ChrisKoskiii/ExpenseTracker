@@ -19,7 +19,6 @@ struct DetailExpenseView: View {
   
   //Scanner properties
   @State private var cameraIsPresented  = false
-  @State private var showScanner        = false
   @State private var isRecognizing      = false
   @State private var scannedImage:      UIImage?
   
@@ -36,7 +35,7 @@ struct DetailExpenseView: View {
         
         expenseTextfields
         
-        scanButton
+        ScanButton(showScanner: $viewModel.showScanner)
         
         updateExpenseButton
         
@@ -60,19 +59,19 @@ struct DetailExpenseView: View {
         }
       }
     }
-    .sheet(isPresented: $showScanner, content: {
+    .sheet(isPresented: $viewModel.showScanner, content: {
       ScannerView { result in
         switch result {
         case .success(let scannedImages):
           isRecognizing = true
           scannedImage = scannedImages.first
-          detailExpense.receipt = coreVM.getImageData(scannedImage!)
+          detailExpense.receipt = viewModel.getImageData(scannedImage!)
         case .failure(let error):
           print(error.localizedDescription)
         }
-        showScanner = false
+        viewModel.showScanner = false
       } didCancelScanning: {
-        showScanner = false
+        viewModel.showScanner = false
       }
     })
     .task {
@@ -121,21 +120,6 @@ struct DetailExpenseView: View {
       }
       .cardBackground()
       .padding(.horizontal)
-    }
-  }
-  
-  var scanButton: some View {
-    Button {
-      showScanner = true
-    } label: {
-      HStack {
-        Image(systemName: "doc.text.viewfinder")
-          .renderingMode(.template)
-          .foregroundColor(.white)
-        Text("Scan")
-          .foregroundColor(.white)
-      }
-      .scanButtonStyle()
     }
   }
   

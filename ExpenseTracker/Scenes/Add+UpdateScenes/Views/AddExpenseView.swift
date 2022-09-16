@@ -44,7 +44,7 @@ struct AddExpenseView: View {
         .cardBackground()
         .padding(.horizontal)
         
-        scanButton
+        ScanButton(showScanner: $viewModel.showScanner)
         
         addExpenseButton
         
@@ -57,45 +57,21 @@ struct AddExpenseView: View {
     }
     .background(Color(.secondarySystemBackground))
     .navigationTitle("Add expense")
-    .alert("Please fill out all fields.", isPresented: $viewModel.presentAlert, actions: {
-    })
+    .alert("Please fill out all fields.",
+           isPresented: $viewModel.presentAlert,
+           actions: { })
     .sheet(isPresented: $viewModel.showScanner, content: {
       ScannerView { result in
-        switch result {
-        case .success(let scannedImages):
-          viewModel.isRecognizing = true
-          viewModel.scannedImage = scannedImages.first!
-          viewModel.imageData = coreData.getImageData(viewModel.scannedImage!)
-        case .failure(let error):
-          print(error.localizedDescription)
-        }
-        
-        viewModel.showScanner = false
-        
+        viewModel.scanResult(result)
       } didCancelScanning: {
         viewModel.showScanner = false
       }
     })
   }
   
-  var scanButton: some View {
-    Button {
-      viewModel.showScanner = true
-    } label: {
-      HStack {
-        Image(systemName: "doc.text.viewfinder")
-          .renderingMode(.template)
-          .foregroundColor(.white)
-        Text("Scan")
-          .foregroundColor(.white)
-      }
-      .scanButtonStyle()
-    }
-  }
-  
   var addExpenseButton: some View {
     Button {
-      if emptyTextFields() {
+      if viewModel.emptyTextFields() {
         viewModel.presentAlert.toggle()
       } else {
         if let myCategory = viewModel.selectedCategory,
@@ -118,16 +94,6 @@ struct AddExpenseView: View {
         .resizable()
         .scaledToFit()
         .frame(width: 150, height: 150)
-    }
-  }
-  
-  func emptyTextFields() -> Bool {
-    if viewModel.titleText.isEmpty ||
-        viewModel.costText.isZero ||
-        viewModel.selectedCategory == nil ||
-        viewModel.selectedVendor == nil {
-      return true
-    } else { return false
     }
   }
 }

@@ -24,6 +24,7 @@ class DetailExpenseViewModel: ObservableObject {
   @Published var date: Date = Date.now
   @Published var color: Color = .brandPrimary
 
+  @Published var showScanner = false
   
   func getDetails(from expense: ExpenseEntity) {
     let category = getCategoryModel(from: expense.category)
@@ -61,5 +62,9 @@ class DetailExpenseViewModel: ObservableObject {
     let vendorModel   = VendorModel(name: vendor)
     let expense       = ExpenseModel(category: categoryModel, cost: cost, date: date, title: title, vendor: vendorModel, receipt: receipt)
     completion(expense)
+  }
+  
+  func getImageData(_ image: UIImage) -> Data {
+    return image.jpegData(compressionQuality: 1.0)!
   }
 }

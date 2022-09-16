@@ -30,7 +30,8 @@ struct ExpensesView: View {
     .onAppear {
       dataManager.fetchDateRangeExpenses(
         startDate: viewModel.monthStart,
-        endDate: viewModel.monthEnd, timeframe: TimeFrame.month)
+        endDate: viewModel.monthEnd,
+        timeframe: TimeFrame.month)
     }
     .navigationViewStyle(.stack)
   }
@@ -85,7 +86,8 @@ struct ExpensesView: View {
     .refreshable {
       dataManager.fetchDateRangeExpenses(
         startDate: viewModel.monthStart,
-        endDate: viewModel.monthEnd, timeframe: TimeFrame.month)
+        endDate: viewModel.monthEnd,
+        timeframe: TimeFrame.month)
     }
   }
 }

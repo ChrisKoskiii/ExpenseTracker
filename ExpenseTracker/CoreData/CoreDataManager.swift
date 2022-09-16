@@ -275,10 +275,6 @@ class CoreDataManager: ObservableObject {
     }
   }
   
-  func getImageData(_ image: UIImage) -> Data {
-    return image.jpegData(compressionQuality: 1.0)!
-  }
-  
   func getTotal(from expenses: [ExpenseEntity]) -> Double {
     return expenses.lazy.compactMap { $0.cost }
       .reduce(0, +)

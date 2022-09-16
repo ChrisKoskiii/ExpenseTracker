@@ -18,7 +18,8 @@ struct MonthSelectorView: View {
           viewModel.subtractMonth()
           dataManager.fetchDateRangeExpenses(
             startDate: viewModel.monthStart,
-            endDate: viewModel.monthEnd, timeframe: TimeFrame.month)
+            endDate: viewModel.monthEnd,
+            timeframe: TimeFrame.month)
         }
       } label: {
         Image(systemName: "chevron.left")
@@ -42,7 +43,8 @@ struct MonthSelectorView: View {
           viewModel.addMonth()
           dataManager.fetchDateRangeExpenses(
             startDate: viewModel.monthStart,
-            endDate: viewModel.monthEnd, timeframe: TimeFrame.month)
+            endDate: viewModel.monthEnd,
+            timeframe: TimeFrame.month)
         }
       } label: {
         Image(systemName: "chevron.right")

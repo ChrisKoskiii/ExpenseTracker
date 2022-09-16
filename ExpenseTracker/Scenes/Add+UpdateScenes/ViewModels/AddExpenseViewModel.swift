@@ -44,7 +44,29 @@ class AddExpenseViewModel: ObservableObject {
     completion(newExpense)
   }
   
-  func getSymbolColor(from category: CategoryModel) {
-    color = Color.clear.getColor(from: category)
+  func scanResult(_ result: Result<[UIImage], Error>) {
+    switch result {
+    case .success(let scannedImages):
+      isRecognizing = true
+      scannedImage = scannedImages.first!
+      imageData = getImageData(scannedImage!)
+    case .failure(let error):
+      print(error.localizedDescription)
+    }
+    showScanner = false
+  }
+  
+  func getImageData(_ image: UIImage) -> Data {
+    return image.jpegData(compressionQuality: 1.0)!
+  }
+  
+  func emptyTextFields() -> Bool {
+    if titleText.isEmpty ||
+        costText.isZero ||
+        selectedCategory == nil ||
+        selectedVendor == nil {
+      return true
+    } else { return false
+    }
   }
 }

@@ -61,6 +61,7 @@
 		9EF7456828B6F10C0058F681 /* CustomModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF7456728B6F10C0058F681 /* CustomModifiers.swift */; };
 		9EF7458D28B858C70058F681 /* TabViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF7458C28B858C70058F681 /* TabViewScreen.swift */; };
 		9EF7E25928D3FEB700B291CF /* MonthSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF7E25828D3FEB700B291CF /* MonthSelectorView.swift */; };
+		9EF7E25B28D40B0D00B291CF /* ScanButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF7E25A28D40B0D00B291CF /* ScanButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -121,6 +122,7 @@
 		9EF7456728B6F10C0058F681 /* CustomModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomModifiers.swift; sourceTree = "<group>"; };
 		9EF7458C28B858C70058F681 /* TabViewScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabViewScreen.swift; sourceTree = "<group>"; };
 		9EF7E25828D3FEB700B291CF /* MonthSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthSelectorView.swift; sourceTree = "<group>"; };
+		9EF7E25A28D40B0D00B291CF /* ScanButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanButton.swift; sourceTree = "<group>"; };
 		D563CD5D6A1F16FFFD396D2F /* Pods-ExpenseTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExpenseTracker.release.xcconfig"; path = "Target Support Files/Pods-ExpenseTracker/Pods-ExpenseTracker.release.xcconfig"; sourceTree = "<group>"; };
 		E593EA4A9BB8660B44FF0DAA /* Pods_ExpenseTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ExpenseTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -186,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				9EF0BA9628C12D4500FAFBDF /* RecentSymbol.swift */,
+				9EF7E25A28D40B0D00B291CF /* ScanButton.swift */,
 			);
 			path = ReusableViews;
 			sourceTree = "<group>";
@@ -548,6 +551,7 @@
 				9E5DBE0E28B40588007C96D7 /* ExpenseModel.swift in Sources */,
 				9EF7458D28B858C70058F681 /* TabViewScreen.swift in Sources */,
 				9E58254628A5686600C80A73 /* Color+Ext.swift in Sources */,
+				9EF7E25B28D40B0D00B291CF /* ScanButton.swift in Sources */,
 				9E2129FA28C7B88000D50C38 /* Binding+Ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
