@@ -16,29 +16,41 @@ struct NewVendorSheet: View {
   
   @State private var showExistingAlert = false
   
-    var body: some View {
-      VStack {
+  var body: some View {
+    VStack {
+      
       TextField("Vendor Name", text: $viewModel.name)
-        Button("Add Vendor") {
-          viewModel.makeNewVendorModel()
-          if let vendor = viewModel.storedVendor {
-            let result = data.isDuplicate(vendor.name, "VendorEntity")
-            if result.isTrue {
-              showExistingAlert = true
-            } else {
-              data.addVendor(vendor)
-              viewModel.storedVendor = nil
-              isPresented = false
-            }
-          }
-        }
+        .textfieldStyle()
+        .cardBackground()
+        .padding(.horizontal)
+      
+      Button {
+        createNewVendor()
+      } label: {
+        Text("Add Vendor")
+          .font(.title3)
       }
-      .alert("Category already exists", isPresented: $showExistingAlert) { }
     }
+    .alert("Category already exists", isPresented: $showExistingAlert) { }
+  }
+  
+  func createNewVendor() {
+    viewModel.makeNewVendorModel()
+    if let vendor = viewModel.storedVendor {
+      let result = data.isDuplicate(vendor.name, "VendorEntity")
+      if result.isTrue {
+        showExistingAlert = true
+      } else {
+        data.addVendor(vendor)
+        viewModel.storedVendor = nil
+        isPresented = false
+      }
+    }
+  }
 }
 
 struct NewVendorSheet_Previews: PreviewProvider {
-    static var previews: some View {
-      NewVendorSheet(isPresented: .constant(true))
-    }
+  static var previews: some View {
+    NewVendorSheet(isPresented: .constant(true))
+  }
 }

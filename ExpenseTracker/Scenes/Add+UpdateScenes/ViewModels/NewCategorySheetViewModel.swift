@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class CategoriesViewModel: ObservableObject {
+class NewCategorySheetViewModel: ObservableObject {
   
   @Published var storedCategory: CategoryModel?
   
@@ -18,6 +18,8 @@ class CategoriesViewModel: ObservableObject {
   @Published var green       = 0.0
   @Published var blue        = 0.0
   @Published var alpha       = 0.0
+  
+  @Published var showExistingAlert = false
   
   func makeCategoryModel() {
     getColor()
