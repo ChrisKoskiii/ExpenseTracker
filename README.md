@@ -1,4 +1,23 @@
 # ExpenseTracker
-SwiftUI Expense Tracking Application
 
-main: [![Build status](https://build.appcenter.ms/v0.1/apps/c2e61818-2238-46ba-be30-0d11598577d8/branches/main/badge)](https://appcenter.ms)
+ExpenseTracker is a fully featured Expense Tracking application built in SwiftUI
+
+Technologies used: 
+
+* Swift
+* SwiftUI
+* CoreData
+* CloudKit
+* PDFKit
+* VisionKit
+* MVVM
+
+<img src="https://i.imgur.com/c94Kqla.png" width="200" height="425" />
+
+# Architecure
+
+The app is structured after MVVM. The files are structured by **Scenes**, and whithin each contains a **Views** and a **ViewModels** folder.
+
+CoreData is handled in its own CoreDataManager class, and is passed to views that need it through the **environmentObject**.
+
+ 
