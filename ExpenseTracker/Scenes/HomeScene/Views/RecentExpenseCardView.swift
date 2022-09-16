@@ -80,29 +80,3 @@ struct RecentExpenseCardView_Previews: PreviewProvider {
       .environmentObject(coreVM)
   }
 }
-
-//     VStack(spacing: 0) {
-//
-//          Text(recentExpense.wrappedDate.weekday())
-//            .font(.caption2)
-//            .kerning(2)
-//            .foregroundColor(.recentTextColor)
-//            .lineLimit(1)
-//            .minimumScaleFactor(0.75)
-//
-//          Text(recentExpense.wrappedDate.formatDate())
-//            .font(.title3)
-//            .bold()
-//            .kerning(2)
-//            .overlay(
-//              LinearGradient(colors: [.teal, .brandPrimary], startPoint: .leading, endPoint: .trailing)
-//            ).mask {
-//              Text(recentExpense.wrappedDate.formatDate())
-//                .font(.title3)
-//                .bold()
-//                .kerning(2)
-//            }
-//
-//        }
-//        .frame(width: 70)
-//        .padding(.leading, 6)

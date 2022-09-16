@@ -16,7 +16,7 @@ struct HomeView: View {
     NavigationView {
       VStack {
         
-        MonthlyTotalView(coreVM: dataManager)
+        MonthlyTotalView(dataManager: dataManager)
         
         recentTransactionText
         
@@ -44,6 +44,7 @@ struct HomeView: View {
       .navigationBarTitleDisplayMode(.large)
     }
     .navigationViewStyle(.stack)
+    //Is this still needed?
     .onChange(of: scenePhase) { _ in
       dataManager.fetchData()
     }

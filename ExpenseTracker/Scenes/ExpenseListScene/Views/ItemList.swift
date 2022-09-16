@@ -10,11 +10,9 @@ import SwiftUI
 struct ItemList: View {
   @Environment(\.presentationMode) var presentationMode
   
-  @State var items:           [String]
-  @State var selectedChoice   = "Alphabetical"
-  @Binding var selectedItem:  String?
+  @State var items: [String]
   
-  var sortChoices = ["Alphabetical", "Recently Used"]
+  @Binding var selectedItem: String?
   
   var body: some View {
     List {
@@ -35,7 +33,6 @@ struct ItemList: View {
   
   func deleteItem(at offsets: IndexSet) {
     items.remove(atOffsets: offsets)
-    print(items)
   }
 }
 

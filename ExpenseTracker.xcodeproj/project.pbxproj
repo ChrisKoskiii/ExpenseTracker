@@ -36,7 +36,7 @@
 		9E5824F728A1A6EE00C80A73 /* ReportsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5824F628A1A6EE00C80A73 /* ReportsViewModel.swift */; };
 		9E58250128A2D07D00C80A73 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E58250028A2D07D00C80A73 /* CloudKit.framework */; };
 		9E58254628A5686600C80A73 /* Color+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E58254528A5686600C80A73 /* Color+Ext.swift */; };
-		9E58254A28A57EAF00C80A73 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E58254928A57EAF00C80A73 /* HomeViewModel.swift */; };
+		9E58254A28A57EAF00C80A73 /* TotalsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E58254928A57EAF00C80A73 /* TotalsManager.swift */; };
 		9E58254C28A5EEE800C80A73 /* ExpensesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E58254B28A5EEE800C80A73 /* ExpensesViewModel.swift */; };
 		9E5DBE0E28B40588007C96D7 /* ExpenseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5DBE0D28B40588007C96D7 /* ExpenseModel.swift */; };
 		9E7F71D828BFDCE900B0B5E0 /* VendorEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7F71D728BFDCE900B0B5E0 /* VendorEntity+CoreDataClass.swift */; };
@@ -60,6 +60,7 @@
 		9EF0BA9928C13AAB00FAFBDF /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF0BA9828C13AAB00FAFBDF /* Enums.swift */; };
 		9EF7456828B6F10C0058F681 /* CustomModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF7456728B6F10C0058F681 /* CustomModifiers.swift */; };
 		9EF7458D28B858C70058F681 /* TabViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF7458C28B858C70058F681 /* TabViewScreen.swift */; };
+		9EF7E25928D3FEB700B291CF /* MonthSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF7E25828D3FEB700B291CF /* MonthSelectorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,7 +95,7 @@
 		9E58250028A2D07D00C80A73 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		9E58254428A54E2300C80A73 /* ExpenseTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExpenseTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E58254528A5686600C80A73 /* Color+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Ext.swift"; sourceTree = "<group>"; };
-		9E58254928A57EAF00C80A73 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		9E58254928A57EAF00C80A73 /* TotalsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalsManager.swift; sourceTree = "<group>"; };
 		9E58254B28A5EEE800C80A73 /* ExpensesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesViewModel.swift; sourceTree = "<group>"; };
 		9E5DBE0D28B40588007C96D7 /* ExpenseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseModel.swift; sourceTree = "<group>"; };
 		9E7F71D228BFDCE900B0B5E0 /* VendorEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "VendorEntity+CoreDataProperties.swift"; path = "/Users/christopherkoski/Developer/ExpenseTracker/ExpenseTracker/CoreData/VendorEntity+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
@@ -119,6 +120,7 @@
 		9EF0BA9828C13AAB00FAFBDF /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		9EF7456728B6F10C0058F681 /* CustomModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomModifiers.swift; sourceTree = "<group>"; };
 		9EF7458C28B858C70058F681 /* TabViewScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabViewScreen.swift; sourceTree = "<group>"; };
+		9EF7E25828D3FEB700B291CF /* MonthSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthSelectorView.swift; sourceTree = "<group>"; };
 		D563CD5D6A1F16FFFD396D2F /* Pods-ExpenseTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExpenseTracker.release.xcconfig"; path = "Target Support Files/Pods-ExpenseTracker/Pods-ExpenseTracker.release.xcconfig"; sourceTree = "<group>"; };
 		E593EA4A9BB8660B44FF0DAA /* Pods_ExpenseTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ExpenseTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -283,8 +285,7 @@
 		9EF7E24C28D3F2FC00B291CF /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				9E58254928A57EAF00C80A73 /* HomeViewModel.swift */,
-				9E2129F728C7B21400D50C38 /* AddExpenseViewModel.swift */,
+				9E58254928A57EAF00C80A73 /* TotalsManager.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -302,6 +303,7 @@
 			isa = PBXGroup;
 			children = (
 				9E8E1F302894232300300E14 /* ExpensesView.swift */,
+				9EF7E25828D3FEB700B291CF /* MonthSelectorView.swift */,
 				9E01C2BB2896DC2E00337A37 /* ScannedImageView.swift */,
 				9E34DE3E28AEBE1C00235442 /* ItemList.swift */,
 			);
@@ -355,6 +357,7 @@
 		9EF7E25428D3F47D00B291CF /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				9E2129F728C7B21400D50C38 /* AddExpenseViewModel.swift */,
 				9E2129F528C672BD00D50C38 /* CategoriesViewModel.swift */,
 				9E2129FB28C7BA2400D50C38 /* DetailExpenseViewModel.swift */,
 				9E2129FF28C7C11700D50C38 /* NewVendorSheetViewModel.swift */,
@@ -526,6 +529,7 @@
 				9E2129F628C672BD00D50C38 /* CategoriesViewModel.swift in Sources */,
 				9E187D3F2893055000142000 /* View+Extensions.swift in Sources */,
 				9E2129FE28C7C0C800D50C38 /* NewVendorSheet.swift in Sources */,
+				9EF7E25928D3FEB700B291CF /* MonthSelectorView.swift in Sources */,
 				9E7F71D828BFDCE900B0B5E0 /* VendorEntity+CoreDataClass.swift in Sources */,
 				9E212A0228C8176000D50C38 /* GlobalTools.swift in Sources */,
 				9E8E1F2D289380A300300E14 /* HomeView.swift in Sources */,
@@ -539,7 +543,7 @@
 				9EA561D428C10CF6003B1C4B /* CategoryEntity+CoreDataClass.swift in Sources */,
 				9E34DE3B28AEB3E500235442 /* CategoryListView.swift in Sources */,
 				9E34DE4128AED43400235442 /* OperatorOverload.swift in Sources */,
-				9E58254A28A57EAF00C80A73 /* HomeViewModel.swift in Sources */,
+				9E58254A28A57EAF00C80A73 /* TotalsManager.swift in Sources */,
 				9E7F71DD28BFDCE900B0B5E0 /* ExpenseEntity+CoreDataProperties.swift in Sources */,
 				9E5DBE0E28B40588007C96D7 /* ExpenseModel.swift in Sources */,
 				9EF7458D28B858C70058F681 /* TabViewScreen.swift in Sources */,

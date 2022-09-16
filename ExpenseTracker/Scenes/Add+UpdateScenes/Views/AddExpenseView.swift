@@ -11,7 +11,7 @@ struct AddExpenseView: View {
   @Environment(\.presentationMode) var presentationMode
   
   @EnvironmentObject var coreData:  CoreDataManager
-  @EnvironmentObject var tools: GlobalTools
+  @EnvironmentObject var tools:     GlobalTools
   
   @StateObject var viewModel = AddExpenseViewModel()
   
@@ -73,7 +73,6 @@ struct AddExpenseView: View {
         viewModel.showScanner = false
         
       } didCancelScanning: {
-        // Dismiss the scanner controller and the sheet.
         viewModel.showScanner = false
       }
     })

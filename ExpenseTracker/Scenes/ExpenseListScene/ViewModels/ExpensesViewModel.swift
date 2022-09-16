@@ -11,12 +11,10 @@ import SwiftUI
 class ExpensesViewModel: ObservableObject {
   
   @Published var monthText: String = "January"
-  @Published var yearText: String = "1999"
+  @Published var yearText: String  = "1999"
   @Published var monthStart: Date  = Date.startOfMonth(Date.now)()
   @Published var monthEnd: Date    = Date.endOfMonth(Date.now)()
   
-  @Published var selectedCategory: CategoryModel?
-  @Published var selectedVendor: String?
   @Published var newExpense: ExpenseModel?
   
   private var currentMonthShown: Date = Date.now
@@ -60,22 +58,6 @@ class ExpensesViewModel: ObservableObject {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy"
     yearText = dateFormatter.string(from: date)
-  }
-  
-  func newCategory(name: String, symbol: String, colorR: Double, colorG: Double, colorB: Double, colorA: Double) {
-    selectedCategory = CategoryModel(name: name,
-                                     symbol: symbol,
-                                     colorR: colorR,
-                                     colorG: colorG,
-                                     colorB: colorB,
-                                     colorA: colorA)
-  }
-  
-  func categoryColor() -> Color {
-    if let category = selectedCategory {
-    return Color(red: category.colorR, green: category.colorG, blue: category.colorB, opacity: category.colorA)
-    }
-    return Color.brandPrimary
   }
 }
 

@@ -11,7 +11,8 @@ struct ReportsView: View {
   
   @EnvironmentObject var coreVM:  CoreDataManager
   @EnvironmentObject var tools:   GlobalTools
-  @StateObject var reportsVM    = ReportsViewModel()
+  
+  @StateObject var viewModel = ReportsViewModel()
   
   @Binding var startDate: Date
   @Binding var endDate:   Date
@@ -33,17 +34,17 @@ struct ReportsView: View {
         }
       }
     
-      .sheet(isPresented: $reportsVM.showShareSheet) {
-        reportsVM.PDFUrl = nil
+      .sheet(isPresented: $viewModel.showShareSheet) {
+        viewModel.PDFUrl = nil
       } content: {
-        if let PDFUrl = reportsVM.PDFUrl {
+        if let PDFUrl = viewModel.PDFUrl {
           ShareSheet(urls: [PDFUrl])
         }
       }
     
       .onAppear {
         coreVM.fetchDateRangeExpenses(startDate: startDate, endDate: endDate)
-        reportsVM.getTotal(from: coreVM.dateRangeExpenses)
+        viewModel.getTotal(from: coreVM.dateRangeExpenses)
       }
       .onDisappear {
         coreVM.categoriesDict.keys.forEach { coreVM.categoriesDict[$0] = 0.0}
@@ -89,7 +90,7 @@ struct ReportsView: View {
         
         Spacer()
         
-        Text("$"+String(format: "%.2f", reportsVM.total))
+        Text("$"+String(format: "%.2f", viewModel.total))
           .padding(.trailing)
         
       }
@@ -124,8 +125,8 @@ struct ReportsView: View {
         pdfVC.view.layer.render(in: context.cgContext)
       })
       
-      self.reportsVM.PDFUrl = outputFileURL
-      self.reportsVM.showShareSheet = true
+      self.viewModel.PDFUrl = outputFileURL
+      self.viewModel.showShareSheet = true
       
     }catch {
       print("Could not create PDF file: \(error)")
@@ -140,6 +141,6 @@ struct ReportsView: View {
 
 struct ReportsView_Previews: PreviewProvider {
   static var previews: some View {
-    ReportsView(reportsVM: ReportsViewModel(), startDate: .constant(Date.now), endDate: .constant(Date.now))
+    ReportsView(viewModel: ReportsViewModel(), startDate: .constant(Date.now), endDate: .constant(Date.now))
   }
 }

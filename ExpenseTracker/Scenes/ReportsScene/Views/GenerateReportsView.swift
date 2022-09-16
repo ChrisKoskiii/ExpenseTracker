@@ -12,9 +12,6 @@ struct GenerateReportsView: View {
   
   @State private var startDate: Date  = Date.now
   @State private var endDate: Date    = Date.now
-  @State private var selectedChoice   = "Full Report"
-  
-  var reportChoices = ["Full Report", "Summary"]
   
   var body: some View {
     NavigationView {

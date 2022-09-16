@@ -11,9 +11,8 @@ struct ExpensesView: View {
   
   @EnvironmentObject var dataManager: CoreDataManager
   @EnvironmentObject var tools:       GlobalTools
-  @StateObject var expensesVM =       ExpensesViewModel()
   
-  @State private var isLeft = false
+  @StateObject var viewModel = ExpensesViewModel()
   
   var body: some View {
     NavigationView {
@@ -24,14 +23,14 @@ struct ExpensesView: View {
         .toolbar {
           
           ToolbarItem(placement: .principal) {
-            MonthSelector(dataManager: dataManager, expensesVM: expensesVM, isLeft: $isLeft)
+            MonthSelectorView(dataManager: dataManager, viewModel: viewModel)
           }
         }
     }
     .onAppear {
       dataManager.fetchDateRangeExpenses(
-        startDate: expensesVM.monthStart,
-        endDate: expensesVM.monthEnd, timeframe: TimeFrame.month)
+        startDate: viewModel.monthStart,
+        endDate: viewModel.monthEnd, timeframe: TimeFrame.month)
     }
     .navigationViewStyle(.stack)
   }
@@ -85,8 +84,8 @@ struct ExpensesView: View {
     }
     .refreshable {
       dataManager.fetchDateRangeExpenses(
-        startDate: expensesVM.monthStart,
-        endDate: expensesVM.monthEnd, timeframe: TimeFrame.month)
+        startDate: viewModel.monthStart,
+        endDate: viewModel.monthEnd, timeframe: TimeFrame.month)
     }
   }
 }
@@ -108,58 +107,13 @@ struct AddExpenseButton: View {
   }
 }
 
-struct MonthSelector: View {
-  @ObservedObject var dataManager: CoreDataManager
-  @ObservedObject var expensesVM: ExpensesViewModel
-  @Binding var isLeft: Bool
-  var body: some View {
-    HStack {
-      Button {
-        withAnimation(.easeInOut) {
-          expensesVM.subtractMonth()
-          dataManager.fetchDateRangeExpenses(
-            startDate: expensesVM.monthStart,
-            endDate: expensesVM.monthEnd, timeframe: TimeFrame.month)
-        }
-      } label: {
-        Image(systemName: "chevron.left")
-          .font(.title3)
-      }
-      VStack {
-        Text(expensesVM.monthText)
-          .font(.title3)
-          .fontWeight(.medium)
-          .lineLimit(1)
-          .minimumScaleFactor(0.75)
-          .frame(width: 100)
-        Text(expensesVM.yearText)
-          .fontWeight(.light)
-          .lineLimit(1)
-          .minimumScaleFactor(0.75)
-          .frame(width: 80)
-      }
-      Button {
-        withAnimation(.easeInOut) {
-          expensesVM.addMonth()
-          dataManager.fetchDateRangeExpenses(
-            startDate: expensesVM.monthStart,
-            endDate: expensesVM.monthEnd, timeframe: TimeFrame.month)
-        }
-      } label: {
-        Image(systemName: "chevron.right")
-          .font(.title3)
-      }
-    }
-  }
-}
-
 struct ExpensesView_Previews: PreviewProvider {
   static let coreVM = CoreDataManager()
   
   static var previews: some View {
-    ExpensesView(expensesVM: ExpensesViewModel())
+    ExpensesView(viewModel: ExpensesViewModel())
       .environmentObject(coreVM)
-    ExpensesView(expensesVM: ExpensesViewModel())
+    ExpensesView(viewModel: ExpensesViewModel())
       .environmentObject(coreVM)
       .preferredColorScheme(.dark)
   }

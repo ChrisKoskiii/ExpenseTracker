@@ -8,25 +8,25 @@
 import SwiftUI
 
 struct MonthlyTotalView: View {
+  
   @Environment(\.scenePhase) var scenePhase
-  @ObservedObject var coreVM: CoreDataManager
-  @StateObject var homeVM =   HomeViewModel()
+  
+  @ObservedObject var dataManager: CoreDataManager
+  @StateObject var viewModel =     TotalsManager()
   
   var body: some View {
     VStack(alignment: .leading, spacing: 0) {
       
       VStack(spacing: 16) {
         
-        //"This week so far" with menu button
         HStack(spacing: 0) {
           ThisWeekString(text: "This ")
-          MenuView(homeVM: homeVM, coreVM: coreVM)
+          MenuView(homeVM: viewModel, coreVM: dataManager)
           ThisWeekString(text: " so far:")
           Spacer()
         }
         
-        //Large total string
-        Text("$"+String(format: "%.2f", homeVM.total))
+        Text("$"+String(format: "%.2f", viewModel.total))
           .font(.largeTitle)
           .bold()
       }
@@ -38,8 +38,8 @@ struct MonthlyTotalView: View {
 
     .onChange(of: scenePhase) { _ in
       if let startDate = Calendar.current.date(byAdding: .day, value: -7, to: Date()) {
-        coreVM.fetchDateRangeExpenses(startDate: startDate, endDate: Date.now, timeframe: TimeFrame.week)
-        homeVM.setViewTotal(text: "week", total: coreVM.weeklyTotal)
+        dataManager.fetchDateRangeExpenses(startDate: startDate, endDate: Date.now, timeframe: TimeFrame.week)
+        viewModel.setViewTotal(text: "week", total: dataManager.weeklyTotal)
       }
     }
   }
@@ -65,7 +65,7 @@ struct timeFrameButtonText: View {
 }
 
 struct MenuView: View {
-  @ObservedObject var homeVM: HomeViewModel
+  @ObservedObject var homeVM: TotalsManager
   var coreVM: CoreDataManager
   var body: some View {
     Menu {
@@ -115,6 +115,6 @@ struct ThisWeekString: View {
 
 struct MonthlyTotalView_Previews: PreviewProvider {
   static var previews: some View {
-    MonthlyTotalView(coreVM: CoreDataManager())
+    MonthlyTotalView(dataManager: CoreDataManager())
   }
 }

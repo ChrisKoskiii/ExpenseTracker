@@ -7,7 +7,7 @@
 
 import Foundation
 
-class HomeViewModel: ObservableObject {
+class TotalsManager: ObservableObject {
   
   @Published var total: Double     = 0.0
   @Published var selectedTimeFrame = "week"

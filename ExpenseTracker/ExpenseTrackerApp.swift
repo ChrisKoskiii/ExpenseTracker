@@ -15,13 +15,13 @@ struct ExpenseTrackerApp: App {
   
   @AppStorage("isDarkMode") private var isDarkMode = false
   
-  @StateObject var coreVM     = CoreDataManager()
-  @StateObject var globals    = GlobalTools()
+  @StateObject var dataManager = CoreDataManager()
+  @StateObject var globals     = GlobalTools()
   
   var body: some Scene {
     WindowGroup {
       TabViewScreen()
-        .environmentObject(coreVM)
+        .environmentObject(dataManager)
         .environmentObject(globals)
         .preferredColorScheme(isDarkMode ? .dark : .light)
         .onAppear {
