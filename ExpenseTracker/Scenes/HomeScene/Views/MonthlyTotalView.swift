@@ -76,8 +76,6 @@ struct MenuView: View {
           coreVM.fetchDateRangeExpenses(startDate: startDate, endDate: Date.now, timeframe: TimeFrame.week)
           homeVM.setViewTotal(text: "week", total: coreVM.weeklyTotal)
         }
-        
-        
       })
       
       Button("month", action: {
@@ -86,8 +84,6 @@ struct MenuView: View {
           coreVM.fetchDateRangeExpenses(startDate: startDate, endDate: Date.now, timeframe: TimeFrame.month)
           homeVM.setViewTotal(text: "month", total: coreVM.monthlyTotal)
         }
-        
-        
       })
       
       Button("year", action: {

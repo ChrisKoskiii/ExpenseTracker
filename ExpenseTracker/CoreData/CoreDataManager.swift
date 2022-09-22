@@ -6,7 +6,6 @@
 //
 
 import CoreData
-import UIKit
 import SwiftUI
 import CloudKit
 
@@ -147,7 +146,7 @@ class CoreDataManager: ObservableObject {
     if let receiptData = expense.receipt {
       newExpense.receipt = receiptData
     }
-    
+   
     let categoryResult = isDuplicate(expense.category.name, "CategoryEntity")
     
     if categoryResult.isTrue {
