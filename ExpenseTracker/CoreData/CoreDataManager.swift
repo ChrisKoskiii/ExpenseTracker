@@ -46,6 +46,7 @@ class CoreDataManager: ObservableObject {
     fetchExpenses()
     fetchCategories()
     fetchVendors()
+    fetchHomeViewTotals()
   }
   
   func fetchExpenses() {
@@ -98,7 +99,17 @@ class CoreDataManager: ObservableObject {
     recentExpenses = Array(savedExpenses.prefix(5))
   }
   
-  func fetchDateRangeExpenses(startDate: Date, endDate: Date, timeframe: TimeFrame? = nil, completion: (([ExpenseEntity]) -> ())? = nil) {
+  func fetchHomeViewTotals() {
+    if let weekAgo = Calendar.current.date(byAdding: .day, value: -7, to: Date()),
+       let monthAgo = Calendar.current.date(byAdding: .month, value: -1, to: Date()),
+       let yearAgo = Calendar.current.date(byAdding: .year, value: -1, to: Date()) {
+      fetchDateRangeExpenses(startDate: weekAgo, endDate: Date.now, timeframe: TimeFrame.week)
+      fetchDateRangeExpenses(startDate: monthAgo, endDate: Date.now, timeframe: TimeFrame.month)
+      fetchDateRangeExpenses(startDate: yearAgo, endDate: Date.now, timeframe: TimeFrame.year)
+    }
+  }
+  
+  func fetchDateRangeExpenses(startDate: Date, endDate: Date, timeframe: TimeFrame? = nil) {
     let request = NSFetchRequest<ExpenseEntity>(entityName: "ExpenseEntity")
     let sort = NSSortDescriptor(key: #keyPath(ExpenseEntity.date), ascending: false)
     
@@ -112,6 +123,7 @@ class CoreDataManager: ObservableObject {
         switch safeTimeframe {
         case .week:
           weeklyTotal = getTotal(from: expenses)
+          print(weeklyTotal)
           dateRangeExpenses = expenses
         case .month:
           monthlyTotal = getTotal(from: expenses)
@@ -146,7 +158,7 @@ class CoreDataManager: ObservableObject {
     if let receiptData = expense.receipt {
       newExpense.receipt = receiptData
     }
-   
+    
     let categoryResult = isDuplicate(expense.category.name, "CategoryEntity")
     
     if categoryResult.isTrue {
@@ -200,6 +212,7 @@ class CoreDataManager: ObservableObject {
   func deleteEntity(_ entity: NSManagedObject) {
     container.viewContext.delete(entity)
     saveData()
+    fetchData()
   }
   
   //MARK: Update functions
@@ -230,6 +243,7 @@ class CoreDataManager: ObservableObject {
     }
     
     saveData()
+    fetchData()
   }
   
   func updateCategories() {

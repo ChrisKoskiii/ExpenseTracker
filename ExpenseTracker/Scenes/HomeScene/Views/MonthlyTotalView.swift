@@ -12,7 +12,10 @@ struct MonthlyTotalView: View {
   @Environment(\.scenePhase) var scenePhase
   
   @ObservedObject var dataManager: CoreDataManager
-  @StateObject var viewModel =     TotalsManager()
+  
+  @State private var timeFrame: TimeFrame = .week
+  
+  @State var selectedTimeFrame = "week"
   
   var body: some View {
     VStack(alignment: .leading, spacing: 0) {
@@ -20,30 +23,69 @@ struct MonthlyTotalView: View {
       VStack(spacing: 16) {
         
         HStack(spacing: 0) {
-          ThisWeekString(text: "This ")
-          MenuView(homeVM: viewModel, coreVM: dataManager)
-          ThisWeekString(text: " so far:")
+          Text("This")
+            .font(.callout)
+            .foregroundColor(.secondary)
+          
+          Menu {
+            
+            Button("week", action: {
+              if let startDate = Calendar.current.date(byAdding: .day, value: -7, to: Date()) {
+                
+                dataManager.fetchDateRangeExpenses(startDate: startDate, endDate: Date.now, timeframe: TimeFrame.week)
+
+                timeFrame = .week
+                selectedTimeFrame = "week"
+              }
+            })
+            
+            Button("month", action: {
+              if let startDate = Calendar.current.date(byAdding: .month, value: -1, to: Date()) {
+                
+                dataManager.fetchDateRangeExpenses(startDate: startDate, endDate: Date.now, timeframe: TimeFrame.month)
+                
+                timeFrame = .month
+                selectedTimeFrame = "month"
+              }
+            })
+            
+            Button("year", action: {
+              if let startDate = Calendar.current.date(byAdding: .year, value: -1, to: Date()) {
+                
+                dataManager.fetchDateRangeExpenses(startDate: startDate, endDate: Date.now, timeframe: TimeFrame.year)
+                
+                timeFrame = .year
+                selectedTimeFrame = "year"
+              }
+            })
+            
+          } label: {
+            timeFrameButtonText(text: selectedTimeFrame)
+          }
+          
+          Text(" so far.")
+            .font(.callout)
+            .foregroundColor(.secondary)
+          
           Spacer()
         }
         
-        Text("$"+String(format: "%.2f", viewModel.total))
-          .font(.largeTitle)
-          .bold()
+        switch timeFrame {
+        case .week :
+          TotalText(total: $dataManager.weeklyTotal)
+        case .month:
+          TotalText(total: $dataManager.monthlyTotal)
+        case .year:
+          TotalText(total: $dataManager.yearlyTotal)
+        }
+        
       }
       .frame(maxWidth: .infinity)
       .padding(.horizontal)
       .padding(.top, 4)
     }
     .padding(.horizontal)
-
-    .onChange(of: scenePhase) { _ in
-      if let startDate = Calendar.current.date(byAdding: .day, value: -7, to: Date()) {
-        dataManager.fetchDateRangeExpenses(startDate: startDate, endDate: Date.now, timeframe: TimeFrame.week)
-        viewModel.setViewTotal(text: "week", total: dataManager.weeklyTotal)
-      }
-    }
   }
-  
 }
 
 struct timeFrameButtonText: View {
@@ -64,48 +106,12 @@ struct timeFrameButtonText: View {
   }
 }
 
-struct MenuView: View {
-  @ObservedObject var homeVM: TotalsManager
-  var coreVM: CoreDataManager
+struct TotalText: View {
+  @Binding var total: Double
   var body: some View {
-    Menu {
-      
-      Button("week", action: {
-        if let startDate = Calendar.current.date(byAdding: .day, value: -7, to: Date()) {
-          
-          coreVM.fetchDateRangeExpenses(startDate: startDate, endDate: Date.now, timeframe: TimeFrame.week)
-          homeVM.setViewTotal(text: "week", total: coreVM.weeklyTotal)
-        }
-      })
-      
-      Button("month", action: {
-        if let startDate = Calendar.current.date(byAdding: .month, value: -1, to: Date()) {
-          
-          coreVM.fetchDateRangeExpenses(startDate: startDate, endDate: Date.now, timeframe: TimeFrame.month)
-          homeVM.setViewTotal(text: "month", total: coreVM.monthlyTotal)
-        }
-      })
-      
-      Button("year", action: {
-        if let startDate = Calendar.current.date(byAdding: .year, value: -1, to: Date()) {
-          
-          coreVM.fetchDateRangeExpenses(startDate: startDate, endDate: Date.now, timeframe: TimeFrame.year)
-          homeVM.setViewTotal(text: "year", total: coreVM.yearlyTotal)
-        }
-      })
-      
-    } label: {
-      timeFrameButtonText(text: homeVM.selectedTimeFrame)
-    }
-  }
-}
-
-struct ThisWeekString: View {
-  var text: String
-  var body: some View {
-    Text(text)
-      .font(.callout)
-      .foregroundColor(.secondary)
+    Text("$"+String(format: "%.2f", total))
+      .font(.largeTitle)
+      .bold()
   }
 }
 

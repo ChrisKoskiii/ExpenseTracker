@@ -44,10 +44,6 @@ struct HomeView: View {
       .navigationBarTitleDisplayMode(.large)
     }
     .navigationViewStyle(.stack)
-    //Is this still needed?
-    .onChange(of: scenePhase) { _ in
-      dataManager.fetchData()
-    }
   }
   
   var recentTransactionText: some View {

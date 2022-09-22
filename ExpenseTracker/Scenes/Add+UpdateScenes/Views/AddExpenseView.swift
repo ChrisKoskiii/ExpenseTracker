@@ -10,7 +10,7 @@ import SwiftUI
 struct AddExpenseView: View {
   @Environment(\.presentationMode) var presentationMode
   
-  @EnvironmentObject var coreData:  CoreDataManager
+  @EnvironmentObject var dataManager:  CoreDataManager
   @EnvironmentObject var tools:     GlobalTools
   
   @StateObject var viewModel = AddExpenseViewModel()
@@ -77,9 +77,10 @@ struct AddExpenseView: View {
         if let myCategory = viewModel.selectedCategory,
            let myVendor = viewModel.selectedVendor {
           viewModel.makeNewExpense(category: myCategory, vendor: myVendor, date: viewModel.dateValue) { expense in
-            coreData.addExpense(expense)
+            dataManager.addExpense(expense)
           }
         }
+        dataManager.fetchData()
         presentationMode.wrappedValue.dismiss()
       }
     } label: {
