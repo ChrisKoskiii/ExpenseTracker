@@ -32,11 +32,13 @@ struct HomeView: View {
         if dataManager.recentExpenses.isEmpty {
           VStack {
             Spacer()
-            Image(systemName: "rectangle.and.pencil.and.ellipsis")
+            Image(systemName: "checklist")
               .resizable()
               .scaledToFit()
               .frame(height: 100)
               .foregroundColor(Color.secondary)
+              .symbolRenderingMode(.hierarchical)
+            
             Text("Start adding expenses!")
               .font(.title)
               .foregroundColor(Color.secondary)
@@ -58,8 +60,8 @@ struct HomeView: View {
             ZStack {
               if dataManager.recentExpenses.isEmpty {
                 Circle()
-                  .stroke(lineWidth: 40)
-                  .frame(width: 1, height: 1)
+                  .stroke(lineWidth: 15)
+                  .frame(width: 15, height: 15)
                   .foregroundColor(Color.brandPrimary)
                   .scaleEffect(scale)
                   .opacity(opacity)
@@ -68,6 +70,7 @@ struct HomeView: View {
                       opacity = 0.1
                   }
                   .animation(repeatingAnimation, value: [scale, opacity])
+                  .edgesIgnoringSafeArea(.all)
               }
               Circle()
                 .frame(width: 30, height: 30)
