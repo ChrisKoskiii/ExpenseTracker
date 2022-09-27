@@ -41,4 +41,8 @@ extension Date {
 
     return f.weekdaySymbols[Calendar.current.component(.weekday, from: self) - 1]
   }
+  
+  var startOfDay: Date {
+    return Calendar.current.startOfDay(for: self)
+  }
 }

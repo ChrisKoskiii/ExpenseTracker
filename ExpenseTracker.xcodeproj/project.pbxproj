@@ -40,14 +40,13 @@
 		9E58254C28A5EEE800C80A73 /* ExpensesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E58254B28A5EEE800C80A73 /* ExpensesViewModel.swift */; };
 		9E5DBE0E28B40588007C96D7 /* ExpenseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5DBE0D28B40588007C96D7 /* ExpenseModel.swift */; };
 		9E7F71D828BFDCE900B0B5E0 /* VendorEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7F71D728BFDCE900B0B5E0 /* VendorEntity+CoreDataClass.swift */; };
-		9E7F71D928BFDCE900B0B5E0 /* VendorEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7F71D228BFDCE900B0B5E0 /* VendorEntity+CoreDataProperties.swift */; };
 		9E7F71DC28BFDCE900B0B5E0 /* ExpenseEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7F71D628BFDCE900B0B5E0 /* ExpenseEntity+CoreDataClass.swift */; };
 		9E7F71DD28BFDCE900B0B5E0 /* ExpenseEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7F71D528BFDCE900B0B5E0 /* ExpenseEntity+CoreDataProperties.swift */; };
 		9E7F71DF28BFE7D900B0B5E0 /* VendorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7F71DE28BFE7D900B0B5E0 /* VendorModel.swift */; };
 		9E8E1F262893762E00300E14 /* RecentExpenseCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8E1F252893762E00300E14 /* RecentExpenseCardView.swift */; };
 		9E8E1F2D289380A300300E14 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8E1F2C289380A300300E14 /* HomeView.swift */; };
 		9E8E1F312894232300300E14 /* ExpensesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8E1F302894232300300E14 /* ExpensesView.swift */; };
-		9E8E1F332894232A00300E14 /* ReportsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8E1F322894232A00300E14 /* ReportsView.swift */; };
+		9E8E1F332894232A00300E14 /* ReportsSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8E1F322894232A00300E14 /* ReportsSheetView.swift */; };
 		9E8E1F362894233B00300E14 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8E1F352894233B00300E14 /* SettingsView.swift */; };
 		9E9B34AE2899733900408F05 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9B34AD2899733900408F05 /* ShareSheet.swift */; };
 		9EA561D328C10CF6003B1C4B /* CategoryEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA561D128C10CF6003B1C4B /* CategoryEntity+CoreDataProperties.swift */; };
@@ -65,6 +64,7 @@
 		9EF7E2DE28E27F0300B291CF /* EditCategorySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF7E2DD28E27F0300B291CF /* EditCategorySheet.swift */; };
 		9EF7E2E228E32F8600B291CF /* EditCategorySheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF7E2E128E32F8600B291CF /* EditCategorySheetViewModel.swift */; };
 		9EF7E2E428E3316300B291CF /* CategoryEntity+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF7E2E328E3316300B291CF /* CategoryEntity+Ext.swift */; };
+		9EF7E2E628E36E3F00B291CF /* VendorEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF7E2E528E36E3F00B291CF /* VendorEntity+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,7 +102,6 @@
 		9E58254928A57EAF00C80A73 /* TotalsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalsManager.swift; sourceTree = "<group>"; };
 		9E58254B28A5EEE800C80A73 /* ExpensesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesViewModel.swift; sourceTree = "<group>"; };
 		9E5DBE0D28B40588007C96D7 /* ExpenseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseModel.swift; sourceTree = "<group>"; };
-		9E7F71D228BFDCE900B0B5E0 /* VendorEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "VendorEntity+CoreDataProperties.swift"; path = "/Users/christopherkoski/Developer/ExpenseTracker/ExpenseTracker/CoreData/VendorEntity+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
 		9E7F71D528BFDCE900B0B5E0 /* ExpenseEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ExpenseEntity+CoreDataProperties.swift"; path = "/Users/christopherkoski/Developer/ExpenseTracker/ExpenseTracker/CoreData/ExpenseEntity+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
 		9E7F71D628BFDCE900B0B5E0 /* ExpenseEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ExpenseEntity+CoreDataClass.swift"; path = "/Users/christopherkoski/Developer/ExpenseTracker/ExpenseTracker/CoreData/ExpenseEntity+CoreDataClass.swift"; sourceTree = "<absolute>"; };
 		9E7F71D728BFDCE900B0B5E0 /* VendorEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "VendorEntity+CoreDataClass.swift"; path = "/Users/christopherkoski/Developer/ExpenseTracker/ExpenseTracker/CoreData/VendorEntity+CoreDataClass.swift"; sourceTree = "<absolute>"; };
@@ -110,7 +109,7 @@
 		9E8E1F252893762E00300E14 /* RecentExpenseCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentExpenseCardView.swift; sourceTree = "<group>"; };
 		9E8E1F2C289380A300300E14 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		9E8E1F302894232300300E14 /* ExpensesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesView.swift; sourceTree = "<group>"; };
-		9E8E1F322894232A00300E14 /* ReportsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportsView.swift; sourceTree = "<group>"; };
+		9E8E1F322894232A00300E14 /* ReportsSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportsSheetView.swift; sourceTree = "<group>"; };
 		9E8E1F352894233B00300E14 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		9E8E1F3728942A2300300E14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9E9B34AD2899733900408F05 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
@@ -129,6 +128,7 @@
 		9EF7E2DD28E27F0300B291CF /* EditCategorySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategorySheet.swift; sourceTree = "<group>"; };
 		9EF7E2E128E32F8600B291CF /* EditCategorySheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategorySheetViewModel.swift; sourceTree = "<group>"; };
 		9EF7E2E328E3316300B291CF /* CategoryEntity+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CategoryEntity+Ext.swift"; sourceTree = "<group>"; };
+		9EF7E2E528E36E3F00B291CF /* VendorEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "VendorEntity+CoreDataProperties.swift"; path = "../../VendorEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D563CD5D6A1F16FFFD396D2F /* Pods-ExpenseTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExpenseTracker.release.xcconfig"; path = "Target Support Files/Pods-ExpenseTracker/Pods-ExpenseTracker.release.xcconfig"; sourceTree = "<group>"; };
 		E593EA4A9BB8660B44FF0DAA /* Pods_ExpenseTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ExpenseTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -208,7 +208,7 @@
 				9E7F71D628BFDCE900B0B5E0 /* ExpenseEntity+CoreDataClass.swift */,
 				9E7F71D528BFDCE900B0B5E0 /* ExpenseEntity+CoreDataProperties.swift */,
 				9E7F71D728BFDCE900B0B5E0 /* VendorEntity+CoreDataClass.swift */,
-				9E7F71D228BFDCE900B0B5E0 /* VendorEntity+CoreDataProperties.swift */,
+				9EF7E2E528E36E3F00B291CF /* VendorEntity+CoreDataProperties.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -350,7 +350,7 @@
 			isa = PBXGroup;
 			children = (
 				9ED23ACC289CB99B00CAAB70 /* GenerateReportsView.swift */,
-				9E8E1F322894232A00300E14 /* ReportsView.swift */,
+				9E8E1F322894232A00300E14 /* ReportsSheetView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -513,10 +513,9 @@
 			files = (
 				9EF0BA9928C13AAB00FAFBDF /* Enums.swift in Sources */,
 				9EA561D328C10CF6003B1C4B /* CategoryEntity+CoreDataProperties.swift in Sources */,
-				9E7F71D928BFDCE900B0B5E0 /* VendorEntity+CoreDataProperties.swift in Sources */,
 				9EF7E2DE28E27F0300B291CF /* EditCategorySheet.swift in Sources */,
 				9E187D412893115A00142000 /* CoreDataManager.swift in Sources */,
-				9E8E1F332894232A00300E14 /* ReportsView.swift in Sources */,
+				9E8E1F332894232A00300E14 /* ReportsSheetView.swift in Sources */,
 				9EF7E2E428E3316300B291CF /* CategoryEntity+Ext.swift in Sources */,
 				9E9B34AE2899733900408F05 /* ShareSheet.swift in Sources */,
 				9E34DE3D28AEB3F500235442 /* VendorListView.swift in Sources */,
@@ -555,6 +554,7 @@
 				9E7F71DF28BFE7D900B0B5E0 /* VendorModel.swift in Sources */,
 				9ED23ACD289CB99B00CAAB70 /* GenerateReportsView.swift in Sources */,
 				9E1E3D292894687B004FE485 /* Date+Extension.swift in Sources */,
+				9EF7E2E628E36E3F00B291CF /* VendorEntity+CoreDataProperties.swift in Sources */,
 				9EA561D428C10CF6003B1C4B /* CategoryEntity+CoreDataClass.swift in Sources */,
 				9E34DE3B28AEB3E500235442 /* CategoryListView.swift in Sources */,
 				9E34DE4128AED43400235442 /* OperatorOverload.swift in Sources */,
@@ -706,6 +706,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -740,6 +741,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

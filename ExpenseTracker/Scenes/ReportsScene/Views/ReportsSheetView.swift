@@ -7,48 +7,52 @@
 
 import SwiftUI
 
-struct ReportsView: View {
+struct ReportsSheetView: View {
   
-  @EnvironmentObject var coreVM:  CoreDataManager
+  @EnvironmentObject var dataManager:  CoreDataManager
   @EnvironmentObject var tools:   GlobalTools
   
   @StateObject var viewModel = ReportsViewModel()
   
   @Binding var startDate: Date
   @Binding var endDate:   Date
+  @Binding var showingSheet: Bool
+  
+  @State var total = 0.0
   
   var body: some View {
-    
-    expenseList
-      .navigationBarTitle("Generate Reports")
-      .navigationBarTitleDisplayMode(.inline)
-      .background(Color(uiColor: .systemGray5))
-      .toolbar {
-        ToolbarItem {
-          
-          Button {
-            exportToPDF()
-          } label : {
-            Image(systemName: "square.and.arrow.up.fill")
+    NavigationView {
+      expenseList
+        .navigationBarTitle("Generate Reports")
+        .navigationBarTitleDisplayMode(.inline)
+        .background(Color(uiColor: .systemGray5))
+        .toolbar {
+          ToolbarItem {
+            
+            Button {
+              exportToPDF()
+            } label : {
+              Image(systemName: "square.and.arrow.up.fill")
+            }
           }
         }
-      }
-    
-      .sheet(isPresented: $viewModel.showShareSheet) {
-        viewModel.PDFUrl = nil
-      } content: {
-        if let PDFUrl = viewModel.PDFUrl {
-          ShareSheet(urls: [PDFUrl])
+      
+        .sheet(isPresented: $viewModel.showShareSheet) {
+          viewModel.PDFUrl = nil
+        } content: {
+          if let PDFUrl = viewModel.PDFUrl {
+            ShareSheet(urls: [PDFUrl])
+          }
         }
-      }
-    
-      .onAppear {
-        coreVM.fetchDateRangeExpenses(startDate: startDate, endDate: endDate)
-        viewModel.getTotal(from: coreVM.dateRangeExpenses)
-      }
-      .onDisappear {
-        coreVM.categoriesDict.keys.forEach { coreVM.categoriesDict[$0] = 0.0}
-      }
+      
+        .onAppear {
+          dataManager.fetchDateRangeExpenses(startDate: startDate.startOfDay, endDate: endDate)
+          viewModel.getTotal(from: dataManager.dateRangeExpenses)
+        }
+        .onDisappear {
+          dataManager.categoriesDict.keys.forEach { dataManager.categoriesDict[$0] = 0.0}
+        }
+    }
   }
   
   var expenseList: some View {
@@ -63,7 +67,7 @@ struct ReportsView: View {
         
       }
       
-      let categories = coreVM.categoriesDict.keys.sorted().map{Category(name: $0, cost: coreVM.categoriesDict[$0]!)}
+      let categories = dataManager.categoriesDict.keys.sorted().map{Category(name: $0, cost: dataManager.categoriesDict[$0]!)}
       
       ForEach(categories, id: \.name) { category in
         HStack {
@@ -141,6 +145,6 @@ struct ReportsView: View {
 
 struct ReportsView_Previews: PreviewProvider {
   static var previews: some View {
-    ReportsView(viewModel: ReportsViewModel(), startDate: .constant(Date.now), endDate: .constant(Date.now))
+    ReportsSheetView(viewModel: ReportsViewModel(), startDate: .constant(Date.now), endDate: .constant(Date.now), showingSheet: .constant(true))
   }
 }

@@ -81,13 +81,12 @@ struct ExpensesView: View {
           }
         }
       }
-      //      .listRowBackground(Color.clear)
-    }
-    .refreshable {
-      dataManager.fetchDateRangeExpenses(
-        startDate: viewModel.monthStart,
-        endDate: viewModel.monthEnd,
-        timeframe: TimeFrame.month)
+      .refreshable {
+        dataManager.fetchDateRangeExpenses(
+          startDate: viewModel.monthStart,
+          endDate: viewModel.monthEnd,
+          timeframe: TimeFrame.month)
+      }
     }
   }
 }

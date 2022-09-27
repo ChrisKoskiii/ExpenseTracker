@@ -123,8 +123,7 @@ class CoreDataManager: ObservableObject {
         switch safeTimeframe {
         case .week:
           weeklyTotal = getTotal(from: expenses)
-          print(weeklyTotal)
-          dateRangeExpenses = expenses
+
         case .month:
           monthlyTotal = getTotal(from: expenses)
           monthlyExpenses = expenses
@@ -257,6 +256,7 @@ class CoreDataManager: ObservableObject {
     saveData()
     fetchData()
   }
+  
   func updateCategories() {
     fetchAllCategories()
   }
@@ -305,6 +305,7 @@ class CoreDataManager: ObservableObject {
   }
   
   func categoryTotal() {
+    zeroOutCategoryTotals()
     for expense in dateRangeExpenses {
       for (key, value) in categoriesDict {
         if expense.category.wrappedName == key {
@@ -312,6 +313,15 @@ class CoreDataManager: ObservableObject {
           newValue += expense.cost
           categoriesDict.updateValue(newValue, forKey: key)
         }
+      }
+    }
+  }
+  
+  func zeroOutCategoryTotals() {
+    for _ in dateRangeExpenses {
+      for (key, _) in categoriesDict {
+        let newValue = 0.0
+        categoriesDict.updateValue(newValue, forKey: key)
       }
     }
   }

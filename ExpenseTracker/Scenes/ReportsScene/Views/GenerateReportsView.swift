@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct GenerateReportsView: View {
-  @EnvironmentObject var coreVM: CoreDataManager
+  @EnvironmentObject var dataManager: CoreDataManager
   
-  @State private var startDate: Date  = Date.now
+  @State private var startDate: Date  = Date.now.startOfDay
   @State private var endDate: Date    = Date.now
+  
+  @State var showingSheet = false
   
   var body: some View {
     NavigationView {
@@ -21,14 +23,20 @@ struct GenerateReportsView: View {
         
         DatePicker("End date", selection: $endDate, displayedComponents: [.date])
         
-        NavigationLink(destination: ReportsView(startDate: $startDate, endDate: $endDate), label: {
+        Button {
+          dataManager.fetchDateRangeExpenses(startDate: startDate, endDate: endDate)
+          showingSheet.toggle()
+        } label: {
           Text("Generate Report")
             .foregroundColor(.cyan)
             .centerInView()
-        })
+        }
         .centerInView()
       }
       .navigationTitle("Create Reports")
+      .sheet(isPresented: $showingSheet) {
+        ReportsSheetView(startDate: $startDate, endDate: $endDate , showingSheet: $showingSheet)
+      }
     }
   }
 }

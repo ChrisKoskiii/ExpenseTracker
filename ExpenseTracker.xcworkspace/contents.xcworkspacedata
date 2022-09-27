@@ -20,7 +20,7 @@
          location = "group:/Users/christopherkoski/Developer/ExpenseTracker/ExpenseTracker/CoreData/VendorEntity+CoreDataClass.swift">
       </FileRef>
       <FileRef
-         location = "group:/Users/christopherkoski/Developer/ExpenseTracker/ExpenseTracker/CoreData/VendorEntity+CoreDataProperties.swift">
+         location = "group:VendorEntity+CoreDataProperties.swift">
       </FileRef>
    </Group>
    <FileRef
