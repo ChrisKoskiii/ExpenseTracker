@@ -9,19 +9,19 @@ import SwiftUI
 
 struct CategoryListView: View {
   @Environment(\.presentationMode) var presentationMode
-  
   @EnvironmentObject var dataManager:    CoreDataManager
   
   @Binding var selectedCategory: CategoryModel?
   @Binding var categoryText: String
   @Binding var categorySymbol: String
   
-  @State private var showingSheet = false
+  @State private var showingNewSheet = false
+  @State private var showingEditSheet = false
   
   var body: some View {
     List {
       Button("Add new") {
-        showingSheet.toggle()
+        showingNewSheet.toggle()
       }
       ForEach(dataManager.savedCategories, id: \.self) { item in
         let symbolColor = Color(red: item.colorR, green: item.colorG, blue: item.colorB, opacity: item.colorA)
@@ -38,7 +38,9 @@ struct CategoryListView: View {
           }
           .buttonStyle(.borderless)
           Spacer()
-          NavigationLink(destination: NewCategorySheet(isPresented: $showingSheet)) {
+          Button {
+
+          } label : {
             Image(systemName: item.wrappedSymbol)
               .resizable()
               .scaledToFit()
@@ -47,6 +49,7 @@ struct CategoryListView: View {
           }
           .frame(width: 60)
           .buttonStyle(PlainButtonStyle())
+          
         }
       }
       .onDelete(perform: deleteItem)
@@ -55,8 +58,8 @@ struct CategoryListView: View {
     .background(Color(.secondarySystemBackground))
     .navigationTitle("Categories")
     .navigationBarTitleDisplayMode(.inline)
-    .sheet(isPresented: $showingSheet) {
-      NewCategorySheet(isPresented: $showingSheet)
+    .sheet(isPresented: $showingNewSheet) {
+      NewCategorySheet(isPresented: $showingNewSheet)
     }
   }
   
@@ -70,7 +73,7 @@ struct CategoryListView: View {
   
   func categoryEntityToModel(_ category: CategoryEntity) -> CategoryModel {
     return CategoryModel(name: category.wrappedName, symbol: category.wrappedSymbol, colorR: category.colorR, colorG: category.colorG, colorB: category.colorB, colorA: category.colorA)
-
+    
   }
   
 }

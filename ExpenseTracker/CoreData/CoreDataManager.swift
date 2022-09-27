@@ -246,6 +246,17 @@ class CoreDataManager: ObservableObject {
     fetchData()
   }
   
+  func updateCategory(_ existingCategory: CategoryEntity, with storedCategory: CategoryModel) {
+    existingCategory.name = storedCategory.name
+    existingCategory.symbol = storedCategory.symbol
+    existingCategory.colorR = storedCategory.colorR
+    existingCategory.colorG = storedCategory.colorG
+    existingCategory.colorB = storedCategory.colorB
+    existingCategory.colorA = storedCategory.colorA
+    
+    saveData()
+    fetchData()
+  }
   func updateCategories() {
     fetchAllCategories()
   }

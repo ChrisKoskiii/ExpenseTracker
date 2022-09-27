@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct NewCategorySheet: View {
-  @EnvironmentObject var data: CoreDataManager
+  @EnvironmentObject var dataManager: CoreDataManager
   
   @StateObject var viewModel = NewCategorySheetViewModel()
   
@@ -42,13 +42,13 @@ struct NewCategorySheet: View {
   func createCategory() {
     viewModel.makeCategoryModel()
     if let category = viewModel.storedCategory {
-      let result = data.isDuplicate(category.name, "CategoryEntity")
+      let result = dataManager.isDuplicate(category.name, "CategoryEntity")
       if result.isTrue {
         viewModel.showExistingAlert = true
       } else {
-        data.addCategory(category)
+        dataManager.addCategory(category)
         viewModel.storedCategory = nil
-        data.fetchCategories()
+        dataManager.fetchCategories()
         isPresented = false
       }
     }

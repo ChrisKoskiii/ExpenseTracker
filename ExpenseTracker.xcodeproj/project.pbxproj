@@ -63,6 +63,8 @@
 		9EF7E25928D3FEB700B291CF /* MonthSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF7E25828D3FEB700B291CF /* MonthSelectorView.swift */; };
 		9EF7E25B28D40B0D00B291CF /* ScanButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF7E25A28D40B0D00B291CF /* ScanButton.swift */; };
 		9EF7E2DE28E27F0300B291CF /* EditCategorySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF7E2DD28E27F0300B291CF /* EditCategorySheet.swift */; };
+		9EF7E2E228E32F8600B291CF /* EditCategorySheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF7E2E128E32F8600B291CF /* EditCategorySheetViewModel.swift */; };
+		9EF7E2E428E3316300B291CF /* CategoryEntity+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF7E2E328E3316300B291CF /* CategoryEntity+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -125,6 +127,8 @@
 		9EF7E25828D3FEB700B291CF /* MonthSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthSelectorView.swift; sourceTree = "<group>"; };
 		9EF7E25A28D40B0D00B291CF /* ScanButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanButton.swift; sourceTree = "<group>"; };
 		9EF7E2DD28E27F0300B291CF /* EditCategorySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategorySheet.swift; sourceTree = "<group>"; };
+		9EF7E2E128E32F8600B291CF /* EditCategorySheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategorySheetViewModel.swift; sourceTree = "<group>"; };
+		9EF7E2E328E3316300B291CF /* CategoryEntity+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CategoryEntity+Ext.swift"; sourceTree = "<group>"; };
 		D563CD5D6A1F16FFFD396D2F /* Pods-ExpenseTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExpenseTracker.release.xcconfig"; path = "Target Support Files/Pods-ExpenseTracker/Pods-ExpenseTracker.release.xcconfig"; sourceTree = "<group>"; };
 		E593EA4A9BB8660B44FF0DAA /* Pods_ExpenseTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ExpenseTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -242,6 +246,7 @@
 				9E187D3E2893055000142000 /* View+Extensions.swift */,
 				9E2129F928C7B88000D50C38 /* Binding+Ext.swift */,
 				9E57068828D16D1000A3AD57 /* AnyTransition+Ext.swift */,
+				9EF7E2E328E3316300B291CF /* CategoryEntity+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -366,6 +371,7 @@
 				9E2129F528C672BD00D50C38 /* NewCategorySheetViewModel.swift */,
 				9E2129FB28C7BA2400D50C38 /* DetailExpenseViewModel.swift */,
 				9E2129FF28C7C11700D50C38 /* NewVendorSheetViewModel.swift */,
+				9EF7E2E128E32F8600B291CF /* EditCategorySheetViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -511,6 +517,7 @@
 				9EF7E2DE28E27F0300B291CF /* EditCategorySheet.swift in Sources */,
 				9E187D412893115A00142000 /* CoreDataManager.swift in Sources */,
 				9E8E1F332894232A00300E14 /* ReportsView.swift in Sources */,
+				9EF7E2E428E3316300B291CF /* CategoryEntity+Ext.swift in Sources */,
 				9E9B34AE2899733900408F05 /* ShareSheet.swift in Sources */,
 				9E34DE3D28AEB3F500235442 /* VendorListView.swift in Sources */,
 				9E8E1F312894232300300E14 /* ExpensesView.swift in Sources */,
@@ -524,6 +531,7 @@
 				9E34DE3F28AEBE1C00235442 /* ItemList.swift in Sources */,
 				9E7F71DC28BFDCE900B0B5E0 /* ExpenseEntity+CoreDataClass.swift in Sources */,
 				9E5824F728A1A6EE00C80A73 /* ReportsViewModel.swift in Sources */,
+				9EF7E2E228E32F8600B291CF /* EditCategorySheetViewModel.swift in Sources */,
 				9E01C2BC2896DC2E00337A37 /* ScannedImageView.swift in Sources */,
 				9E8E1F262893762E00300E14 /* RecentExpenseCardView.swift in Sources */,
 				9E8E1F362894233B00300E14 /* SettingsView.swift in Sources */,

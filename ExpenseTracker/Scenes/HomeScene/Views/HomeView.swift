@@ -12,6 +12,15 @@ struct HomeView: View {
   
   @EnvironmentObject var dataManager:  CoreDataManager
   
+  
+  @State var opacity = 1.0
+  @State var scale: CGFloat = 1
+  
+  var repeatingAnimation: Animation {
+    Animation
+      .easeInOut(duration: 1.5)
+      .repeatForever()
+  }
   var body: some View {
     NavigationView {
       VStack {
@@ -20,7 +29,24 @@ struct HomeView: View {
         
         recentTransactionText
         
-        RecentExpensesList(coreVM: dataManager)
+        if dataManager.recentExpenses.isEmpty {
+          VStack {
+            Spacer()
+            Image(systemName: "rectangle.and.pencil.and.ellipsis")
+              .resizable()
+              .scaledToFit()
+              .frame(height: 100)
+              .foregroundColor(Color.secondary)
+            Text("Start adding expenses!")
+              .font(.title)
+              .foregroundColor(Color.secondary)
+              .fontWeight(.semibold)
+            Spacer()
+            Spacer()
+          }
+        } else {
+          RecentExpensesList(coreVM: dataManager)
+        }
         
         Spacer()
         
@@ -30,6 +56,19 @@ struct HomeView: View {
           NavigationLink(destination: AddExpenseView()) {
             
             ZStack {
+              if dataManager.recentExpenses.isEmpty {
+                Circle()
+                  .stroke(lineWidth: 40)
+                  .frame(width: 1, height: 1)
+                  .foregroundColor(Color.brandPrimary)
+                  .scaleEffect(scale)
+                  .opacity(opacity)
+                  .onAppear{
+                      scale = 1.5
+                      opacity = 0.1
+                  }
+                  .animation(repeatingAnimation, value: [scale, opacity])
+              }
               Circle()
                 .frame(width: 30, height: 30)
                 .foregroundColor(Color.brandPrimary)
