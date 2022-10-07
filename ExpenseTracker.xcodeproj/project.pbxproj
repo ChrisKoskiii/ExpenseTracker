@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0B0CEA1B26F3DCEBB156773A /* Pods_ExpenseTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E593EA4A9BB8660B44FF0DAA /* Pods_ExpenseTracker.framework */; };
 		9E01C2BC2896DC2E00337A37 /* ScannedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E01C2BB2896DC2E00337A37 /* ScannedImageView.swift */; };
 		9E187D2E2892FF3D00142000 /* ExpenseTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E187D2D2892FF3D00142000 /* ExpenseTrackerApp.swift */; };
 		9E187D322892FF3E00142000 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E187D312892FF3E00142000 /* Assets.xcassets */; };
@@ -68,7 +67,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		80E65B3880AE0697C89A67C5 /* Pods-ExpenseTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExpenseTracker.debug.xcconfig"; path = "Target Support Files/Pods-ExpenseTracker/Pods-ExpenseTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		9E01C2BB2896DC2E00337A37 /* ScannedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannedImageView.swift; sourceTree = "<group>"; };
 		9E187D2D2892FF3D00142000 /* ExpenseTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseTrackerApp.swift; sourceTree = "<group>"; };
 		9E187D312892FF3E00142000 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -129,8 +127,6 @@
 		9EF7E2E128E32F8600B291CF /* EditCategorySheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategorySheetViewModel.swift; sourceTree = "<group>"; };
 		9EF7E2E328E3316300B291CF /* CategoryEntity+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CategoryEntity+Ext.swift"; sourceTree = "<group>"; };
 		9EF7E2E528E36E3F00B291CF /* VendorEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "VendorEntity+CoreDataProperties.swift"; path = "../../VendorEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		D563CD5D6A1F16FFFD396D2F /* Pods-ExpenseTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExpenseTracker.release.xcconfig"; path = "Target Support Files/Pods-ExpenseTracker/Pods-ExpenseTracker.release.xcconfig"; sourceTree = "<group>"; };
-		E593EA4A9BB8660B44FF0DAA /* Pods_ExpenseTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ExpenseTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,29 +135,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E58250128A2D07D00C80A73 /* CloudKit.framework in Frameworks */,
-				0B0CEA1B26F3DCEBB156773A /* Pods_ExpenseTracker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2AC4BC267D6A53F5881B5BC2 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				80E65B3880AE0697C89A67C5 /* Pods-ExpenseTracker.debug.xcconfig */,
-				D563CD5D6A1F16FFFD396D2F /* Pods-ExpenseTracker.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		9E187D212892FF3D00142000 = {
 			isa = PBXGroup;
 			children = (
 				9E187D2C2892FF3D00142000 /* ExpenseTracker */,
 				C7F47A0366323B07310DC9B5 /* Frameworks */,
 				9E58254428A54E2300C80A73 /* ExpenseTracker.app */,
-				2AC4BC267D6A53F5881B5BC2 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -410,7 +395,6 @@
 			isa = PBXGroup;
 			children = (
 				9E58250028A2D07D00C80A73 /* CloudKit.framework */,
-				E593EA4A9BB8660B44FF0DAA /* Pods_ExpenseTracker.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -422,7 +406,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9E187D382892FF3E00142000 /* Build configuration list for PBXNativeTarget "ExpenseTracker" */;
 			buildPhases = (
-				9558E52030051E6B68BDC22C /* [CP] Check Pods Manifest.lock */,
 				9E187D262892FF3D00142000 /* Sources */,
 				9E187D272892FF3D00142000 /* Frameworks */,
 				9E187D282892FF3D00142000 /* Resources */,
@@ -480,31 +463,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		9558E52030051E6B68BDC22C /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ExpenseTracker-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9E187D262892FF3D00142000 /* Sources */ = {
@@ -687,7 +645,6 @@
 		};
 		9E187D392892FF3E00142000 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 80E65B3880AE0697C89A67C5 /* Pods-ExpenseTracker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon 4";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -699,14 +656,14 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ExpenseTracker/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your camera";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "We need access to your library to save photos.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your camera to scan documents.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "We need access to your library to save scanned documents.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -722,7 +679,6 @@
 		};
 		9E187D3A2892FF3E00142000 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D563CD5D6A1F16FFFD396D2F /* Pods-ExpenseTracker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon 4";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -734,14 +690,14 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ExpenseTracker/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your camera";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "We need access to your library to save photos.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your camera to scan documents.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "We need access to your library to save scanned documents.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -5,10 +5,7 @@
 //  Created by Christopher Koski on 7/28/22.
 //
 
-import SwiftUI
-import AppCenter
-import AppCenterCrashes
-import AppCenterAnalytics
+import SwiftUI 
 
 @main
 struct ExpenseTrackerApp: App {
